@@ -644,8 +644,8 @@ export const handleLogout = async () => {
   Cookies.remove('__user__isLoggedIn');
   Cookies.remove('test__user__isLoggedIn');
   Cookies.remove('development__user__isLoggedIn');
-  localStorage.removeItem('shiv11_userID');
-  localStorage.removeItem('shiv11_userName');
+  localStorage.removeItem('yolo_userID');
+  localStorage.removeItem('yolo_userName');
   removeAuthCookie();
   toast.success('Logged Out Successfully...');
 };

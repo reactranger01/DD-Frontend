@@ -16,7 +16,7 @@ import { numberWithCommas } from '@/utils/numberWithCommas';
 import RunPosition from '@/components/Modal/RunPosition';
 
 const MyBets = () => {
-  const shiv11_userID = localStorage.getItem('shiv11_userID');
+  const yolo_userID = localStorage.getItem('yolo_userID');
   const [activeTab, setActiveTab] = useState('current');
   const [betsData, setBetsData] = useState({});
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -500,7 +500,7 @@ const MyBets = () => {
         isOpen={isOpenModal}
         handleClose={handleCloseModal}
         data={{
-          userId: shiv11_userID,
+          userId: yolo_userID,
           eventId: selectedEventID,
           selectionId: selectedID,
           runner: selectedRunner,

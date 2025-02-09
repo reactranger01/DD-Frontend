@@ -14,7 +14,7 @@ const KycVerification = () => {
   const [activeTab, setActiveTab] = useState('aadharCard');
   const [isKyc, setisKyc] = useState(false);
   const [kycData, setkycData] = useState({});
-  const userId = localStorage.getItem('shiv11_userID');
+  const userId = localStorage.getItem('yolo_userID');
   useEffect(() => {
     if (userId) {
       setForm({ ...form, userId: userId });

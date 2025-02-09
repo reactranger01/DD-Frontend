@@ -60,7 +60,7 @@ const Signup = () => {
       await forgotPasswordValidation.validate(form, {
         abortEarly: false,
       });
-      const response = await postData('/user/send-verificationshiv-code', {
+      const response = await postData('/user/send-verification-code', {
         mobile: form.phoneNumber,
       });
       if (response?.status === 200 || response?.status === 201) {
@@ -86,7 +86,7 @@ const Signup = () => {
       await registrationformValidation.validate(form, {
         abortEarly: false,
       });
-      const response = await postData('/user/register-shiv-user', form);
+      const response = await postData('/user/register-yolo-user', form);
       if (response?.status === 200 || response?.status === 201) {
         toast.success(response?.data?.message);
         setForm({

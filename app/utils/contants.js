@@ -114,7 +114,7 @@ export const socialImageList = [
   {
     id: 3,
     url: '/footer/social3.png',
-    path: 'https://www.instagram.com/shiv11fantasy?igsh=cGViZ3hsODRyaTJs',
+    path: 'https://www.instagram.com/',
   },
   // {
   //   id: 4,
@@ -127,7 +127,7 @@ export const socialImageList = [
   {
     id: 6,
     url: '/footer/social6.png',
-    path: 'https://t.me/shiv11com',
+    path: 'https://t.me',
   },
 ];
 

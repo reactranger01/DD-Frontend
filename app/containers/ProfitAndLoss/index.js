@@ -10,7 +10,7 @@ import { numberWithCommas } from '@/utils/numberWithCommas';
 const ProfitAndLoss = () => {
   const [activeTab, setActiveTab] = useState('Cricket');
   const [startDate, setStartDate] = useState(new Date());
-  const userName = localStorage.getItem('shiv11_userName');
+  const userName = localStorage.getItem('yolo_userName');
   const [endDate, setEndDate] = useState(new Date());
   const [profitLoss, setProfitLossData] = useState([]);
   const [profitData, setProfitData] = useState([]);

@@ -73,16 +73,16 @@ function Header() {
         const response = await getAuthData('/user/get-user-details');
         if (response?.status === 201 || response?.status === 200) {
           setUserInfo(response.data);
-          localStorage.setItem('shiv11_userID', response.data.id); // Return the data instead of logging it
-          localStorage.setItem('shiv11_userName', response.data.username); // Return the data instead of logging it
+          localStorage.setItem('yolo_userID', response.data.id); // Return the data instead of logging it
+          localStorage.setItem('yolo_userName', response.data.username); // Return the data instead of logging it
         }
         if (response?.status === 403 || response.data.isDeleted === true) {
           navigate('/');
           Cookies.remove('__user__isLoggedIn');
           Cookies.remove('test__user__isLoggedIn');
           Cookies.remove('development__user__isLoggedIn');
-          localStorage.removeItem('shiv11_userID');
-          localStorage.removeItem('shiv11_userName');
+          localStorage.removeItem('yolo_userID');
+          localStorage.removeItem('yolo_userName');
           removeAuthCookie();
         }
       } catch (e) {
@@ -110,8 +110,8 @@ function Header() {
     Cookies.remove('__user__isLoggedIn');
     Cookies.remove('test__user__isLoggedIn');
     Cookies.remove('development__user__isLoggedIn');
-    localStorage.removeItem('shiv11_userID');
-    localStorage.removeItem('shiv11_userName');
+    localStorage.removeItem('yolo_userID');
+    localStorage.removeItem('yolo_userName');
     removeAuthCookie();
     toast.success('Logged Out Successfully...');
   };

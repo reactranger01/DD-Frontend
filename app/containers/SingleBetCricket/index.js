@@ -212,7 +212,7 @@ const SingleBetCricket = () => {
         isOpen={isOpenModal}
         handleClose={handleCloseModal}
         data={{
-          userId: shiv11_userID,
+          userId: yolo_userID,
           eventId: eventId,
           selectionId: selectedID,
           runner: selectedRunner,

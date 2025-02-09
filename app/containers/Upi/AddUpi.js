@@ -10,8 +10,8 @@ import { toast } from 'react-toastify';
 const AddUpi = () => {
   const navigate = useNavigate();
 
-  const userId = localStorage.getItem('shiv11_userID');
-  const userName = localStorage.getItem('shiv11_userName');
+  const userId = localStorage.getItem('yolo_userID');
+  const userName = localStorage.getItem('yolo_userName');
 
   useEffect(() => {
     if (userId) {

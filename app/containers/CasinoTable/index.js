@@ -13,7 +13,7 @@ const CasinoTable = () => {
   const isLogin = isLoggedIn();
   const [url, setUrl] = useState('');
   const [deviceType, setDeviceType] = useState(null);
-  const userId = localStorage.getItem('shiv11_userID');
+  const userId = localStorage.getItem('yolo_userID');
   const [allCasinoGame, setAllCasinoGame] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [providerSearch, setProviderSearch] = useState('');

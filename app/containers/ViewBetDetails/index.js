@@ -333,7 +333,7 @@ const ViewBetDetails = () => {
       if (response?.status === 201 || response?.status === 200) {
         setUserInfo(response.data);
         dispatch(fetchUserDetailsAction({}));
-        localStorage.setItem('shiv11_userID', response.data.id); // Return the data instead of logging it
+        localStorage.setItem('yolo_userID', response.data.id); // Return the data instead of logging it
       }
     } catch (e) {
       console.error(e);

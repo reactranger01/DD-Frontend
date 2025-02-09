@@ -9,7 +9,7 @@ import { Empty } from 'antd';
 
 const CasinoStatement = () => {
   const navigate = useNavigate();
-  const shiv11_userID = localStorage.getItem('shiv11_userID');
+  const yolo_userID = localStorage.getItem('yolo_userID');
   const [page, setPage] = useState(1);
   const [betsData, setBetsData] = useState([]);
   const [activeTab, setActiveTab] = useState('casino');
@@ -51,7 +51,7 @@ const CasinoStatement = () => {
     if (islogin) {
       try {
         const response = await getAuthData(
-          `/user/get-casino-aviator-statement?uid=${shiv11_userID}&search=${activeTab}&limit=${take}&offset=${
+          `/user/get-casino-aviator-statement?uid=${yolo_userID}&search=${activeTab}&limit=${take}&offset=${
             (page - 1) * take
           }&startdate=${moment(startDate).format(
             'YYYY-MM-DD',

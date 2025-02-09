@@ -10,8 +10,8 @@ import { toast } from 'react-toastify';
 
 const Password = () => {
   const navigate = useNavigate();
-  const userid = localStorage.getItem('shiv11_userID');
-  const userName = localStorage.getItem('shiv11_userName');
+  const userid = localStorage.getItem('yolo_userID');
+  const userName = localStorage.getItem('yolo_userName');
   const [formError, setFormError] = useState({});
   const [form, setForm] = useState({});
   const [isPassword, setIsPassword] = useState(false);

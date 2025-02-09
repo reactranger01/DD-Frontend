@@ -122,7 +122,7 @@ const AccountInfo = () => {
               </div>
               <div className="flex">
                 <img
-                  src="/images/logo-shiv11.png"
+                  src="/images/yoloLogo.webp"
                   className="md:w-[137px] w-[90px] ml-auto"
                 />
               </div>
@@ -352,7 +352,7 @@ const AccountInfo = () => {
                   Link
                 </p>
                 <p className="font-medium text-12 leading-4 flex items-end gap-2 break-all">
-                  <span>https://www.shiv11.com/login</span>
+                  <span>https://www.yolo247.com/login</span>
                   <img src="/images/icons/copy.svg" className="w-[20px]" />
                 </p>
               </div>
