@@ -61,17 +61,22 @@ export const socialIcons = [
 
 export const buttonData = [
   {
+    id: 'instantGames',
+    label: 'Instant Games',
+    imageUrl: '/images/aviator-icon.webp',
+  },
+  {
     id: 'casinoButton',
     label: 'Casino',
-    imageUrl: '/images/casinonewlogo.png',
+    imageUrl: '/images/casino-icon.webp',
   },
-  { id: 'sportsButton', label: 'Sports', imageUrl: '/images/sportslogo.png' },
+  { id: 'hotGames', label: 'Hot Games', imageUrl: '/images/fire-icon.webp' },
   {
-    id: 'aviatorButton',
-    label: 'Aviator',
-    imageUrl: '/images/instantgames.png',
+    id: 'sports',
+    label: 'Sports',
+    imageUrl: '/images/sports-icon.webp',
   },
-  { id: 'bonusButton', label: 'Bonus', imageUrl: '/images/bonuslogo.png' },
+  { id: 'bonusButton', label: 'Bonus', imageUrl: '/images/bonus-icon.webp' },
 ];
 
 export const paymentsImageList = [

@@ -1120,3 +1120,11 @@ right section
   font-size: 0px;
   clip-path: polygon(30% 0px, 0% 100%, 100% 100%, 100% 0%);
 }
+
+.header-bg {
+  background: radial-gradient(
+    circle at left top,
+    rgb(13, 38, 119) -70%,
+    rgb(0, 0, 0) 84%
+  );
+}

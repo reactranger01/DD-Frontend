@@ -74,14 +74,18 @@ const HeroSection = () => {
             buttonData.map((button) => (
               <button
                 key={button.id}
-                className={`flex flex-col justify-center items-center w-[66px] h-[76px] rounded-r-md relative ${
+                className={`flex flex-col justify-center items-center w-[66px] h-[76px] rounded-r-md leading-4 relative ${
                   activeButton === button.id
                     ? 'bg-gradient-1'
                     : 'bg-primary-1400'
                 }`}
                 onClick={() => handleButtonClick(button.id)}
               >
-                <img src={button.imageUrl} alt="line" />
+                <img
+                  src={button.imageUrl}
+                  className="!max-w-[35px]"
+                  alt="line"
+                />
                 {button.label}
                 {activeButton === button.id && (
                   <img

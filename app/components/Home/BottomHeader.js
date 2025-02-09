@@ -6,8 +6,8 @@ const BottomHeader = () => {
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
   return (
-    <div className="bg-[#CFCFCF] py-2 font-inter overflow-x-auto">
-      <div className="flex justify-between items-center overflow-hidden min-w-[957px] md:min-w-[1208px]">
+    <div className="bg-[rgb(207,207,207)] md:first-letter:py-2 font-inter overflow-x-auto">
+      <div className="hidden  md:flex justify-between items-center overflow-hidden min-w-[957px] md:min-w-[1208px]">
         <div>
           <button className="bg-[#3E3E3E] text-white text-16 bh-btn-skew font-bold p-[14px] md:py-[10px] md:px-8 rounded mr-2 relative left-[-6px] md:-top-1 top-2">
             <span>TOP GAMES</span>

@@ -133,7 +133,7 @@ function Header() {
   // };
   return (
     <>
-      <nav className="flex items-center justify-between flex-wrap  px-3 md:pr-0 md:pl-4  relative font-inter py-3 md:py-0">
+      <nav className="flex items-center header-bg  justify-between flex-wrap  px-3 md:pr-0 md:pl-4  relative font-inter py-1 md:py-0">
         <div
           className="flex items-center flex-shrink-0 text-white mr-6"
           onClick={() => navigate('/')}
@@ -141,7 +141,7 @@ function Header() {
           <img
             src="/images/yoloLogo.webp"
             alt="logo"
-            className="cursor-pointer w-[120px]"
+            className="cursor-pointer md:w-[120px] w-[80px] mt-2 md:mt-0"
           />
         </div>
         <div className="flex-1 flex-grow flex items-center lg:justify-between justify-end">
@@ -212,19 +212,19 @@ function Header() {
                     </button>
                   </Link>
                   <button
-                    className="bg-[#6778e3] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded"
+                    className="bg-[#6778e3] text-white font-semibold btn-skew py-[2px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded"
                     type="button"
                     onClick={() => navigate('/login')}
                   >
                     <span className="btn-skew-reverse">Login</span>
                   </button>
-                  <button
+                  {/* <button
                     className="bg-[#f4a322] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded ml-2"
                     type="button"
                     onClick={() => navigate('/signup')}
                   >
                     <span className="btn-skew-reverse">SIGNUP</span>
-                  </button>
+                  </button> */}
                 </div>
               </>
             )}
@@ -740,9 +740,9 @@ function Header() {
           </MenuItem>
         </Menu>
       </div>
-      <div className="bg-black lg:pt-[26px]  text-center  relative">
+      <div className="bg-[#2e2e2e87] lg:pt-[26px]  text-center  relative">
         <marquee direction="left">
-          <p className="flex items-center font-inter text-white text-12 font-normal ">
+          <p className="flex items-center font-roboto leading-3 md:leading-none text-white text-12 font-normal ">
             Yolo247 - Beyond Games Your Bonuses, Auto activated - Explore your
             entertainment partner now !!Check out our bonus page for exciting
             rewards.
@@ -775,13 +775,13 @@ function Header() {
                     >
                       <span className="btn-skew-reverse">Login</span>
                     </button>
-                    <button
+                    {/* <button
                       className="bg-[#f4a322] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded ml-2"
                       type="button"
                       onClick={() => navigate('/signup')}
                     >
                       <span className="btn-skew-reverse">SIGNUP</span>
-                    </button>
+                    </button> */}
                   </div>
                   {/* {isOpen && (
                   <div className="absolute top-[45px] right-0 z-50 w-[250px] bg-white rounded-lg p-3">
