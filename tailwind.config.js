@@ -45,6 +45,9 @@ module.exports = {
           1300: '#FFD085',
           1400: '#292929',
         },
+        secondary: {
+          100: '#6778e3',
+        },
       },
       borderRadius: {
         10: '10px',

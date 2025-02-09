@@ -1,4 +1,6 @@
-import { getAuthData } from './apiHandlers';
+import { toast } from 'react-toastify';
+import { getAuthData, removeAuthCookie } from './apiHandlers';
+import Cookies from 'js-cookie';
 
 export const calcCurrentBetStats = (betData) => {
   if (betData) {
@@ -635,4 +637,15 @@ export const fetchEventData = async (game, eventId, setters) => {
     setLoaderOneTime(true);
     console.error(`Error fetching event data from ${game}:`, e);
   }
+};
+
+export const handleLogout = async () => {
+  window.location.href = '/';
+  Cookies.remove('__user__isLoggedIn');
+  Cookies.remove('test__user__isLoggedIn');
+  Cookies.remove('development__user__isLoggedIn');
+  localStorage.removeItem('shiv11_userID');
+  localStorage.removeItem('shiv11_userName');
+  removeAuthCookie();
+  toast.success('Logged Out Successfully...');
 };

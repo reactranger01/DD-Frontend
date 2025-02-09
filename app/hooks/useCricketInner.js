@@ -2,12 +2,12 @@ import { getAuthData, isLoggedIn } from '@/utils/apiHandlers';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { logout } from '@/utils/logout';
 import {
   calcPlacedBetBookmakerCricketalculation,
   calcPlacedBetOddsCriketCalculation,
   fetchEventData,
   getUserBets,
+  handleLogout,
   transformBookmakerData,
 } from '@/utils/helper';
 
@@ -179,7 +179,7 @@ const useCricketInner = () => {
           window.outerHeight - window.innerHeight > threshold
         ) {
           window.location.replace('https://www.google.com');
-          logout();
+          handleLogout();
         }
       };
       const devToolsInterval = setInterval(checkDevTools, 1000);

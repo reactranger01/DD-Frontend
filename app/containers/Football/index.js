@@ -7,140 +7,13 @@ import {
   SmallDesc,
 } from '@/components';
 import PopularFixtureFootball from '@/components/Home/PopularFixtureFootball';
-import { getAuthData } from '@/utils/apiHandlers';
+import useFootballOuter from '@/hooks/useFootballOuter';
 import { popularList } from '@/utils/contants';
-import { mapOddsWithRunners, mergeData } from '@/utils/mergeData';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const Football = () => {
-  const navigate = useNavigate();
   const [openTab, setOpenTab] = useState(1);
-  const [fixtureData, setFixtureData] = useState([]);
-  const [fixtureEventName, setFixtureEventName] = useState([]);
-  const todayDate = new Date().toISOString().split('T')[0];
-  const tomorrowDate = new Date();
-  tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-  // const dayAfterTomorrow = new Date();
-  // dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
-  // const yesterdatDate = dayAfterTomorrow.toISOString().split('T')[0];
-  // const pastDate = new Date();
-  // pastDate.setDate(pastDate.getDate() - 1);
-  // const pastDateTime = pastDate.toISOString().split('T')[0];
-  const tomorrowDateString = tomorrowDate.toISOString().split('T')[0];
-  useEffect(() => {
-    // Initial call to fetch data
-    getEventData();
-    const intervalId = setInterval(() => {
-      getEventData();
-    }, 300000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const getEventData = async () => {
-    try {
-      const response = await getAuthData(
-        '/catalogue/soccer/get-events-with-markets',
-      );
-      // /catalogue/cricket/get-events-with-markets
-
-      if (response?.status === 201 || response?.status === 200) {
-        if (response?.data) {
-          const convertedData = response?.data;
-          setFixtureEventName(convertedData);
-        }
-      } else {
-        setFixtureEventName([]);
-      }
-    } catch (e) {
-      console.error(e);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    let source;
-    const getSteam = () => {
-      try {
-        if (source) {
-          source.close();
-        }
-        source = new EventSource(
-          `${process.env.API_URL}/catalogue/soccer/get-fixture-stream`,
-        );
-        source.onmessage = function (e) {
-          if (e.data) {
-            const dataArray = Object.values(JSON.parse(e.data)).map((item) => ({
-              ...item,
-            }));
-            setFixtureData(dataArray);
-          }
-        };
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getSteam();
-    return () => {
-      if (source) {
-        source.close();
-      }
-    };
-  }, [navigate]);
-  const parsedFixtureData = fixtureData
-    .filter((item) => item.status !== 'CLOSED')
-    .map((item) => {
-      const parsedItem = {
-        ...item,
-        odds: JSON.parse(item.runners),
-      };
-      delete parsedItem.runners;
-      return parsedItem;
-    });
-
-  const mergedData = mergeData(fixtureEventName, parsedFixtureData);
-  // runnername add in runners
-  let WantData = mapOddsWithRunners(mergedData);
-  // openDate & inplay not available remove data from array && item.odds.status === 'OPEN',
-  const NewfilteredData = WantData.filter(
-    (item) =>
-      'matchDateTime' in item &&
-      item?.isDelete === false &&
-      item?.status !== 'CLOSED',
-  );
-
-  // today matches
-  const todayDataInplayFalse = NewfilteredData.filter((entry) => {
-    const entryDate = new Date(entry?.matchDateTime)
-      ?.toISOString()
-      ?.split('T')[0];
-    return entryDate === todayDate && entry?.odds?.inplay === false;
-  });
-
-  //tomorrow matches
-  const tomorrowData = NewfilteredData?.filter((entry) => {
-    const entryDate = new Date(entry.matchDateTime)
-      ?.toISOString()
-      ?.split('T')[0];
-    return entryDate === tomorrowDateString;
-  });
-  //upcoming matches
-  // const remainingData = NewfilteredData?.filter((entry) => {
-  //   const entryDate = new Date(entry.openDate)?.toISOString()?.split('T')[0];
-  //   return entryDate >= dayAfterTomorrowDateString;
-  // });
-
-  const remainingData = NewfilteredData.filter((entry) => {
-    const entryDate = new Date(entry?.matchDateTime)
-      ?.toISOString()
-      ?.split('T')[0];
-    return (
-      entryDate !== todayDate &&
-      entryDate !== tomorrowDateString &&
-      entryDate >= todayDate
-    );
-  });
+  const { inplayFalse, inplayTrue } = useFootballOuter();
 
   return (
     <>
@@ -155,14 +28,14 @@ const Football = () => {
         style={{ backgroundImage: 'url("/images/newBanners/allBg.webp")' }}
       >
         <div className="flex-1 bg-black md:bg-transparent">
-          <InplayFootball fixtureData={mergedData} />
+          <InplayFootball fixtureData={inplayTrue} />
           <div className="">
             <div className="relative">
               <div className="shape-rect h-[35px] flex">
-                <div className="bg-primary-1200 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
+                <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
                   Popular
                 </div>
-                <div className="curve-part bg-primary-1200 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
+                <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
               </div>
 
               <div className="h-full overflow-auto custom-scroll">
@@ -243,9 +116,7 @@ const Football = () => {
                                 </div>
                                 <div className="col-span-1 bg-[#454545] h-full"></div>
                               </div>
-                              <PopularFixtureFootball
-                                data={todayDataInplayFalse}
-                              />
+                              <PopularFixtureFootball data={inplayFalse} />
                             </div>
                           </div>
                           <div
@@ -290,7 +161,7 @@ const Football = () => {
                                 <div className="col-span-1 bg-[#454545] h-full"></div>
                               </div>
 
-                              <PopularFixtureFootball data={tomorrowData} />
+                              <PopularFixtureFootball data={inplayFalse} />
                             </div>
                           </div>
                           <div
@@ -335,7 +206,7 @@ const Football = () => {
                                 <div className="col-span-1 bg-[#454545] h-full"></div>
                               </div>
 
-                              <PopularFixtureFootball data={remainingData} />
+                              <PopularFixtureFootball data={inplayFalse} />
                             </div>
                           </div>
                         </div>

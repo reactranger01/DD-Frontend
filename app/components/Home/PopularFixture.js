@@ -75,17 +75,14 @@ const PopularFixture = ({ data }) => {
   console.log(data, 'data');
   return (
     <>
-      {' '}
-      {data.length === 0 ? (
+      {data?.length === 0 ? (
         <div className=" flex h-[60px] rounded-br-lg mb-[1px] justify-center items-center overflow-hidden cursor-pointer bg-white hover:bg-[#f2f2f2]">
-          {' '}
-          {/* No Match Found */}
+          NO DATA
         </div>
       ) : (
         <>
           {data &&
-            // eslint-disable-next-line react/prop-types
-            data.map((_items, index) => {
+            data?.map((_items, index) => {
               let minLimitOdds, maxLimitOdds;
               if (_items.inplay) {
                 minLimitOdds = _items?.inPlayMinLimit;
@@ -589,7 +586,7 @@ const PopularFixture = ({ data }) => {
                               className={`blue-btn flex-1 flex flex-col items-center justify-center w-[43px] h-[45px]  min-w-[45px] max-w-[45px] md:max-w-auto  border-2  rounded-[4px] gap-[2px]  ${
                                 _items?.total_matched < totalMatchedCss
                                   ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-primary-1200 text-white'
+                                  : 'bg-secondary-100 text-white'
                               }`}
                             >
                               {/* <span className="text-14 font-semibold leading-[16px]">
@@ -714,13 +711,13 @@ const PopularFixture = ({ data }) => {
                               className={`blue-btn flex-1 flex flex-col items-center justify-center w-[45px] h-[45px]  rounded-[4px]  min-w-[45px] max-w-[45px] md:max-w-auto text-white gap-[2px] ${
                                 _items?.total_matched < totalMatchedCss
                                   ? 'bg-gray-300 text-gray-400'
-                                  : 'bg-primary-1200 text-white'
+                                  : 'bg-secondary-100 text-white'
                               } `}
                             >
                               {/* ${
                                 _items?.odds?.runners?.[2]?.ex
                                   ?.availableToBack?.[0]?.price
-                                  ? 'bg-primary-1200 text-white'
+                                  ? 'bg-secondary-100 text-white'
                                   : 'bg-[#a3a3a3]'
                               } */}
                               <span className="text-14 font-semibold leading-[16px]">
@@ -824,7 +821,7 @@ const PopularFixture = ({ data }) => {
                               className={`blue-btn flex-1 flex flex-col items-center justify-center w-[43px] h-[45px]  min-w-[45px] max-w-[45px] md:max-w-auto  border-2  rounded-[4px] gap-[2px] ${
                                 _items?.total_matched < totalMatchedCss
                                   ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-primary-1200 text-white'
+                                  : 'bg-secondary-100 text-white'
                               }`}
                             >
                               <>

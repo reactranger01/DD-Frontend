@@ -32,18 +32,18 @@ const HeroSectionWebSlider = () => {
             src={item.url}
             alt={item.url}
             onClick={() => navigate(item.path)}
-            className="w-[480px] h-[90px] p-1"
+            className="w-[281px] h-[82px] py-1"
           />
         ))}
       </div>
       <button
-        className="absolute h-[91px] w-[64px] top-1/2 transform -translate-y-1/2 left-0 bg-blue-700 text-white py-2 px-4 "
+        className="flex-center ay-center left-0  text-white  slick-prev "
         onClick={() => scroll('left')}
       >
         <img src="/images/leftarrow.png" />
       </button>
       <button
-        className="absolute h-[91px] w-[64px] top-1/2 transform -translate-y-1/2 right-0 bg-blue-700 text-white py-2 px-4"
+        className="flex-center ay-center right-0 text-white slick-next"
         onClick={() => scroll('right')}
       >
         <img src="/images/rightarrow.png" />

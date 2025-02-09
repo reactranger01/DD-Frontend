@@ -175,7 +175,7 @@ const AddAccount = () => {
                 name={'ifscCode'}
                 value={form?.ifscCode}
                 // addonRight={
-                //   <div className="absolute top-0 right-0 w-[35px] h-full rounded-tr-lg rounded-br-lg bg-primary-1200 text-20 text-white grid place-content-center">
+                //   <div className="absolute top-0 right-0 w-[35px] h-full rounded-tr-lg rounded-br-lg bg-secondary-100 text-20 text-white grid place-content-center">
                 //     {reactIcons.search}
                 //   </div>
                 // }
@@ -204,7 +204,7 @@ const AddAccount = () => {
                 className="pl-6"
                 placeholder="Set Default Account"
                 addonLeft={
-                  <div className="w-[10px] h-[10px] bg-primary-1200 rounded-full absolute top-[15px] left-[10px]"></div>
+                  <div className="w-[10px] h-[10px] bg-secondary-100 rounded-full absolute top-[15px] left-[10px]"></div>
                 }
               />
             </div>

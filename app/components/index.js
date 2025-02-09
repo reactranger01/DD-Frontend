@@ -42,3 +42,21 @@ export const BankAccountCard = loadable(() => import('./BankAccountCard'), {
 export const CasinoPlay = loadable(() => import('./CasinoPlay'), {
   fallback: <Loading />,
 });
+export const MatchOddsCricket = loadable(
+  () => import('./CricketSingleBet/MatchOddsCricket'),
+  {
+    fallback: <Loading />,
+  },
+);
+export const BookmakersCricket = loadable(
+  () => import('./CricketSingleBet/BookmakersCricket'),
+  {
+    fallback: <Loading />,
+  },
+);
+export const SessionCricket = loadable(
+  () => import('./CricketSingleBet/SessionCricket'),
+  {
+    fallback: <Loading />,
+  },
+);

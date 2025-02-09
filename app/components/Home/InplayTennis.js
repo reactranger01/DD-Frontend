@@ -6,37 +6,14 @@ import PopularFixtureTennis from './PopularFixtureTennis';
 const InplayTennis = ({ fixtureData }) => {
   const [openTab, setOpenTab] = useState(1);
 
-  let WantData = fixtureData?.map((item) => {
-    let modifiedOdds = item?.odds?.map((odd) => {
-      let correspondingRunner = item?.runners?.find(
-        (r) => r.selectionId === Number(odd.selectionId),
-      );
-      return {
-        ...odd,
-        runnerName: correspondingRunner?.runnerName || '',
-      };
-    });
-    return {
-      ...item,
-      odds: {
-        ...item.odds,
-        runners: modifiedOdds,
-        marketId: item.marketId || item.market_id,
-      },
-    };
-  });
-  const inplayTennisData = WantData.filter(
-    (entry) => entry?.inplay === true && entry?.status === 'OPEN',
-  );
-
   return (
     <div className="py-5">
       <div className="relative">
         <div className="shape-rect h-[35px] flex">
-          <div className="bg-primary-1200 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
+          <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
             Tennis
           </div>
-          <div className="curve-part bg-primary-1200 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
+          <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
         </div>
         <div className="h-full overflow-auto custom-scroll">
           <div className="flex flex-wrap">
@@ -116,7 +93,7 @@ const InplayTennis = ({ fixtureData }) => {
                           </div>
                           <div className="col-span-1 bg-[#454545] h-full"></div>
                         </div>
-                        <PopularFixtureTennis data={inplayTennisData} />
+                        <PopularFixtureTennis data={fixtureData} />
                       </div>
                     </div>
                   </div>

@@ -273,11 +273,7 @@ export const herSlider = [
     url: '/images/topBanners/9.webp',
     path: '/',
   },
-  {
-    id: 11,
-    url: '/images/topBanners/10.webp',
-    path: '/',
-  },
+
   {
     id: 12,
     url: '/images/topBanners/11.webp',

@@ -53,19 +53,98 @@ const Footer = () => {
   return (
     <>
       <div>
-        <Accordion className="custom-accordian footer-accordion">
+        <Accordion className="custom-accordian footer-accordion origin-center">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
+            className="text-center"
           >
-            Online Betting in India
+            <span className="inline-block break-words">
+              Yolo247 - Best Real Money Online Gaming Platform in India
+            </span>
           </AccordionSummary>
-          <AccordionDetails>
-            <p className="text-14 md:text-16">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+
+          <AccordionDetails className="max-h-[300px] overflow-y-auto ml-4">
+            <h2 className="text-20 font-bold mb-6 ">
+              Yolo247 - Best Real Money Online Gambling Platform in India
+            </h2>
+            <p className="">
+              Betting has never been as fun and rewarding as before, the way you
+              are going to experience it on the Yolo247 platform. We, the best
+              real money online gambling platform, provide a top-class casino
+              and sports betting experience.
+            </p>
+            <p className=" mt-2">
+              Our ever-growing happy users play more than 700 exciting and
+              rewarding casino games while also betting on multiple sports. Get
+              ready to dive into the world of casino and sports betting with us
+              to get amazing experiences and rewards.
+            </p>
+
+            <h2 className="text-20 font-bold mt-4 mb-4">
+              Yolo247 - Your Ultimate Online Betting Partner
+            </h2>
+            <p className="">
+              Yolo247 is the best real money online gambling platform, offering
+              exciting casino games and multiple sports betting options. Among
+              all the best Indian betting sites, Yolo247 stands out for its
+              online gambling real money features.
+            </p>
+
+            <p className="mt-4 ">
+              We, the best gambling site in India, offer casino real money games
+              in India under the following categories:
+              <ul className="list-disc pl-6 mt-2">
+                <li>Card games</li>
+                <li>Wheel games</li>
+                <li>Dice games</li>
+                <li>Crash games</li>
+                <li>Lot games</li>
+              </ul>
+            </p>
+
+            <p className="mt-4">
+              Under each category, there are multiple games that you can try and
+              win real cash. Among all trusted Indian betting sites, Yolo247 has
+              an edge, as it offers some of the most popular sports for betting.
+            </p>
+
+            <p className="mt-4">
+              Yolo247 betting online platform is also quite popular because of
+              instant withdrawals and multiple deposit options. With Yolo247
+              instant withdrawals, you can get your winnings within half an hour
+              in your account.
+            </p>
+
+            <button className="underline text-orange-500 cursor-pointer hover:text-white">
+              Download Now
+            </button>
+
+            <h2 className="text-20 font-bold mt-4">
+              Why is Yolo247 Your Best Choice?
+            </h2>
+
+            <p className="mt-4">
+              Yolo247 is the best real money online gambling site for many
+              reasons, and the following are some of the reasons why you should
+              pick Yolo247 as your online casino and sports betting partner:
+            </p>
+
+            <h3 className="mt-4 font-bold">imple & Easy Login</h3>
+
+            <p className="mt-4">
+              he magic of online gaming and sports betting lies in their
+              simplicity, and our straightforward navigation makes the gaming
+              experience memorable. Our website and app are dedicated to
+              understanding players’ needs and providing them with a rewarding
+              casino and sports betting experience.
+            </p>
+            <p className="mt-4">
+              The easy and smooth login lets the users play their favourite
+              games in no time. All you need to do is enter your credentials and
+              click on ‘Login’ to get to your favourite casino games and sports
+              betting options.
             </p>
           </AccordionDetails>
         </Accordion>

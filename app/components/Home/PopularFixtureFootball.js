@@ -75,22 +75,21 @@ const PopularFixtureFootball = ({ data }) => {
 
   const totalMatched = 0;
   const totalMatchedCss = 0;
+  // eslint-disable-next-line
   const FixtureData = FixtureData1.sort((a, b) => {
     return new Date(a.matchDateTime) - new Date(b.matchDateTime);
   });
 
   return (
     <>
-      {' '}
-      {FixtureData.length === 0 ? (
+      {data?.length === 0 ? (
         <div className=" flex h-[60px] rounded-br-lg mb-[1px] justify-center items-center overflow-hidden cursor-pointer bg-white hover:bg-[#f2f2f2]">
-          {' '}
-          {/* No Match Found */}
+          NO DATA
         </div>
       ) : (
         <>
-          {FixtureData &&
-            FixtureData.map((_items, index) => {
+          {data &&
+            data?.map((_items, index) => {
               let minLimitOdds, maxLimitOdds;
               if (_items.inplay) {
                 minLimitOdds = _items?.inPlayMinLimit;
@@ -102,13 +101,6 @@ const PopularFixtureFootball = ({ data }) => {
 
               return (
                 <>
-                  {/* {_items?.odds?.runners?.[0]?.ex?.availableToBack?.[0]
-                    ?.price ||
-                  _items?.odds?.runners?.[1]?.ex?.availableToBack?.[0]?.price ||
-                  _items?.odds?.runners?.[2]?.ex?.availableToBack?.[0]?.price ||
-                  _items?.odds?.runners?.[0]?.ex?.availableToLay?.[0]?.price ||
-                  _items?.odds?.runners?.[1]?.ex?.availableToLay?.[0]?.price ||
-                  _items?.odds?.runners?.[2]?.ex?.availableToLay?.[0]?.price ? ( */}
                   <div
                     key={index}
                     className="hidden md:grid grid-cols-5 rounded-br-lg mb-[1px] overflow-hidden cursor-pointer bg-white hover:bg-[#f2f2f2]"
@@ -116,7 +108,7 @@ const PopularFixtureFootball = ({ data }) => {
                     <div className="col-span-2 px-1 py-2 flex items-center justify-between">
                       <div
                         onClick={() => {
-                          if (_items?.odds?.totalMatched < totalMatchedCss) {
+                          if (_items?.total_matched < totalMatchedCss) {
                             return; // Prevent navigation if isDisabled is true
                           }
                           navigate(`/singlebet/soccer/${_items?.event_id}`, {
@@ -142,7 +134,7 @@ const PopularFixtureFootball = ({ data }) => {
                             />
                           </div>
                         </div>
-                        {_items?.runners?.[0]?.runnerName ? (
+                        {_items?.runners ? (
                           <div className="flex flex-col gap-2 ml-2">
                             <span className="text-[#2C286A] text-[13px] leading-none">
                               1&nbsp;&nbsp;&nbsp;
@@ -185,229 +177,206 @@ const PopularFixtureFootball = ({ data }) => {
                     </div>
                     <div className="col-span-2 px-1 py-2">
                       <div className="grid grid-cols-6 gap-2 h-full text-black font-bold text-[13px]">
-                        {_items?.odds?.runners?.[0]?.ex?.availableToBack?.[0]
-                          ?.price ? (
-                          <button
-                            disabled={
-                              _items?.odds?.totalMatched < totalMatched
-                                ? true
-                                : false
-                            }
-                            className={`col-span-1  flex items-center justify-center cursor-pointer hover:border-2 ${
-                              _items?.odds?.totalMatched < totalMatchedCss
-                                ? 'bg-gray-300 text-gray-400'
-                                : 'bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]'
-                            }`}
-                            onClick={() => {
-                              isLogin
-                                ? addToBetPlace(
+                        <div className="">
+                          {_items?.runners?.[0]?.backPrice1 ? (
+                            <button
+                              className="col-span-1 h-full w-full flex items-center justify-center cursor-pointer bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]"
+                              onClick={() => {
+                                if (isLogin) {
+                                  addToBetPlace(
+                                    _items?.competition_name,
                                     _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[0]?.selectionId,
-                                    _items?.odds?.runners?.[0],
+                                    _items?.runners?.[0]?.selectionId,
+                                    _items?.runners?.[0],
                                     'Soccer',
-                                    _items?.odds?.runners?.[0]?.ex
-                                      ?.availableToBack?.[0]?.price,
-                                    _items?.marketName,
+                                    _items?.runners?.[0]?.backPrice1,
+                                    _items?.market_name,
                                     'BACK',
-                                    _items?.odds,
+                                    _items?.name,
+                                    _items?.market_id,
+                                    _items?.runners,
+                                    _items?.sportId,
                                     minLimitOdds,
                                     maxLimitOdds,
-                                  )
-                                : navigate('/login');
-                            }}
-                          >
-                            {_items?.odds?.runners?.[0]?.ex
-                              ?.availableToBack?.[0]?.price || '-'}
-                          </button>
-                        ) : (
-                          <DisableButton btncolor={'blue'} />
-                        )}
-                        {_items?.odds?.runners?.[0]?.ex?.availableToLay?.[0]
-                          ?.price ? (
-                          <button
-                            disabled={
-                              _items?.odds?.totalMatched < totalMatched
-                                ? true
-                                : false
-                            }
-                            onClick={() => {
-                              isLogin
-                                ? addToBetPlace(
+                                  );
+                                } else {
+                                  navigate('/login');
+                                }
+                              }}
+                            >
+                              {_items?.runners?.[0]?.backPrice1}
+                            </button>
+                          ) : (
+                            <DisableButton btncolor={'blue'} />
+                          )}
+                        </div>
+                        <div className="">
+                          {_items?.runners?.[0]?.layPrice1 ? (
+                            <button
+                              className="col-span-1 flex items-center justify-center cursor-pointer bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58] w-full h-full"
+                              onClick={() => {
+                                if (isLogin) {
+                                  addToBetPlace(
+                                    _items?.competition_name,
                                     _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[0]?.selectionId,
-                                    _items?.odds?.runners?.[0],
+                                    _items?.runners?.[0]?.selectionId,
+                                    _items?.runners?.[0],
                                     'Soccer',
-                                    _items?.odds?.runners?.[0]?.ex
-                                      ?.availableToLay?.[0]?.price,
-                                    _items?.marketName,
+                                    _items?.runners?.[0]?.layPrice1,
+                                    _items?.market_name,
                                     'LAY',
-                                    _items?.odds,
+                                    _items?.name,
+                                    _items?.market_id,
+                                    _items?.runners,
+                                    _items?.sportId,
                                     minLimitOdds,
                                     maxLimitOdds,
-                                  )
-                                : navigate('/login');
-                            }}
-                            className={`col-span-1  flex items-center justify-center cursor-pointer hover:border-2 ${
-                              _items?.odds?.totalMatched < totalMatchedCss
-                                ? 'bg-gray-300 text-gray-400'
-                                : ' bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58]'
-                            }`}
-                          >
-                            {_items?.odds?.runners?.[0]?.ex?.availableToLay?.[0]
-                              ?.price || '-'}
-                          </button>
-                        ) : (
-                          <DisableButton btncolor={'pink'} />
-                        )}
+                                  );
+                                } else {
+                                  navigate('/login');
+                                }
+                              }}
+                            >
+                              {_items?.runners?.[0]?.layPrice1 || '-'}
+                            </button>
+                          ) : (
+                            <DisableButton btncolor={'pink'} />
+                          )}
+                        </div>
 
-                        {_items?.odds?.runners?.[2]?.ex?.availableToBack?.[0]
-                          ?.price ? (
-                          <button
-                            disabled={
-                              _items?.odds?.totalMatched < totalMatched
-                                ? true
-                                : false
-                            }
-                            className={`col-span-1  flex items-center justify-center cursor-pointer hover:border-2 ${
-                              _items?.odds?.totalMatched < totalMatchedCss
-                                ? 'bg-gray-300 text-gray-400'
-                                : 'bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]'
-                            }`}
-                            onClick={() => {
-                              isLogin
-                                ? addToBetPlace(
+                        <div className="">
+                          {_items?.runners?.[2]?.backPrice1 ? (
+                            <button
+                              className="col-span-1 h-full w-full flex items-center justify-center cursor-pointer bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]"
+                              onClick={() => {
+                                if (isLogin) {
+                                  addToBetPlace(
+                                    _items?.competition_name,
                                     _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[2]?.selectionId,
-                                    _items?.odds?.runners?.[2],
+                                    _items?.runners?.[2]?.selectionId,
+                                    _items?.runners?.[2],
                                     'Soccer',
-                                    _items?.odds?.runners?.[2]?.ex
-                                      ?.availableToBack?.[0]?.price,
-                                    _items?.marketName,
+                                    _items?.runners?.[2]?.backPrice1,
+                                    _items?.market_name,
                                     'BACK',
-                                    _items?.odds,
+                                    _items?.name,
+                                    _items?.market_id,
+                                    _items?.runners,
+                                    _items?.sportId,
                                     minLimitOdds,
                                     maxLimitOdds,
-                                  )
-                                : navigate('/login');
-                            }}
-                          >
-                            {_items?.odds?.runners?.[2]?.ex
-                              ?.availableToBack?.[0]?.price || '-'}
-                          </button>
-                        ) : (
-                          <DisableButton btncolor={'blue'} />
-                        )}
-                        {_items?.odds?.runners?.[2]?.ex?.availableToLay?.[0]
-                          ?.price ? (
-                          <button
-                            disabled={
-                              _items?.odds?.totalMatched < totalMatched
-                                ? true
-                                : false
-                            }
-                            onClick={() => {
-                              isLogin
-                                ? addToBetPlace(
+                                  );
+                                } else {
+                                  navigate('/login');
+                                }
+                              }}
+                            >
+                              {_items?.runners?.[2]?.backPrice1 || '-'}
+                            </button>
+                          ) : (
+                            <DisableButton btncolor={'blue'} />
+                          )}
+                        </div>
+                        <div className="">
+                          {_items?.runners?.[2]?.layPrice1 ? (
+                            <button
+                              className="col-span-1 flex items-center justify-center cursor-pointer bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58] w-full h-full"
+                              onClick={() => {
+                                if (isLogin) {
+                                  addToBetPlace(
+                                    _items?.competition_name,
                                     _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[2]?.selectionId,
-                                    _items?.odds?.runners?.[2],
+                                    _items?.runners?.[2]?.selectionId,
+                                    _items?.runners?.[2],
                                     'Soccer',
-                                    _items?.odds?.runners?.[2]?.ex
-                                      ?.availableToLay?.[0]?.price,
-                                    _items?.marketName,
+                                    _items?.runners?.[2]?.layPrice1,
+                                    _items?.market_name,
                                     'LAY',
-                                    _items?.odds,
+                                    _items?.name,
+                                    _items?.market_id,
+                                    _items?.runners,
+                                    _items?.sportId,
                                     minLimitOdds,
                                     maxLimitOdds,
-                                  )
-                                : navigate('/login');
-                            }}
-                            className={`col-span-1  flex items-center justify-center cursor-pointer hover:border-2 ${
-                              _items?.odds?.totalMatched < totalMatchedCss
-                                ? 'bg-gray-300 text-gray-400'
-                                : ' bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58]'
-                            }`}
-                          >
-                            {_items?.odds?.runners?.[2]?.ex?.availableToLay?.[0]
-                              ?.price || '-'}
-                          </button>
-                        ) : (
-                          <DisableButton btncolor={'pink'} />
-                        )}
-                        {_items?.odds?.runners?.[1]?.ex?.availableToBack?.[0]
-                          ?.price ? (
-                          <button
-                            disabled={
-                              _items?.odds?.totalMatched < totalMatched
-                                ? true
-                                : false
-                            }
-                            className={`col-span-1  flex items-center justify-center cursor-pointer hover:border-2 ${
-                              _items?.odds?.totalMatched < totalMatchedCss
-                                ? 'bg-gray-300 text-gray-400'
-                                : 'bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]'
-                            }`}
-                            onClick={() => {
-                              isLogin
-                                ? addToBetPlace(
+                                  );
+                                } else {
+                                  navigate('/login');
+                                }
+                              }}
+                            >
+                              {_items?.runners?.[2]?.layPrice1 || '-'}
+                            </button>
+                          ) : (
+                            <DisableButton btncolor={'pink'} />
+                          )}
+                        </div>
+                        <div className="">
+                          {_items?.runners?.[1]?.backPrice1 ? (
+                            <button
+                              className="col-span-1 h-full w-full flex items-center justify-center cursor-pointer bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]"
+                              onClick={() => {
+                                if (isLogin) {
+                                  addToBetPlace(
+                                    _items?.competition_name,
                                     _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[1]?.selectionId,
-                                    _items?.odds?.runners?.[1],
+                                    _items?.runners?.[1]?.selectionId,
+                                    _items?.runners?.[1],
                                     'Soccer',
-                                    _items?.odds?.runners?.[1]?.ex
-                                      ?.availableToBack?.[0]?.price,
-                                    _items?.marketName,
+                                    _items?.runners?.[1]?.backPrice1,
+                                    _items?.market_name,
                                     'BACK',
-                                    _items?.odds,
+                                    _items?.name,
+                                    _items?.market_id,
+                                    _items?.runners,
+                                    _items?.sportId,
                                     minLimitOdds,
                                     maxLimitOdds,
-                                  )
-                                : navigate('/login');
-                            }}
-                          >
-                            {_items?.odds?.runners?.[1]?.ex
-                              ?.availableToBack?.[0]?.price || '-'}
-                          </button>
-                        ) : (
-                          <DisableButton btncolor={'blue'} />
-                        )}
-                        {_items?.odds?.runners?.[1]?.ex?.availableToLay?.[0]
-                          ?.price ? (
-                          <button
-                            disabled={
-                              _items?.odds?.totalMatched < totalMatched
-                                ? true
-                                : false
-                            }
-                            onClick={() => {
-                              isLogin
-                                ? addToBetPlace(
+                                  );
+                                } else {
+                                  navigate('/login');
+                                }
+                              }}
+                            >
+                              {_items?.runners?.[2]?.backPrice1 || '-'}
+                            </button>
+                          ) : (
+                            <DisableButton btncolor={'blue'} />
+                          )}
+                        </div>
+                        <div className="">
+                          {_items?.runners?.[1]?.layPrice1 ? (
+                            <button
+                              className="col-span-1 flex items-center justify-center cursor-pointer bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58] w-full h-full"
+                              onClick={() => {
+                                if (isLogin) {
+                                  addToBetPlace(
+                                    _items?.competition_name,
+                                    _items?.competition_name,
                                     _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[1]?.selectionId,
-                                    _items?.odds?.runners?.[1],
+                                    _items?.runners?.[1]?.selectionId,
+                                    _items?.runners?.[1],
                                     'Soccer',
-                                    _items?.odds?.runners?.[1]?.ex
-                                      ?.availableToLay?.[0]?.price,
-                                    _items?.marketName,
+                                    _items?.runners?.[1]?.layPrice1,
+                                    _items?.market_name,
                                     'LAY',
-                                    _items?.odds,
+                                    _items?.name,
+                                    _items?.market_id,
+                                    _items?.runners,
+                                    _items?.sportId,
                                     minLimitOdds,
                                     maxLimitOdds,
-                                  )
-                                : navigate('/login');
-                            }}
-                            className={`col-span-1  flex items-center justify-center cursor-pointer hover:border-2 ${
-                              _items?.odds?.totalMatched < totalMatchedCss
-                                ? 'bg-gray-300 text-gray-400'
-                                : ' bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58]'
-                            }`}
-                          >
-                            {_items?.odds?.runners?.[1]?.ex?.availableToLay?.[0]
-                              ?.price || '-'}
-                          </button>
-                        ) : (
-                          <DisableButton btncolor={'pink'} />
-                        )}
+                                  );
+                                } else {
+                                  navigate('/login');
+                                }
+                              }}
+                            >
+                              {_items?.runners?.[1]?.layPrice1 || '-'}
+                            </button>
+                          ) : (
+                            <DisableButton btncolor={'pink'} />
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="col-span-1 px-1 py-2 relative border-l border-black">
@@ -557,7 +526,7 @@ const PopularFixtureFootball = ({ data }) => {
                               className={`blue-btn flex-1 flex flex-col items-center justify-center w-[43px] h-[45px]  min-w-[45px] max-w-[45px] md:max-w-auto  border-2  rounded-[4px] gap-[2px]  ${
                                 _items?.odds?.totalMatched < totalMatchedCss
                                   ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-primary-1200 text-white'
+                                  : 'bg-secondary-100 text-white'
                               }`}
                             >
                               {/* <span className="text-14 font-semibold leading-[16px]">
@@ -680,7 +649,7 @@ const PopularFixtureFootball = ({ data }) => {
                               className={`blue-btn flex-1 flex flex-col items-center justify-center w-[45px] h-[45px]  rounded-[4px]  min-w-[45px] max-w-[45px] md:max-w-auto text-white gap-[2px] ${
                                 _items?.odds?.totalMatched < totalMatchedCss
                                   ? 'bg-gray-300 text-gray-400'
-                                  : 'bg-primary-1200 text-white'
+                                  : 'bg-secondary-100 text-white'
                               } `}
                             >
                               <span className="text-14 font-semibold leading-[16px]">
@@ -783,7 +752,7 @@ const PopularFixtureFootball = ({ data }) => {
                               className={`blue-btn flex-1 flex flex-col items-center justify-center w-[43px] h-[45px]  min-w-[45px] max-w-[45px] md:max-w-auto  border-2  rounded-[4px] gap-[2px] ${
                                 _items?.odds?.totalMatched < totalMatchedCss
                                   ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-primary-1200 text-white'
+                                  : 'bg-secondary-100 text-white'
                               }`}
                             >
                               <>

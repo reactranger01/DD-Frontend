@@ -70,7 +70,7 @@ const HomeBottom = () => {
         <div className="hb-heading text-[30px] font-inter text-white px-10">
           <h1 className="my-auto font-semibold">A LITTLE EXTRA NEVER HURTS</h1>
         </div>
-        <div className="grid grid-cols-3 gap-4 px-5">
+        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-5">
           <div className="relative">
             <img src="/images/bottomSection/1.webp" alt="" />
             <div className="hb-clip">
@@ -98,7 +98,7 @@ const HomeBottom = () => {
             YOU ONLY LIVE ONCE. PLAY MORE, EARN MORE !
           </h1>
         </div>
-        <div className="grid grid-cols-5 gap-2 px-5 text-white ">
+        <div className="grid  md:grid-cols-3 lg:grid-cols-5  gap-2 px-5 text-white ">
           {data?.map((item, index) => (
             <div key={index} className="relative">
               <img src={item.img} alt="" />

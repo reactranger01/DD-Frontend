@@ -2,142 +2,17 @@ import {
   Banner,
   BottomHeader,
   HeroSectionWebSlider,
-  // HeroSlider,
   InplayTennis,
   SmallDesc,
 } from '@/components';
 import PopularFixtureTennis from '@/components/Home/PopularFixtureTennis';
-import { getAuthData } from '@/utils/apiHandlers';
+import useTennisOuter from '@/hooks/useTennisOuter';
 import { popularList } from '@/utils/contants';
-import { mapOddsWithRunners, mergeData } from '@/utils/mergeData';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const Tennis = () => {
-  const navigate = useNavigate();
   const [openTab, setOpenTab] = useState(1);
-  const [fixtureData, setFixtureData] = useState([]);
-  const [fixtureEventName, setFixtureEventName] = useState([]);
-  const todayDate = new Date().toISOString().split('T')[0];
-  const tomorrowDate = new Date();
-  tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-  const tomorrowDateString = tomorrowDate.toISOString().split('T')[0];
-
-  useEffect(() => {
-    // Initial call to fetch data
-    getEventData();
-    const intervalId = setInterval(() => {
-      getEventData();
-    }, 300000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const getEventData = async () => {
-    try {
-      const response = await getAuthData(
-        '/catalogue/tennis/get-events-with-markets',
-      );
-      // /catalogue/cricket/get-events-with-markets
-
-      if (response?.status === 201 || response?.status === 200) {
-        if (response?.data) {
-          const convertedData = response?.data;
-          setFixtureEventName(convertedData);
-        }
-      } else {
-        setFixtureEventName([]);
-      }
-    } catch (e) {
-      console.error(e);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    let source;
-    const getSteam = () => {
-      try {
-        if (source) {
-          source.close();
-        }
-        source = new EventSource(
-          `${process.env.API_URL}/catalogue/tennis/get-fixture-stream`,
-        );
-        source.onmessage = function (e) {
-          if (e.data) {
-            const dataArray = Object.values(JSON.parse(e.data)).map((item) => ({
-              ...item,
-            }));
-            setFixtureData(dataArray);
-          }
-        };
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getSteam();
-    // Cleanup
-    return () => {
-      if (source) {
-        source.close();
-      }
-    };
-  }, [navigate]);
-  const parsedFixtureData = fixtureData.map((item) => {
-    const parsedItem = {
-      ...item,
-      odds: JSON.parse(item.runners),
-      eventid: item.matchId,
-    };
-    delete parsedItem.runners;
-    return parsedItem;
-  });
-
-  const mergedData = mergeData(fixtureEventName, parsedFixtureData);
-  // Add runner name in Odds array
-  let WantData = mapOddsWithRunners(mergedData);
-  // openDate & inplay not available remove data from array && 'odds' in item && 'inplay' in item.odds
-  const NewfilteredData = WantData.filter(
-    (item) =>
-      'matchDateTime' in item &&
-      item?.isDelete === false &&
-      item?.status !== 'CLOSED',
-  );
-
-  // today matches && entry.odds.status === 'OPEN'
-  const todayDataInplayFalse = NewfilteredData.filter((entry) => {
-    const entryDate = new Date(entry.matchDateTime)
-      ?.toISOString()
-      ?.split('T')[0];
-    return (
-      (entryDate === todayDate && entry?.inplay === false) ||
-      (entryDate === todayDate && entry?.inPlay === false)
-    );
-  });
-  // tomorrow matches
-  const tomorrowData = NewfilteredData.filter((entry) => {
-    const entryDate = new Date(entry.matchDateTime)
-      ?.toISOString()
-      ?.split('T')[0];
-    return entryDate === tomorrowDateString;
-  });
-  // const remainingData = NewfilteredData?.filter((entry) => {
-  //   const entryDate = new Date(entry.openDate)?.toISOString()?.split('T')[0];
-  //   return entryDate >= dayAfterTomorrowDateString;
-  // });
-  // upcoming matches
-  const remainingData = NewfilteredData.filter((entry) => {
-    const entryDate = new Date(entry.matchDateTime)
-      ?.toISOString()
-      ?.split('T')[0];
-    return (
-      entryDate !== todayDate &&
-      entryDate !== tomorrowDateString &&
-      entryDate >= todayDate
-    );
-  });
+  const { inplayFalse, inplayTrue } = useTennisOuter();
 
   return (
     <>
@@ -152,14 +27,14 @@ const Tennis = () => {
         style={{ backgroundImage: 'url("./images/newBanners/allBg.webp")' }}
       >
         <div className="flex-1 bg-black md:bg-transparent">
-          <InplayTennis fixtureData={mergedData} />
+          <InplayTennis fixtureData={inplayTrue} />
           <div className="">
             <div className="relative">
               <div className="shape-rect h-[35px] flex">
-                <div className="bg-primary-1200 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
+                <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
                   Popular
                 </div>
-                <div className="curve-part bg-primary-1200 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
+                <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
               </div>
               <div className="overflow-auto custom-scroll">
                 <div className="flex flex-wrap">
@@ -240,9 +115,7 @@ const Tennis = () => {
                                 <div className="col-span-1 bg-[#454545] h-full"></div>
                               </div>
 
-                              <PopularFixtureTennis
-                                data={todayDataInplayFalse}
-                              />
+                              <PopularFixtureTennis data={inplayFalse} />
                             </div>
                           </div>
                           <div
@@ -287,7 +160,7 @@ const Tennis = () => {
                                 <div className="col-span-1 bg-[#454545] h-full"></div>
                               </div>
 
-                              <PopularFixtureTennis data={tomorrowData} />
+                              <PopularFixtureTennis data={inplayFalse} />
                             </div>
                           </div>
                           <div
@@ -331,7 +204,7 @@ const Tennis = () => {
                                 </div>
                                 <div className="col-span-1 bg-[#454545] h-full"></div>
                               </div>
-                              <PopularFixtureTennis data={remainingData} />
+                              <PopularFixtureTennis data={inplayFalse} />
                             </div>
                           </div>
                         </div>

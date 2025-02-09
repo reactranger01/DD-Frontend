@@ -5,7 +5,7 @@
 //   const navigate = useNavigate();
 
 //   return (
-//     <div className="bg-primary-1200 p-3 flex items-center justify-between">
+//     <div className="bg-secondary-100 p-3 flex items-center justify-between">
 //       <div className="flex items-center gap-2">
 //         <span className="text-14 md:text-16 text-white font-semibold">Bet</span>
 //         <span className="text-14 md:text-16 w-[40px] h-[40px] rounded-full bg-primary-400 text-white grid place-content-center">

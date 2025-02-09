@@ -23,13 +23,13 @@ import RightBar from './RightBar';
 import { numberWithCommas } from '@/utils/numberWithCommas';
 import CasinoBox from '../HoverBox/CasinoBox';
 import SportsBox from '../HoverBox/SportsBox';
-import AviatorBox from '../HoverBox/AviatorBox';
+// import AviatorBox from '../HoverBox/AviatorBox';
 
 function Header() {
   const isMobileView = useMediaQuery('(max-width:600px)');
   const [isSportsHovered, setIsSportsHovered] = useState(false);
   const [isCasinoHovered, setIsCasinoHovered] = useState(false);
-  const [isAviatorHovered, setIsAviatorHovered] = useState(false);
+  // const [isAviatorHovered, setIsAviatorHovered] = useState(false);
   const userDetails = useSelector((state) => state?.userDetails.data);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [dropdown, setDropdown] = useState(false);
@@ -147,34 +147,240 @@ function Header() {
         <div className="flex-1 flex-grow flex items-center justify-between">
           <div className="text-sm flex items-center">
             <button
-              onMouseEnter={() => setIsSportsHovered(true)}
-              onMouseLeave={() => setIsSportsHovered(false)}
-              className={`${'gradient-btn text-white'}  btn-skew font-bold py-2 px-2 lg:px-9 rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]`}
-            >
-              <span>Sports</span>
-            </button>
-            <SportsBox isHovered={isSportsHovered} />
-
-            <button
               onMouseEnter={() => setIsCasinoHovered(true)}
               onMouseLeave={() => setIsCasinoHovered(false)}
-              className={`${'gradient-btn text-white'}  btn-skew font-bold py-2 px-2 lg:px-9 rounded mr-2 hidden md:inline min-w-[70px] lg:min-w-[unset]`}
+              className=" top-buttons  btn-skew font-bold py-2 px-2  rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]"
             >
-              <span>Casino</span>
+              <span>CASINO</span>
             </button>
             <CasinoBox isHovered={isCasinoHovered} />
-
             <button
+              onMouseEnter={() => setIsSportsHovered(true)}
+              onMouseLeave={() => setIsSportsHovered(false)}
+              className=" top-buttons  btn-skew font-bold py-2 px-2  rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]"
+            >
+              <span>INSTANT GAMES</span>
+            </button>
+            <button
+              onMouseEnter={() => setIsSportsHovered(true)}
+              onMouseLeave={() => setIsSportsHovered(false)}
+              className=" top-buttons  btn-skew font-bold py-2 px-2  rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]"
+            >
+              <span>HOT GAMES</span>
+            </button>
+            <button
+              onMouseEnter={() => setIsSportsHovered(true)}
+              onMouseLeave={() => setIsSportsHovered(false)}
+              className=" top-buttons  btn-skew font-bold py-2 px-2  rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]"
+            >
+              <span>SPORTS</span>
+            </button>
+            <SportsBox isHovered={isSportsHovered} />
+            <button
+              onMouseEnter={() => setIsSportsHovered(true)}
+              onMouseLeave={() => setIsSportsHovered(false)}
+              className=" top-buttons  btn-skew font-bold py-2 px-2  rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]"
+            >
+              <span>BONUS</span>
+            </button>
+            {/* <button
               onMouseEnter={() => setIsAviatorHovered(true)}
               onMouseLeave={() => setIsAviatorHovered(false)}
-              className={`${'gradient-btn text-white'}  btn-skew font-bold py-2 px-2 lg:px-9  rounded mr-2 hidden md:inline min-w-[70px] lg:min-w-[unset]`}
+              className=" top-buttons  btn-skew font-bold py-2 px-2  rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]"
             >
-              <span>Aviator</span>
+              <span>AVAITOR</span>
             </button>
-            <AviatorBox isHovered={isAviatorHovered} />
+            <AviatorBox isHovered={isAviatorHovered} /> */}
           </div>
+        </div>
+      </nav>
 
-          <div className="relative flex gap-2">
+      <div className="mobile-menu">
+        <Menu
+          className="md:hidden w-full"
+          id="basic-menu"
+          anchorEl={dropdown}
+          open={Boolean(dropdown)}
+          onClose={() => {
+            setDropdown(null);
+          }}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          sx={{
+            '& .MuiPaper-root': {
+              minWidth: isMobileView ? 'auto' : 350,
+              backgroundColor: 'black',
+              padding: 0,
+              width: '100%',
+              marginTop: '30px',
+            },
+          }}
+        >
+          <div className="bg-[#383838] border-[1px] border-[#525252] rounded-md mx-4">
+            <MenuItem onClick={handleClose} disableRipple={true}>
+              <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                  Balance
+                </p>
+                <div>
+                  <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
+                    {numberWithCommas(userDetails?.balance || userInfo.balance)}
+                  </p>
+                </div>
+              </div>
+            </MenuItem>
+            {/* <MenuItem onClick={handleClose} disableRipple={true}>
+              <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                  Bonus Won
+                </p>
+                <div>
+                  <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
+                    {userDetails?.creditAmount || userInfo.creditAmount}
+                  </p>
+                </div>
+              </div>
+            </MenuItem> */}
+            <MenuItem onClick={handleClose} disableRipple={true}>
+              <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                  Net Exposure
+                </p>
+                <div>
+                  <p className="2xl:text-16 text-14 font-medium text-[#BA202D] flex-1">
+                    {numberWithCommas(
+                      userDetails?.exposureAmount || userInfo.exposureAmount,
+                    )}
+                  </p>
+                </div>
+              </div>
+            </MenuItem>
+
+            <MenuItem
+              onClick={() => {
+                setDropdown(false);
+                handleLogout();
+              }}
+              disableRipple={true}
+            >
+              <div className="flex items-center gap-2 w-full gradient-btn py-2 rounded-b-[4px]">
+                <p className="2xl:text-16 text-14 text-center font-semibold text-white flex-1">
+                  Log Out
+                </p>
+              </div>
+            </MenuItem>
+          </div>
+          <MenuItem>
+            <div className="side-bar-mobile flex items-center justify-between w-full !min-w-full md:min-w-auto">
+              <div className="flex sidebar-mobile-inner ">
+                <List className="w-full">
+                  {sidebarTabs.map((item, index) => (
+                    <>
+                      <div
+                        key={index}
+                        className={`mb-3 w-full  md:w-80 bg-[#383838] border-[1px] border-[#525252] rounded-md  ${
+                          item.name === 'Finances' && 'hidden'
+                        }`}
+                      >
+                        <ListItemButton
+                          onClick={() => handleMainTabClick(index)}
+                          className={`list-button transition-colors ease duration-300 bg-[#383838] ${
+                            openTab == index && 'bg-gradient-1'
+                          }`}
+                        >
+                          <div className="flex gap-2.5 items-center text-white text-sm font-inter w-full">
+                            <div>
+                              <div className="border border-white bg-[radial-gradient(#FFFFFF4D, #FFFFFF80)] icon-bg rounded-md p-2 shadow-[0_0_8px_3px_#6369AD66]">
+                                <img src={item.icon} alt="dashboard" />
+                              </div>
+                            </div>
+                            <div>{item.name}</div>
+                          </div>
+                          {openTab === index ? <ExpandLess /> : <ExpandMore />}
+                        </ListItemButton>
+                        <Collapse
+                          in={openTab === index}
+                          timeout="auto"
+                          unmountOnExit
+                        >
+                          <List component="div" disablePadding>
+                            {item.subTab.map((subTab, subIndex) => (
+                              <ListItemButton
+                                key={subIndex}
+                                onClick={() => {
+                                  navigate(subTab.link);
+                                  setDropdown(false);
+                                }}
+                                className={`innerMenu ${
+                                  subTab.link == currentPath && 'bg-gradient-1'
+                                }`}
+                              >
+                                <ListItemText primary={subTab.name} />
+                              </ListItemButton>
+                            ))}
+                          </List>
+                        </Collapse>
+                      </div>
+                      {item.subTab.map((subTab, subIndex) => (
+                        <div
+                          key={subIndex}
+                          onClick={() => setDropdown(false)}
+                          className={`mb-3 w-full  md:w-80 bg-[#383838] border-[1px] border-[#525252] rounded-md  ${
+                            item.name !== 'Finances' && 'hidden'
+                          }`}
+                        >
+                          <ListItemButton
+                            onClick={() => navigate(subTab?.link)}
+                            className="list-button transition-colors ease duration-300 bg-[#383838]"
+                          >
+                            <div className="flex gap-2.5 items-center text-white text-sm font-inter w-full">
+                              <div>
+                                <div className="border border-white bg-[radial-gradient(#FFFFFF4D, #FFFFFF80)] icon-bg rounded-md p-2 shadow-[0_0_8px_3px_#6369AD66]">
+                                  <img
+                                    src="/images/icons/finances.svg"
+                                    alt="dashboard"
+                                  />
+                                </div>
+                              </div>
+                              <div>
+                                {subTab?.name === 'History'
+                                  ? 'D/W History'
+                                  : subTab?.name}
+                              </div>
+                            </div>
+                          </ListItemButton>
+                        </div>
+                      ))}
+                    </>
+                  ))}
+                </List>
+              </div>
+            </div>
+          </MenuItem>
+          <MenuItem className="my-[-57px]">
+            <RightBar className="right-bar-mobile" card="!mx-0" />
+          </MenuItem>
+        </Menu>
+      </div>
+      <div className="bg-black pt-[26px]  text-center  relative">
+        <marquee direction="left">
+          <p className="flex items-center font-inter text-white text-12 font-normal ">
+            Yolo247 - Beyond Games Your Bonuses, Auto activated - Explore your
+            entertainment partner now !!Check out our bonus page for exciting
+            rewards.
+          </p>
+        </marquee>
+        <div className="absolute z-50 top-2 left-2">
+          <div className="relative flex">
             {/* {/ Before login content /} */}
             {!login && (
               <>
@@ -193,18 +399,18 @@ function Header() {
                     </button>
                   </Link>
                   <button
-                    className="bg-[#1C77FF] text-white btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded"
+                    className="bg-[#6778e3] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded"
                     type="button"
                     onClick={() => navigate('/login')}
                   >
-                    <span>LOGIN</span>
+                    <span className="btn-skew-reverse">Login</span>
                   </button>
                   <button
-                    className="bg-[#FFDD2D] text-black btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded ml-2"
+                    className="bg-[#f4a322] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded ml-2"
                     type="button"
                     onClick={() => navigate('/signup')}
                   >
-                    <span>SIGNUP</span>
+                    <span className="btn-skew-reverse">SIGNUP</span>
                   </button>
                 </div>
                 {/* {isOpen && (
@@ -566,7 +772,7 @@ function Header() {
                 )}
               </>
             )}
-            <div className="download-now flex bg-[#202D3E] text-teal-800  font-bold py-2 font-inter items-center justify-center [clip-path:polygon(11%_0,100%_0%,100%_100%,0%_100%)] w-[115px]">
+            <div className="download-now flex bg-[#202D3E] border-l border-white text-teal-800  font-bold py-2 font-inter items-center justify-center [clip-path:polygon(20%_0,100%_0%,100%_100%,0%_100%)] w-[135px]">
               <button>
                 <img
                   className="w-[90px]"
@@ -581,183 +787,6 @@ function Header() {
             </button> */}
           </div>
         </div>
-      </nav>
-
-      <div className="mobile-menu">
-        <Menu
-          className="md:hidden w-full"
-          id="basic-menu"
-          anchorEl={dropdown}
-          open={Boolean(dropdown)}
-          onClose={() => {
-            setDropdown(null);
-          }}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          sx={{
-            '& .MuiPaper-root': {
-              minWidth: isMobileView ? 'auto' : 350,
-              backgroundColor: 'black',
-              padding: 0,
-              width: '100%',
-              marginTop: '30px',
-            },
-          }}
-        >
-          <div className="bg-[#383838] border-[1px] border-[#525252] rounded-md mx-4">
-            <MenuItem onClick={handleClose} disableRipple={true}>
-              <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
-                <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
-                  Balance
-                </p>
-                <div>
-                  <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
-                    {numberWithCommas(userDetails?.balance || userInfo.balance)}
-                  </p>
-                </div>
-              </div>
-            </MenuItem>
-            {/* <MenuItem onClick={handleClose} disableRipple={true}>
-              <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
-                <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
-                  Bonus Won
-                </p>
-                <div>
-                  <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
-                    {userDetails?.creditAmount || userInfo.creditAmount}
-                  </p>
-                </div>
-              </div>
-            </MenuItem> */}
-            <MenuItem onClick={handleClose} disableRipple={true}>
-              <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
-                <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
-                  Net Exposure
-                </p>
-                <div>
-                  <p className="2xl:text-16 text-14 font-medium text-[#BA202D] flex-1">
-                    {numberWithCommas(
-                      userDetails?.exposureAmount || userInfo.exposureAmount,
-                    )}
-                  </p>
-                </div>
-              </div>
-            </MenuItem>
-
-            <MenuItem
-              onClick={() => {
-                setDropdown(false);
-                handleLogout();
-              }}
-              disableRipple={true}
-            >
-              <div className="flex items-center gap-2 w-full gradient-btn py-2 rounded-b-[4px]">
-                <p className="2xl:text-16 text-14 text-center font-semibold text-white flex-1">
-                  Log Out
-                </p>
-              </div>
-            </MenuItem>
-          </div>
-          <MenuItem>
-            <div className="side-bar-mobile flex items-center justify-between w-full !min-w-full md:min-w-auto">
-              <div className="flex sidebar-mobile-inner ">
-                <List className="w-full">
-                  {sidebarTabs.map((item, index) => (
-                    <>
-                      <div
-                        key={index}
-                        className={`mb-3 w-full  md:w-80 bg-[#383838] border-[1px] border-[#525252] rounded-md  ${
-                          item.name === 'Finances' && 'hidden'
-                        }`}
-                      >
-                        <ListItemButton
-                          onClick={() => handleMainTabClick(index)}
-                          className={`list-button transition-colors ease duration-300 bg-[#383838] ${
-                            openTab == index && 'bg-gradient-1'
-                          }`}
-                        >
-                          <div className="flex gap-2.5 items-center text-white text-sm font-inter w-full">
-                            <div>
-                              <div className="border border-white bg-[radial-gradient(#FFFFFF4D, #FFFFFF80)] icon-bg rounded-md p-2 shadow-[0_0_8px_3px_#6369AD66]">
-                                <img src={item.icon} alt="dashboard" />
-                              </div>
-                            </div>
-                            <div>{item.name}</div>
-                          </div>
-                          {openTab === index ? <ExpandLess /> : <ExpandMore />}
-                        </ListItemButton>
-                        <Collapse
-                          in={openTab === index}
-                          timeout="auto"
-                          unmountOnExit
-                        >
-                          <List component="div" disablePadding>
-                            {item.subTab.map((subTab, subIndex) => (
-                              <ListItemButton
-                                key={subIndex}
-                                onClick={() => {
-                                  navigate(subTab.link);
-                                  setDropdown(false);
-                                }}
-                                className={`innerMenu ${
-                                  subTab.link == currentPath && 'bg-gradient-1'
-                                }`}
-                              >
-                                <ListItemText primary={subTab.name} />
-                              </ListItemButton>
-                            ))}
-                          </List>
-                        </Collapse>
-                      </div>
-                      {item.subTab.map((subTab, subIndex) => (
-                        <div
-                          key={subIndex}
-                          onClick={() => setDropdown(false)}
-                          className={`mb-3 w-full  md:w-80 bg-[#383838] border-[1px] border-[#525252] rounded-md  ${
-                            item.name !== 'Finances' && 'hidden'
-                          }`}
-                        >
-                          <ListItemButton
-                            onClick={() => navigate(subTab?.link)}
-                            className="list-button transition-colors ease duration-300 bg-[#383838]"
-                          >
-                            <div className="flex gap-2.5 items-center text-white text-sm font-inter w-full">
-                              <div>
-                                <div className="border border-white bg-[radial-gradient(#FFFFFF4D, #FFFFFF80)] icon-bg rounded-md p-2 shadow-[0_0_8px_3px_#6369AD66]">
-                                  <img
-                                    src="/images/icons/finances.svg"
-                                    alt="dashboard"
-                                  />
-                                </div>
-                              </div>
-                              <div>
-                                {subTab?.name === 'History'
-                                  ? 'D/W History'
-                                  : subTab?.name}
-                              </div>
-                            </div>
-                          </ListItemButton>
-                        </div>
-                      ))}
-                    </>
-                  ))}
-                </List>
-              </div>
-            </div>
-          </MenuItem>
-          <MenuItem className="my-[-57px]">
-            <RightBar className="right-bar-mobile" card="!mx-0" />
-          </MenuItem>
-        </Menu>
       </div>
     </>
   );

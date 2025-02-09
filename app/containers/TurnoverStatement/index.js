@@ -61,7 +61,7 @@ const TurnoverStatement = () => {
                   <li
                     key={item}
                     className={`w-full 2xl:text-[15px] text-14 2xl:p-[10px] p-[7px] font-semibold text-black text-center rounded-lg shadow-[0_0_6px_0_#1C77FF5E] flex items-center justify-between cursor-pointer mb-[2px]  ${
-                      item.id == activeTab ? 'bg-primary-1200' : 'bg-white'
+                      item.id == activeTab ? 'bg-secondary-100' : 'bg-white'
                     }`}
                     onClick={() => setActiveTab(item.id)}
                   >

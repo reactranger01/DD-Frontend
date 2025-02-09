@@ -505,7 +505,7 @@ const Banner = ({ value, onChangeHandler, name, wrapperClassName }) => {
                   onChangeHandler={onChangeHandler}
                   value={value}
                   wrapperClassName={`w-[304px] ml-auto ${wrapperClassName}`}
-                  className="bg-primary-1200 text-white border-[#C5CAFF78] h-[35px] pl-8"
+                  className="bg-secondary-100 text-white border-[#C5CAFF78] h-[35px] pl-8"
                   addonLeft={
                     <span className="absolute top-[9px] left-3 text-white">
                       {reactIcons.search}

@@ -10,10 +10,10 @@ const InplayCricket = ({ fixtureData }) => {
     <div className="py-5">
       <div className="relative">
         <div className="shape-rect h-[35px] flex">
-          <div className="bg-primary-1200 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
+          <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
             Cricket
           </div>
-          <div className="curve-part bg-primary-1200 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
+          <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
         </div>
 
         <div className="h-full overflow-auto custom-scroll">
