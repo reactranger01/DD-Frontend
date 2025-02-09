@@ -192,6 +192,414 @@ function Header() {
             </button>
             <AviatorBox isHovered={isAviatorHovered} /> */}
           </div>
+          {login && (
+            <div className="relative flex">
+              {/* {/ Before login content /} */}
+              {!login && (
+                <>
+                  <div className="text-sm flex items-center mr-2">
+                    <Link
+                      // https://api.whatsapp.com/send/?phone=919828417564&text&type=phone_number&app_absent=0
+                      to="#"
+                      target="_blank"
+                    >
+                      <button className="mr-4 hidden md:block">
+                        <img
+                          src="/images/whatsapp.gif"
+                          alt="whatsapp"
+                          className="w-[140px]"
+                        />
+                      </button>
+                    </Link>
+                    <button
+                      className="bg-[#6778e3] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded"
+                      type="button"
+                      onClick={() => navigate('/login')}
+                    >
+                      <span className="btn-skew-reverse">Login</span>
+                    </button>
+                    <button
+                      className="bg-[#f4a322] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded ml-2"
+                      type="button"
+                      onClick={() => navigate('/signup')}
+                    >
+                      <span className="btn-skew-reverse">SIGNUP</span>
+                    </button>
+                  </div>
+                  {/* {isOpen && (
+                  <div className="absolute top-[45px] right-0 z-50 w-[250px] bg-white rounded-lg p-3">
+                    <button
+                      onClick={mobileMenuHandler('/casino-table')}
+                      className={`${
+                        location.pathname === '/casino-table'
+                          ? 'gradient-btn text-white'
+                          : 'gradient-btn-2 text-black'
+                      }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                    >
+                      <span>Casino</span>
+                    </button>
+                    <button
+                      onClick={mobileMenuHandler('/')}
+                      className={`${
+                        location.pathname === '/'
+                          ? 'gradient-btn text-white'
+                          : 'gradient-btn-2 text-black'
+                      }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                    >
+                      <span>Sports</span>
+                    </button>
+                    <button
+                      // onClick={() => {
+                      //   navigate('/aviator');
+                      //   setIsOpen(false);
+                      // }}
+                      onClick={mobileMenuHandler('/aviator')}
+                      className={`${
+                        location.pathname === '/aviator'
+                          ? 'gradient-btn text-white'
+                          : 'gradient-btn-2 text-black'
+                      }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                    >
+                      <span>Aviator</span>
+                    </button>
+                  </div>
+                )} */}
+                </>
+              )}
+              {/* {/ After login content /} */}
+              {login && (
+                <>
+                  <div className="flex items-center">
+                    <div className="notification-icon mr-3 ">
+                      <Link
+                        // https://api.whatsapp.com/send/?phone=919828417564&text&type=phone_number&app_absent=0
+                        to="#"
+                        target="_blank"
+                      >
+                        {' '}
+                        <button className="mr-4 hidden md:block">
+                          <img
+                            src="/images/whatsapp.gif"
+                            alt="whatsapp"
+                            className="w-[180px]"
+                          />
+                        </button>
+                      </Link>
+                    </div>
+                    {/* <button className="block bg-blue-700 p-1 rounded-[5px] md:hidden mr-2">
+                    <img
+                      src="/images/more-option/live-tv.png"
+                      alt="live-tv"
+                      className="w-5"
+                    />
+                  </button> */}
+                    <button
+                      className="block bg-green-700 p-1 rounded-[5px] md:hidden mr-2"
+                      onClick={() =>
+                        navigate('/profile/deposit', {
+                          state: '/profile/deposit',
+                        })
+                      }
+                    >
+                      <img
+                        src="/images/icons/account_balance_wallet.svg"
+                        className="w-5 h-5"
+                      />
+                    </button>
+                    <div className="btn-skew-login remove-skew md:bg-transparent bg-[#383838] rounded-md md:rounded-none md:border-r md:border-l font-bold py-1 px-2 relative  border-white flex items-center justify-center -mr-[5px] w-[135px] sm:w-[180px] md:w-auto h-[45px] md:h-auto">
+                      <div className="relative">
+                        <button
+                          onClick={(event) => {
+                            setDropdown(event.currentTarget);
+                          }}
+                          type="button"
+                          className="text-white  font-medium rounded-lg text-sm text-center inline-flex items-center capitalize"
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="text-left min-w-[100px] sm:min-w-[130px] text-12 md:text-14 lg:text-16">
+                              <h4 className="font-semibold">
+                                {userDetails?.username || userInfo.username}
+                              </h4>
+                              <span className="font-semibold text-[#0EAD69] ml-[3px]">
+                                Bal :{' '}
+                                {numberWithCommas(
+                                  Math.floor(userDetails?.balance) -
+                                    Math.floor(
+                                      Math.abs(userDetails?.exposureAmount),
+                                    ) ||
+                                    Math.floor(userInfo?.balance) -
+                                      Math.floor(
+                                        Math.abs(userInfo?.exposureAmount),
+                                      ),
+                                )}
+                                {/* {numberWithCommas(
+                                Math.abs(
+                                  Math.floor(userDetails?.balance) +
+                                    Math.floor(userDetails?.exposureAmount) ||
+                                    Math.floor(userInfo?.balance) +
+                                      Math.floor(userInfo?.exposureAmount),
+                                ),
+                              )} */}
+                              </span>
+                              <div className="md:flex hidden items-center justify-between text-10 ml-[6px]">
+                                <span>
+                                  {moment(currentTime).format('L, h:mm:ss a')}
+                                </span>
+                                {/* {/ <span>3:26:05 PM</span> /} */}
+                              </div>
+                            </div>
+                            {/* <div className="w-4 h-4">
+                        <svg
+                          className="w-2.5 h-2.5 ms-3 md:bg-transparent bg-[#D9D9D9] text-black md:text-[#8A9EC5F7] rounded-full"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 10 6"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m1 1 4 4 4-4"
+                          />
+                        </svg>
+                      </div> */}
+                            <div className="text-22 bg-white rounded-full md:skew-x-[8deg] text-[#8A9EC5F7]">
+                              {reactIcons.arrowDown}
+                            </div>
+                          </div>
+                        </button>
+
+                        <Menu
+                          className="hidden md:flex"
+                          id="basic-menu"
+                          anchorEl={dropdown}
+                          open={Boolean(dropdown)}
+                          onClose={() => {
+                            setDropdown(null);
+                          }}
+                          MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                          }}
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                          }}
+                          sx={{
+                            '& .MuiPaper-root': {
+                              minWidth: 270,
+                              backgroundColor: 'black',
+                              padding: 0,
+                            },
+                          }}
+                        >
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                              <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                                Balance
+                              </p>
+                              <div>
+                                <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
+                                  {numberWithCommas(
+                                    Math.abs(
+                                      userDetails?.balance || userInfo?.balance,
+                                    ),
+                                  )}
+                                </p>
+                              </div>
+                            </div>
+                          </MenuItem>
+                          {/* <MenuItem onClick={handleClose} disableRipple={true}>
+                          <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                            <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                              Bonus Won
+                            </p>
+                            <div>
+                              <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
+                                {userDetails?.creditAmount ||
+                                  userInfo?.creditAmount}
+                              </p>
+                            </div>
+                          </div>
+                        </MenuItem> */}
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                              <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                                Net Exposure
+                              </p>
+                              <div>
+                                <p className="2xl:text-16 text-14 font-medium text-[#BA202D] flex-1">
+                                  {numberWithCommas(
+                                    userDetails?.exposureAmount ||
+                                      userInfo?.exposureAmount,
+                                  )}
+                                </p>
+                              </div>
+                            </div>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 border-b border-dashed w-full"
+                              onClick={() =>
+                                navigate('/profile/account-info', {
+                                  state: '/profile/account-info',
+                                })
+                              }
+                            >
+                              <span className="text-white">
+                                {reactIcons.user2}
+                              </span>
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
+                                Profile
+                              </p>
+                            </div>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 border-b border-dashed w-full"
+                              onClick={() =>
+                                navigate('/profile/deposit', {
+                                  state: '/profile/deposit',
+                                })
+                              }
+                            >
+                              {/* {/ <span className="text-white">{reactIcons.user2}</span> /} */}
+                              <img
+                                src="/images/icons/rupees.svg"
+                                className="w-[18px]"
+                              />
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
+                                Deposit
+                              </p>
+                            </div>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 border-b border-dashed w-full"
+                              onClick={() =>
+                                navigate('/profile/withdraw', {
+                                  state: '/profile/withdraw',
+                                })
+                              }
+                            >
+                              {/* {/ <span className="text-white">{reactIcons.user2}</span> /} */}
+                              <img
+                                src="/images/icons/rupees.svg"
+                                className="w-[18px]"
+                              />
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
+                                Withdraw
+                              </p>
+                            </div>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 w-full"
+                              onClick={() =>
+                                navigate('/profile/my-bets', {
+                                  state: '/profile/my-bets',
+                                })
+                              }
+                            >
+                              <img
+                                src="/images/icons/circle.svg"
+                                className="w-[18px]"
+                              />
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1">
+                                Bet Details
+                              </p>
+                            </div>
+                          </MenuItem>
+
+                          <MenuItem onClick={handleLogout} disableRipple={true}>
+                            <div className="flex items-center gap-2 w-full gradient-btn py-2 rounded-b-[4px]">
+                              <p className="2xl:text-16 text-14 text-center font-semibold text-white flex-1">
+                                Log Out
+                              </p>
+                            </div>
+                          </MenuItem>
+                        </Menu>
+                      </div>
+                    </div>
+                  </div>
+                  {isOpen && (
+                    <div className="absolute top-10 right-0 z-50 w-[250px] bg-white rounded-lg p-3">
+                      {/* <div className="relative mb-2">
+                      <input
+                        type="text"
+                        className="w-full p-2 bg-[#DEDEDE] text-black text-14 border border-[#939BAB] rounded-lg"
+                        placeholder="Search Events"
+                      />
+                      <span className="absolute top-[11px] right-2 text-18">
+                        {reactIcons.search}
+                      </span>
+                    </div> */}
+                      <button
+                        onClick={() => {
+                          navigate('/casino-table');
+                          setIsOpen(false);
+                        }}
+                        // className="gradient-btn text-white btn-skew font-bold py-2 px-8 rounded mr-2 w-full border border-[#939BAB] mb-2"
+                        className={`${
+                          location.pathname === '/casino-table'
+                            ? 'gradient-btn text-white'
+                            : 'gradient-btn-2 text-black'
+                        }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                      >
+                        <span>Casino</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigate('/');
+                          setIsOpen(false);
+                        }}
+                        // className="gradient-btn-2 text-black btn-skew font-bold py-2 px-8 mb-2 rounded mr-2 w-full border border-[#939BAB]"
+                        className={`${
+                          location.pathname === '/'
+                            ? 'gradient-btn text-white'
+                            : 'gradient-btn-2 text-black'
+                        }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                      >
+                        <span>Sports</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigate('/aviator');
+                          setIsOpen(false);
+                        }}
+                        // className="gradient-btn-2 text-black btn-skew font-bold py-2 px-8 rounded mr-2 w-full border border-[#939BAB]"
+                        className={`${
+                          location.pathname === '/aviator'
+                            ? 'gradient-btn text-white'
+                            : 'gradient-btn-2 text-black'
+                        }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                      >
+                        <span>Aviator</span>
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+              <div className="download-now flex bg-[#202D3E] border-l border-white text-teal-800  font-bold py-2 font-inter items-center justify-center [clip-path:polygon(20%_0,100%_0%,100%_100%,0%_100%)] w-[135px]">
+                <button>
+                  <img
+                    className="w-[90px]"
+                    src="/images/downloadImg.webp"
+                    alt="app-download"
+                  />
+                </button>
+              </div>
+
+              {/* <button className="block md:hidden ml-2" onClick={toggleMenu}>
+              <span className="text-white text-24">{reactIcons.menuIcon}</span>
+            </button> */}
+            </div>
+          )}
         </div>
       </nav>
 
@@ -379,41 +787,42 @@ function Header() {
             rewards.
           </p>
         </marquee>
-        <div className="absolute z-50 top-2 left-2">
-          <div className="relative flex">
-            {/* {/ Before login content /} */}
-            {!login && (
-              <>
-                <div className="text-sm flex items-center mr-2">
-                  <Link
-                    // https://api.whatsapp.com/send/?phone=919828417564&text&type=phone_number&app_absent=0
-                    to="#"
-                    target="_blank"
-                  >
-                    <button className="mr-4 hidden md:block">
-                      <img
-                        src="/images/whatsapp.gif"
-                        alt="whatsapp"
-                        className="w-[140px]"
-                      />
+        {!login && (
+          <div className="absolute z-50 top-2 left-2">
+            <div className="relative flex">
+              {/* {/ Before login content /} */}
+              {!login && (
+                <>
+                  <div className="text-sm flex items-center mr-2">
+                    <Link
+                      // https://api.whatsapp.com/send/?phone=919828417564&text&type=phone_number&app_absent=0
+                      to="#"
+                      target="_blank"
+                    >
+                      <button className="mr-4 hidden md:block">
+                        <img
+                          src="/images/whatsapp.gif"
+                          alt="whatsapp"
+                          className="w-[140px]"
+                        />
+                      </button>
+                    </Link>
+                    <button
+                      className="bg-[#6778e3] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded"
+                      type="button"
+                      onClick={() => navigate('/login')}
+                    >
+                      <span className="btn-skew-reverse">Login</span>
                     </button>
-                  </Link>
-                  <button
-                    className="bg-[#6778e3] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded"
-                    type="button"
-                    onClick={() => navigate('/login')}
-                  >
-                    <span className="btn-skew-reverse">Login</span>
-                  </button>
-                  <button
-                    className="bg-[#f4a322] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded ml-2"
-                    type="button"
-                    onClick={() => navigate('/signup')}
-                  >
-                    <span className="btn-skew-reverse">SIGNUP</span>
-                  </button>
-                </div>
-                {/* {isOpen && (
+                    <button
+                      className="bg-[#f4a322] text-white font-semibold btn-skew py-[6px] sm:py-2 sm:px-4 px-[8px] text-12 md:text-14 sm:text-16 rounded ml-2"
+                      type="button"
+                      onClick={() => navigate('/signup')}
+                    >
+                      <span className="btn-skew-reverse">SIGNUP</span>
+                    </button>
+                  </div>
+                  {/* {isOpen && (
                   <div className="absolute top-[45px] right-0 z-50 w-[250px] bg-white rounded-lg p-3">
                     <button
                       onClick={mobileMenuHandler('/casino-table')}
@@ -451,75 +860,75 @@ function Header() {
                     </button>
                   </div>
                 )} */}
-              </>
-            )}
-            {/* {/ After login content /} */}
-            {login && (
-              <>
-                <div className="flex items-center">
-                  <div className="notification-icon mr-3 ">
-                    <Link
-                      // https://api.whatsapp.com/send/?phone=919828417564&text&type=phone_number&app_absent=0
-                      to="#"
-                      target="_blank"
-                    >
-                      {' '}
-                      <button className="mr-4 hidden md:block">
-                        <img
-                          src="/images/whatsapp.gif"
-                          alt="whatsapp"
-                          className="w-[180px]"
-                        />
-                      </button>
-                    </Link>
-                  </div>
-                  {/* <button className="block bg-blue-700 p-1 rounded-[5px] md:hidden mr-2">
+                </>
+              )}
+              {/* {/ After login content /} */}
+              {login && (
+                <>
+                  <div className="flex items-center">
+                    <div className="notification-icon mr-3 ">
+                      <Link
+                        // https://api.whatsapp.com/send/?phone=919828417564&text&type=phone_number&app_absent=0
+                        to="#"
+                        target="_blank"
+                      >
+                        {' '}
+                        <button className="mr-4 hidden md:block">
+                          <img
+                            src="/images/whatsapp.gif"
+                            alt="whatsapp"
+                            className="w-[180px]"
+                          />
+                        </button>
+                      </Link>
+                    </div>
+                    {/* <button className="block bg-blue-700 p-1 rounded-[5px] md:hidden mr-2">
                     <img
                       src="/images/more-option/live-tv.png"
                       alt="live-tv"
                       className="w-5"
                     />
                   </button> */}
-                  <button
-                    className="block bg-green-700 p-1 rounded-[5px] md:hidden mr-2"
-                    onClick={() =>
-                      navigate('/profile/deposit', {
-                        state: '/profile/deposit',
-                      })
-                    }
-                  >
-                    <img
-                      src="/images/icons/account_balance_wallet.svg"
-                      className="w-5 h-5"
-                    />
-                  </button>
-                  <div className="btn-skew-login remove-skew md:bg-transparent bg-[#383838] rounded-md md:rounded-none md:border-r md:border-l font-bold py-1 px-2 relative  border-white flex items-center justify-center -mr-[5px] w-[135px] sm:w-[180px] md:w-auto h-[45px] md:h-auto">
-                    <div className="relative">
-                      <button
-                        onClick={(event) => {
-                          setDropdown(event.currentTarget);
-                        }}
-                        type="button"
-                        className="text-white  font-medium rounded-lg text-sm text-center inline-flex items-center capitalize"
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="text-left min-w-[100px] sm:min-w-[130px] text-12 md:text-14 lg:text-16">
-                            <h4 className="font-semibold">
-                              {userDetails?.username || userInfo.username}
-                            </h4>
-                            <span className="font-semibold text-[#0EAD69] ml-[3px]">
-                              Bal :{' '}
-                              {numberWithCommas(
-                                Math.floor(userDetails?.balance) -
-                                  Math.floor(
-                                    Math.abs(userDetails?.exposureAmount),
-                                  ) ||
-                                  Math.floor(userInfo?.balance) -
+                    <button
+                      className="block bg-green-700 p-1 rounded-[5px] md:hidden mr-2"
+                      onClick={() =>
+                        navigate('/profile/deposit', {
+                          state: '/profile/deposit',
+                        })
+                      }
+                    >
+                      <img
+                        src="/images/icons/account_balance_wallet.svg"
+                        className="w-5 h-5"
+                      />
+                    </button>
+                    <div className="btn-skew-login remove-skew md:bg-transparent bg-[#383838] rounded-md md:rounded-none md:border-r md:border-l font-bold py-1 px-2 relative  border-white flex items-center justify-center -mr-[5px] w-[135px] sm:w-[180px] md:w-auto h-[45px] md:h-auto">
+                      <div className="relative">
+                        <button
+                          onClick={(event) => {
+                            setDropdown(event.currentTarget);
+                          }}
+                          type="button"
+                          className="text-white  font-medium rounded-lg text-sm text-center inline-flex items-center capitalize"
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="text-left min-w-[100px] sm:min-w-[130px] text-12 md:text-14 lg:text-16">
+                              <h4 className="font-semibold">
+                                {userDetails?.username || userInfo.username}
+                              </h4>
+                              <span className="font-semibold text-[#0EAD69] ml-[3px]">
+                                Bal :{' '}
+                                {numberWithCommas(
+                                  Math.floor(userDetails?.balance) -
                                     Math.floor(
-                                      Math.abs(userInfo?.exposureAmount),
-                                    ),
-                              )}
-                              {/* {numberWithCommas(
+                                      Math.abs(userDetails?.exposureAmount),
+                                    ) ||
+                                    Math.floor(userInfo?.balance) -
+                                      Math.floor(
+                                        Math.abs(userInfo?.exposureAmount),
+                                      ),
+                                )}
+                                {/* {numberWithCommas(
                                 Math.abs(
                                   Math.floor(userDetails?.balance) +
                                     Math.floor(userDetails?.exposureAmount) ||
@@ -527,15 +936,15 @@ function Header() {
                                       Math.floor(userInfo?.exposureAmount),
                                 ),
                               )} */}
-                            </span>
-                            <div className="md:flex hidden items-center justify-between text-10 ml-[6px]">
-                              <span>
-                                {moment(currentTime).format('L, h:mm:ss a')}
                               </span>
-                              {/* {/ <span>3:26:05 PM</span> /} */}
+                              <div className="md:flex hidden items-center justify-between text-10 ml-[6px]">
+                                <span>
+                                  {moment(currentTime).format('L, h:mm:ss a')}
+                                </span>
+                                {/* {/ <span>3:26:05 PM</span> /} */}
+                              </div>
                             </div>
-                          </div>
-                          {/* <div className="w-4 h-4">
+                            {/* <div className="w-4 h-4">
                         <svg
                           className="w-2.5 h-2.5 ms-3 md:bg-transparent bg-[#D9D9D9] text-black md:text-[#8A9EC5F7] rounded-full"
                           aria-hidden="true"
@@ -552,56 +961,56 @@ function Header() {
                           />
                         </svg>
                       </div> */}
-                          <div className="text-22 bg-white rounded-full md:skew-x-[8deg] text-[#8A9EC5F7]">
-                            {reactIcons.arrowDown}
-                          </div>
-                        </div>
-                      </button>
-
-                      <Menu
-                        className="hidden md:flex"
-                        id="basic-menu"
-                        anchorEl={dropdown}
-                        open={Boolean(dropdown)}
-                        onClose={() => {
-                          setDropdown(null);
-                        }}
-                        MenuListProps={{
-                          'aria-labelledby': 'basic-button',
-                        }}
-                        anchorOrigin={{
-                          vertical: 'bottom',
-                          horizontal: 'right',
-                        }}
-                        transformOrigin={{
-                          vertical: 'top',
-                          horizontal: 'right',
-                        }}
-                        sx={{
-                          '& .MuiPaper-root': {
-                            minWidth: 270,
-                            backgroundColor: 'black',
-                            padding: 0,
-                          },
-                        }}
-                      >
-                        <MenuItem onClick={handleClose} disableRipple={true}>
-                          <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
-                            <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
-                              Balance
-                            </p>
-                            <div>
-                              <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
-                                {numberWithCommas(
-                                  Math.abs(
-                                    userDetails?.balance || userInfo?.balance,
-                                  ),
-                                )}
-                              </p>
+                            <div className="text-22 bg-white rounded-full md:skew-x-[8deg] text-[#8A9EC5F7]">
+                              {reactIcons.arrowDown}
                             </div>
                           </div>
-                        </MenuItem>
-                        {/* <MenuItem onClick={handleClose} disableRipple={true}>
+                        </button>
+
+                        <Menu
+                          className="hidden md:flex"
+                          id="basic-menu"
+                          anchorEl={dropdown}
+                          open={Boolean(dropdown)}
+                          onClose={() => {
+                            setDropdown(null);
+                          }}
+                          MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                          }}
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                          }}
+                          sx={{
+                            '& .MuiPaper-root': {
+                              minWidth: 270,
+                              backgroundColor: 'black',
+                              padding: 0,
+                            },
+                          }}
+                        >
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                              <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                                Balance
+                              </p>
+                              <div>
+                                <p className="2xl:text-16 text-14 font-medium text-[#45BF75] flex-1">
+                                  {numberWithCommas(
+                                    Math.abs(
+                                      userDetails?.balance || userInfo?.balance,
+                                    ),
+                                  )}
+                                </p>
+                              </div>
+                            </div>
+                          </MenuItem>
+                          {/* <MenuItem onClick={handleClose} disableRipple={true}>
                           <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
                             <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
                               Bonus Won
@@ -614,109 +1023,109 @@ function Header() {
                             </div>
                           </div>
                         </MenuItem> */}
-                        <MenuItem onClick={handleClose} disableRipple={true}>
-                          <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
-                            <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
-                              Net Exposure
-                            </p>
-                            <div>
-                              <p className="2xl:text-16 text-14 font-medium text-[#BA202D] flex-1">
-                                {numberWithCommas(
-                                  userDetails?.exposureAmount ||
-                                    userInfo?.exposureAmount,
-                                )}
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div className="rounded-md 2xl:p-3 p-2 bg-white flex items-center justify-between w-full">
+                              <p className="2xl:text-16 text-14 font-semibold text-black flex-1">
+                                Net Exposure
+                              </p>
+                              <div>
+                                <p className="2xl:text-16 text-14 font-medium text-[#BA202D] flex-1">
+                                  {numberWithCommas(
+                                    userDetails?.exposureAmount ||
+                                      userInfo?.exposureAmount,
+                                  )}
+                                </p>
+                              </div>
+                            </div>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 border-b border-dashed w-full"
+                              onClick={() =>
+                                navigate('/profile/account-info', {
+                                  state: '/profile/account-info',
+                                })
+                              }
+                            >
+                              <span className="text-white">
+                                {reactIcons.user2}
+                              </span>
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
+                                Profile
                               </p>
                             </div>
-                          </div>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} disableRipple={true}>
-                          <div
-                            className="flex items-center gap-2 border-b border-dashed w-full"
-                            onClick={() =>
-                              navigate('/profile/account-info', {
-                                state: '/profile/account-info',
-                              })
-                            }
-                          >
-                            <span className="text-white">
-                              {reactIcons.user2}
-                            </span>
-                            <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
-                              Profile
-                            </p>
-                          </div>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} disableRipple={true}>
-                          <div
-                            className="flex items-center gap-2 border-b border-dashed w-full"
-                            onClick={() =>
-                              navigate('/profile/deposit', {
-                                state: '/profile/deposit',
-                              })
-                            }
-                          >
-                            {/* {/ <span className="text-white">{reactIcons.user2}</span> /} */}
-                            <img
-                              src="/images/icons/rupees.svg"
-                              className="w-[18px]"
-                            />
-                            <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
-                              Deposit
-                            </p>
-                          </div>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} disableRipple={true}>
-                          <div
-                            className="flex items-center gap-2 border-b border-dashed w-full"
-                            onClick={() =>
-                              navigate('/profile/withdraw', {
-                                state: '/profile/withdraw',
-                              })
-                            }
-                          >
-                            {/* {/ <span className="text-white">{reactIcons.user2}</span> /} */}
-                            <img
-                              src="/images/icons/rupees.svg"
-                              className="w-[18px]"
-                            />
-                            <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
-                              Withdraw
-                            </p>
-                          </div>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} disableRipple={true}>
-                          <div
-                            className="flex items-center gap-2 w-full"
-                            onClick={() =>
-                              navigate('/profile/my-bets', {
-                                state: '/profile/my-bets',
-                              })
-                            }
-                          >
-                            <img
-                              src="/images/icons/circle.svg"
-                              className="w-[18px]"
-                            />
-                            <p className="2xl:text-16 text-14 font-semibold text-white flex-1">
-                              Bet Details
-                            </p>
-                          </div>
-                        </MenuItem>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 border-b border-dashed w-full"
+                              onClick={() =>
+                                navigate('/profile/deposit', {
+                                  state: '/profile/deposit',
+                                })
+                              }
+                            >
+                              {/* {/ <span className="text-white">{reactIcons.user2}</span> /} */}
+                              <img
+                                src="/images/icons/rupees.svg"
+                                className="w-[18px]"
+                              />
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
+                                Deposit
+                              </p>
+                            </div>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 border-b border-dashed w-full"
+                              onClick={() =>
+                                navigate('/profile/withdraw', {
+                                  state: '/profile/withdraw',
+                                })
+                              }
+                            >
+                              {/* {/ <span className="text-white">{reactIcons.user2}</span> /} */}
+                              <img
+                                src="/images/icons/rupees.svg"
+                                className="w-[18px]"
+                              />
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1 pb-[6px]">
+                                Withdraw
+                              </p>
+                            </div>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose} disableRipple={true}>
+                            <div
+                              className="flex items-center gap-2 w-full"
+                              onClick={() =>
+                                navigate('/profile/my-bets', {
+                                  state: '/profile/my-bets',
+                                })
+                              }
+                            >
+                              <img
+                                src="/images/icons/circle.svg"
+                                className="w-[18px]"
+                              />
+                              <p className="2xl:text-16 text-14 font-semibold text-white flex-1">
+                                Bet Details
+                              </p>
+                            </div>
+                          </MenuItem>
 
-                        <MenuItem onClick={handleLogout} disableRipple={true}>
-                          <div className="flex items-center gap-2 w-full gradient-btn py-2 rounded-b-[4px]">
-                            <p className="2xl:text-16 text-14 text-center font-semibold text-white flex-1">
-                              Log Out
-                            </p>
-                          </div>
-                        </MenuItem>
-                      </Menu>
+                          <MenuItem onClick={handleLogout} disableRipple={true}>
+                            <div className="flex items-center gap-2 w-full gradient-btn py-2 rounded-b-[4px]">
+                              <p className="2xl:text-16 text-14 text-center font-semibold text-white flex-1">
+                                Log Out
+                              </p>
+                            </div>
+                          </MenuItem>
+                        </Menu>
+                      </div>
                     </div>
                   </div>
-                </div>
-                {isOpen && (
-                  <div className="absolute top-10 right-0 z-50 w-[250px] bg-white rounded-lg p-3">
-                    {/* <div className="relative mb-2">
+                  {isOpen && (
+                    <div className="absolute top-10 right-0 z-50 w-[250px] bg-white rounded-lg p-3">
+                      {/* <div className="relative mb-2">
                       <input
                         type="text"
                         className="w-full p-2 bg-[#DEDEDE] text-black text-14 border border-[#939BAB] rounded-lg"
@@ -726,67 +1135,68 @@ function Header() {
                         {reactIcons.search}
                       </span>
                     </div> */}
-                    <button
-                      onClick={() => {
-                        navigate('/casino-table');
-                        setIsOpen(false);
-                      }}
-                      // className="gradient-btn text-white btn-skew font-bold py-2 px-8 rounded mr-2 w-full border border-[#939BAB] mb-2"
-                      className={`${
-                        location.pathname === '/casino-table'
-                          ? 'gradient-btn text-white'
-                          : 'gradient-btn-2 text-black'
-                      }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
-                    >
-                      <span>Casino</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        navigate('/');
-                        setIsOpen(false);
-                      }}
-                      // className="gradient-btn-2 text-black btn-skew font-bold py-2 px-8 mb-2 rounded mr-2 w-full border border-[#939BAB]"
-                      className={`${
-                        location.pathname === '/'
-                          ? 'gradient-btn text-white'
-                          : 'gradient-btn-2 text-black'
-                      }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
-                    >
-                      <span>Sports</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        navigate('/aviator');
-                        setIsOpen(false);
-                      }}
-                      // className="gradient-btn-2 text-black btn-skew font-bold py-2 px-8 rounded mr-2 w-full border border-[#939BAB]"
-                      className={`${
-                        location.pathname === '/aviator'
-                          ? 'gradient-btn text-white'
-                          : 'gradient-btn-2 text-black'
-                      }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
-                    >
-                      <span>Aviator</span>
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-            <div className="download-now flex bg-[#202D3E] border-l border-white text-teal-800  font-bold py-2 font-inter items-center justify-center [clip-path:polygon(20%_0,100%_0%,100%_100%,0%_100%)] w-[135px]">
-              <button>
-                <img
-                  className="w-[90px]"
-                  src="/images/downloadImg.webp"
-                  alt="app-download"
-                />
-              </button>
-            </div>
+                      <button
+                        onClick={() => {
+                          navigate('/casino-table');
+                          setIsOpen(false);
+                        }}
+                        // className="gradient-btn text-white btn-skew font-bold py-2 px-8 rounded mr-2 w-full border border-[#939BAB] mb-2"
+                        className={`${
+                          location.pathname === '/casino-table'
+                            ? 'gradient-btn text-white'
+                            : 'gradient-btn-2 text-black'
+                        }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                      >
+                        <span>Casino</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigate('/');
+                          setIsOpen(false);
+                        }}
+                        // className="gradient-btn-2 text-black btn-skew font-bold py-2 px-8 mb-2 rounded mr-2 w-full border border-[#939BAB]"
+                        className={`${
+                          location.pathname === '/'
+                            ? 'gradient-btn text-white'
+                            : 'gradient-btn-2 text-black'
+                        }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                      >
+                        <span>Sports</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigate('/aviator');
+                          setIsOpen(false);
+                        }}
+                        // className="gradient-btn-2 text-black btn-skew font-bold py-2 px-8 rounded mr-2 w-full border border-[#939BAB]"
+                        className={`${
+                          location.pathname === '/aviator'
+                            ? 'gradient-btn text-white'
+                            : 'gradient-btn-2 text-black'
+                        }  btn-skew font-bold py-2 px-9  mr-2 mb-2 w-full border border-[#939BAB]`}
+                      >
+                        <span>Aviator</span>
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
+              <div className="download-now flex bg-[#202D3E] border-l border-white text-teal-800  font-bold py-2 font-inter items-center justify-center [clip-path:polygon(20%_0,100%_0%,100%_100%,0%_100%)] w-[135px]">
+                <button>
+                  <img
+                    className="w-[90px]"
+                    src="/images/downloadImg.webp"
+                    alt="app-download"
+                  />
+                </button>
+              </div>
 
-            {/* <button className="block md:hidden ml-2" onClick={toggleMenu}>
+              {/* <button className="block md:hidden ml-2" onClick={toggleMenu}>
               <span className="text-white text-24">{reactIcons.menuIcon}</span>
             </button> */}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

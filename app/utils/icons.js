@@ -12,6 +12,7 @@ import {
   FaThumbsUp,
   FaThumbsDown,
   FaTrophy,
+  FaAngleDoubleRight,
 } from 'react-icons/fa';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import {
@@ -65,6 +66,7 @@ import { IoWallet } from 'react-icons/io5';
 import { FaCheck } from 'react-icons/fa';
 
 export const reactIcons = {
+  doubleArrowR: <FaAngleDoubleRight />,
   user: <FaUser />,
   check: <FaCheck />,
   save: <FiSave />,

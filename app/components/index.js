@@ -60,3 +60,15 @@ export const SessionCricket = loadable(
     fallback: <Loading />,
   },
 );
+export const MatchoddsFootball = loadable(
+  () => import('./FootballSingleBet/MatchoddsFootball'),
+  {
+    fallback: <Loading />,
+  },
+);
+export const OtherMarketFootball = loadable(
+  () => import('./FootballSingleBet/OtherMarketFootball'),
+  {
+    fallback: <Loading />,
+  },
+);
