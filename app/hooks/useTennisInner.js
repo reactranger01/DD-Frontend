@@ -3,8 +3,8 @@ import {
   calcPlacedBetOddsFootballOrTenisCalculation,
   fetchEventData,
   getUserBets,
+  handleLogout,
 } from '@/utils/helper';
-import { logout } from '@/utils/logout';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -113,7 +113,7 @@ const useTennisInner = () => {
           window.outerHeight - window.innerHeight > threshold
         ) {
           window.location.replace('https://www.google.com');
-          logout();
+          handleLogout();
         }
       };
       const devToolsInterval = setInterval(checkDevTools, 1000);

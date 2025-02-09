@@ -72,3 +72,17 @@ export const OtherMarketFootball = loadable(
     fallback: <Loading />,
   },
 );
+
+export const OtherMarketTennis = loadable(
+  () => import('./TennisSingleBet/OtherMarketTennis'),
+  {
+    fallback: <Loading />,
+  },
+);
+
+export const MatchOddsTennis = loadable(
+  () => import('./TennisSingleBet/MatchoddsTennis'),
+  {
+    fallback: <Loading />,
+  },
+);
