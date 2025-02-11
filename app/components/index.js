@@ -26,6 +26,9 @@ export { default as HomeBottom } from './HomeBottom';
 export const Welcome = loadable(() => import('./Welcome'), {
   fallback: <Loading />,
 });
+export const BetSlip = loadable(() => import('./BetSlip'), {
+  fallback: <Loading />,
+});
 export const InplayCricket = loadable(() => import('./Home/InplayCricket'), {
   fallback: <Loading />,
 });
@@ -35,7 +38,12 @@ export const InplayFootball = loadable(() => import('./Home/InplayFootball'), {
 export const InplayTennis = loadable(() => import('./Home/InplayTennis'), {
   fallback: <Loading />,
 });
-
+export const InplayAll = loadable(() => import('./Home/InplayAll'), {
+  fallback: <Loading />,
+});
+export const PopularAll = loadable(() => import('./Home/PopularAll'), {
+  fallback: <Loading />,
+});
 export const BankAccountCard = loadable(() => import('./BankAccountCard'), {
   fallback: <Loading />,
 });

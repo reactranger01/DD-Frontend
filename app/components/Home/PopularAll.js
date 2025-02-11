@@ -1,17 +1,74 @@
-import { inPlayList } from '@/utils/contants';
+import { popularListHead } from '@/utils/contants';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PopularFixture from './PopularFixture';
+import PopularFixtureFootball from './PopularFixtureFootball';
+import PopularFixtureTennis from './PopularFixtureTennis';
 
-const InplayCricket = ({ fixtureData }) => {
-  const [openTab, setOpenTab] = useState(1);
+const PopularAll = ({
+  inplayFalseCricket,
+  inplayFalseSoccer,
+  inplayFalseTennis,
+}) => {
+  const [openTab, setOpenTab] = useState('Today');
+  const filterAndSortMatches = (matches, tab) => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const upcoming = new Date(today);
+    upcoming.setDate(today.getDate() + 2);
 
+    return matches
+      .filter((match) => {
+        const matchDate = new Date(match.matchDateTime);
+
+        if (tab === 'Today') {
+          return matchDate.toDateString() === today.toDateString();
+        }
+        if (tab === 'Tomorrow') {
+          return matchDate.toDateString() === tomorrow.toDateString();
+        }
+        return matchDate > upcoming;
+      })
+      .sort((a, b) => new Date(a.matchDateTime) - new Date(b.matchDateTime));
+  };
+
+  const todayCricket = filterAndSortMatches(inplayFalseCricket, 'Today');
+  const tomorrowCricket = filterAndSortMatches(inplayFalseCricket, 'Tomorrow');
+  const upcomingCricket = filterAndSortMatches(inplayFalseCricket, 'Upcoming');
+
+  const todaySoccer = filterAndSortMatches(inplayFalseSoccer, 'Today');
+  const tomorrowSoccer = filterAndSortMatches(inplayFalseSoccer, 'Tomorrow');
+  const upcomingSoccer = filterAndSortMatches(inplayFalseSoccer, 'Upcoming');
+
+  const todayTennis = filterAndSortMatches(inplayFalseTennis, 'Today');
+  const tomorrowTennis = filterAndSortMatches(inplayFalseTennis, 'Tomorrow');
+  const upcomingTennis = filterAndSortMatches(inplayFalseTennis, 'Upcoming');
+
+  const tennisData =
+    openTab == 'Today'
+      ? todayTennis
+      : openTab == 'Tomorrow'
+      ? tomorrowTennis
+      : upcomingTennis;
+  const soccerData =
+    openTab == 'Today'
+      ? todaySoccer
+      : openTab == 'Tomorrow'
+      ? tomorrowSoccer
+      : upcomingSoccer;
+  const cricketData =
+    openTab == 'Today'
+      ? todayCricket
+      : openTab == 'Tomorrow'
+      ? tomorrowCricket
+      : upcomingCricket;
   return (
     <div className="py-5">
       <div className="relative">
         <div className="shape-rect h-[35px] flex">
           <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
-            IN-PLAY
+            POPULAR
           </div>
           <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
         </div>
@@ -24,7 +81,7 @@ const InplayCricket = ({ fixtureData }) => {
                   className="flex mb-0 list-none w-full flex-wrap flex-row border-b border-[#ffffff]"
                   role="tablist"
                 >
-                  {inPlayList.map((item, index) => (
+                  {popularListHead.map((item, index) => (
                     <li
                       className="-mb-px mr-2 last:mr-0 flex-auto text-center max-w-[120px] font-inter"
                       key={index}
@@ -32,13 +89,13 @@ const InplayCricket = ({ fixtureData }) => {
                       <a
                         className={
                           'text-sm font-bold px-4 py-2 shadow-lg leading-normal flex items-center justify-center ' +
-                          (openTab === item.id
+                          (openTab === item.name
                             ? 'text-primary-1300 border-b-[3px] border-primary-1300'
                             : 'text-white border-0')
                         }
                         onClick={(e) => {
                           e.preventDefault();
-                          setOpenTab(item.id);
+                          setOpenTab(item.name);
                         }}
                         data-toggle="tab"
                         href="#link1"
@@ -53,10 +110,7 @@ const InplayCricket = ({ fixtureData }) => {
               <div className="relative flex flex-col min-w-0 break-words w-full mt-4 font-inter">
                 <div className="flex-auto">
                   <div className="tab-content tab-space">
-                    <div
-                      className={openTab === 1 ? 'block' : 'hidden'}
-                      id="link1"
-                    >
+                    <div id="link1">
                       <div className="w-full flex flex-col pb-3 md:pb-8">
                         <div className="w-full md:flex flex-row items-center hidden">
                           <ul className="bg-[#201c67] w-full grid grid-cols-5 items-center m-0 pl-3 rounded-md">
@@ -94,7 +148,15 @@ const InplayCricket = ({ fixtureData }) => {
                           </div>
                           <div className="col-span-1 bg-[#454545] h-full"></div>
                         </div>
-                        <PopularFixture data={fixtureData} />
+                        {cricketData && cricketData?.length > 0 && (
+                          <PopularFixture data={cricketData} />
+                        )}
+                        {soccerData && soccerData?.length > 0 && (
+                          <PopularFixtureFootball data={soccerData} />
+                        )}
+                        {tennisData && tennisData?.length > 0 && (
+                          <PopularFixtureTennis data={tennisData} />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -107,8 +169,10 @@ const InplayCricket = ({ fixtureData }) => {
     </div>
   );
 };
-InplayCricket.propTypes = {
-  fixtureData: PropTypes.array.isRequired,
+PopularAll.propTypes = {
+  inplayFalseCricket: PropTypes.array.isRequired,
+  inplayFalseSoccer: PropTypes.array.isRequired,
+  inplayFalseTennis: PropTypes.array.isRequired,
 };
 
-export default InplayCricket;
+export default PopularAll;

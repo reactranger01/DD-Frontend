@@ -42,3 +42,7 @@ export const setUser = (payload) => ({
 export const refreshUserDetails = () => ({
   type: types.REFRESH_USER_DETAILS,
 });
+export const setBetPlacementSuccess = (payload) => ({
+  type: types.SET_BET_PLACEMENT_SUCCESS,
+  payload,
+});

@@ -2,10 +2,15 @@ import { inPlayList } from '@/utils/contants';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PopularFixture from './PopularFixture';
+import PopularFixtureFootball from './PopularFixtureFootball';
+import PopularFixtureTennis from './PopularFixtureTennis';
 
-const InplayCricket = ({ fixtureData }) => {
+const InPlayAll = ({
+  inplayTrueCricket,
+  inplayTrueSoccer,
+  inplayTrueTennis,
+}) => {
   const [openTab, setOpenTab] = useState(1);
-
   return (
     <div className="py-5">
       <div className="relative">
@@ -94,7 +99,15 @@ const InplayCricket = ({ fixtureData }) => {
                           </div>
                           <div className="col-span-1 bg-[#454545] h-full"></div>
                         </div>
-                        <PopularFixture data={fixtureData} />
+                        {inplayTrueCricket && inplayTrueCricket?.length > 0 && (
+                          <PopularFixture data={inplayTrueCricket} />
+                        )}
+                        {inplayTrueSoccer && inplayTrueSoccer?.length > 0 && (
+                          <PopularFixtureFootball data={inplayTrueSoccer} />
+                        )}
+                        {inplayTrueTennis && inplayTrueTennis?.length > 0 && (
+                          <PopularFixtureTennis data={inplayTrueTennis} />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -107,8 +120,10 @@ const InplayCricket = ({ fixtureData }) => {
     </div>
   );
 };
-InplayCricket.propTypes = {
-  fixtureData: PropTypes.array.isRequired,
+InPlayAll.propTypes = {
+  inplayTrueCricket: PropTypes.array.isRequired,
+  inplayTrueSoccer: PropTypes.array.isRequired,
+  inplayTrueTennis: PropTypes.array.isRequired,
 };
 
-export default InplayCricket;
+export default InPlayAll;

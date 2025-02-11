@@ -324,7 +324,30 @@ export const herSlider = [
 export const inPlayList = [
   {
     id: 1,
-    name: 'In Play',
+    name: 'In-Play',
+  },
+  {
+    id: 2,
+    name: 'Favorites',
+  },
+  {
+    id: 3,
+    name: 'My Markets',
+  },
+];
+
+export const popularListHead = [
+  {
+    id: 1,
+    name: 'Today',
+  },
+  {
+    id: 2,
+    name: 'Tomorrow',
+  },
+  {
+    id: 3,
+    name: 'Upcoming',
   },
 ];
 

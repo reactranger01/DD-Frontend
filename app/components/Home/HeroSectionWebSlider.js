@@ -22,7 +22,7 @@ const HeroSectionWebSlider = () => {
   return (
     <div className="overflow-hidden relative bg-white">
       <div
-        className="flex space-x-1 pl-14"
+        className="flex space-x-1 pl-14 slide-scroll "
         ref={sliderRef}
         style={{ overflowX: 'scroll' }}
       >

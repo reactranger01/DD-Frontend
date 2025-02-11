@@ -1,5 +1,5 @@
 import {
-  Banner,
+  BetSlip,
   BottomHeader,
   HeroSectionWebSlider,
   InplayCricket,
@@ -222,7 +222,7 @@ const Cricket = () => {
           </div>
         </div>
         <div className="xl:max-w-[390px] w-full hidden md:block">
-          <Banner />
+          <BetSlip />
         </div>
       </div>
     </>
