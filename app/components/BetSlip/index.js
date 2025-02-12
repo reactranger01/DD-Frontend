@@ -92,7 +92,7 @@ const BetSlip = () => {
     });
   };
 
-  const betStake = [100, 200, 500, 1000, 5000, 10000];
+  const betStake = [50, 100, 500, 1000, 5000];
 
   const handleProfitzero = () => {
     dispatch(fetchCurrentCalculationAction(null));
@@ -222,6 +222,8 @@ const BetSlip = () => {
       setCurrentBetWinLossData(calculationData);
     }
   }, [betData, bets]);
+
+  console.log(bets, 'bets');
   return (
     <>
       <div className="w-full pt-5">
@@ -253,200 +255,228 @@ const BetSlip = () => {
           </ul>
         </div>
       </div>
-      <div className="bg-white pb-2 text-12 mt-4">
-        <div
-          className={`relative px-2 ${
-            bets?.[0]?.betOn === 'BACK' ? 'bg-[#a7d8fd]' : 'bg-[#f9c9d4]'
-          } my-2`}
-        >
-          <button
-            onClick={() => {
-              handleRemoveBet(betData?.selectionId);
-            }}
-            className="absolute top-2 right-2 text-red-700 text-xl"
-          >
-            {reactIcons.close}
-          </button>
-          <p> {bets?.[0]?.event}</p>
-          <p>{bets?.[0]?.bettingOn}</p>
-          <p> {bets?.[0]?.selection}</p>
-        </div>
-        <div className="px-2">
-          <div className="flex flex-col gap-1">
-            <div className="flex justify-between">
-              <label htmlFor="" className="text-14 flex items-end  font-medium">
-                Odds
-              </label>
-              <div
-                className={` ${
-                  bets?.[0]?.betOn === 'BACK'
-                    ? ' bg-[#DAEDFF]'
-                    : ' bg-[#FFD6D6]'
-                }  bg-[#DAEDFF] flex gap-2 rounded-tl-md rounded-bl-md px-3 py-1 `}
-              >
-                <p className="text-[#35495E]">
-                  {bets?.[0]?.betOn === 'BACK' ? 'Profit' : 'Liability'}
+      {bets?.length > 0 && (
+        <div className="bg-[#fefefe] p-2 rounded-md">
+          <div className="shadow-2xl bg-white rounded-md text-12 ">
+            <div
+              className={`relative px-2 rounded-t ${
+                bets?.[0]?.betOn === 'BACK'
+                  ? 'bg-[#a7d8fd] border-t-4 border-[#78BBFD]'
+                  : 'bg-[#f9c9d4] border-t-4 border-[#FA7290]'
+              } `}
+            >
+              <div className="flex items-center justify-between ">
+                <p className="font-inter text-[13px] font-bold leading-4">
+                  {bets?.[0]?.selection}
                 </p>
-                <p
-                  className={
-                    bets?.[0]?.betOn === 'BACK'
-                      ? 'text-[#219642]'
-                      : 'text-[#fa7272]'
-                  }
-                >
-                  {bets?.[0]?.betOn === 'BACK'
-                    ? currentBetWinLossDatas?.calculation?.win.toFixed(2) || 0.0
-                    : currentBetWinLossDatas?.calculation?.loss.toFixed(2) ||
-                      0.0}
+                <p className="font-inter text-12  leading-4">
+                  MIN BET :{bets?.[0]?.minimumBet}
+                </p>
+              </div>
+              <div className="flex items-center justify-between ">
+                <p className="font-inter text-12 leading-4 ">
+                  {' '}
+                  {bets?.[0]?.matchName}
+                </p>
+                <p className="font-inter text-12  leading-4">
+                  MAX BET :{bets?.[0]?.maximumBet}
                 </p>
               </div>
             </div>
-            <div className="relative rounded-md overflow-hidden">
-              <input
-                type="text"
-                disabled
-                value={
-                  betData?.market == 'bookmaker'
-                    ? parseFloat((betData?.price / 100 + 1 || 0).toFixed(2))
-                    : parseFloat((betData?.price || 0).toFixed(2))
-                }
-                className="outline-none border border-gray-200   rounded-sm w-full h-10 px-12"
-              />
-              <button
-                type="button"
-                onClick={handleDecrease}
-                className="absolute ay-center cursor-pointer h-10 left-0 bg-[#051316] font-bold px-3 py-1 w-10 flex-center text-white"
-              >
-                -
-              </button>
-              <button
-                type="button"
-                onClick={handleIncrease}
-                className="absolute ay-center cursor-pointer  h-10 right-0 bg-[#051316] font-bold px-3 py-1 w-10 flex-center text-white"
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="" className="text-14 font-medium">
-              Stakes
-            </label>
-            <div className="relative rounded-md overflow-hidden">
-              <input
-                type="number"
-                onChange={handleChange}
-                value={betData?.stake}
-                placeholder="0"
-                className="outline-none border border-gray-200   rounded-sm w-full h-10 px-12"
-              />
-              <button
-                onClick={decreaseStake}
-                className="absolute ay-center h-10 left-0 bg-[#051316] font-bold px-3 py-1 w-10 flex-center text-white"
-              >
-                -
-              </button>
-              <button
-                onClick={increaseStake}
-                className="absolute ay-center h-10 right-0 bg-[#051316] font-bold px-3 py-1 w-10 flex-center text-white"
-              >
-                +
-              </button>
-            </div>
-          </div>
+            <div className="grid grid-cols-2 p-2">
+              <div className="flex items-center gap-2">
+                <div className="flex flex-col">
+                  <label
+                    htmlFor=""
+                    className="text-[13px] font-inter leading-4"
+                  >
+                    Odds
+                  </label>
 
-          {formError.stake && (
-            <div className="form-eror flex text-start text-14">
-              {formError.stake}
-            </div>
-          )}
-        </div>
-        <div className="grid grid-cols-3 gap-3 p-2 ">
-          {betStake &&
-            betStake.map((item) => {
-              return (
-                <button
-                  key={item}
-                  onClick={() => {
-                    setBetData({
-                      ...betData,
-                      stake: item,
-                    });
-                  }}
-                  className={`border border-gray-200 rounded-xl flex-center ${
-                    item === betData?.stake ? 'bg-primary-700' : 'bg-white'
-                  }`}
+                  <div className="relative rounded-sm overflow-hidden">
+                    <input
+                      type="text"
+                      disabled
+                      value={
+                        betData?.market == 'bookmaker'
+                          ? parseFloat(
+                              (betData?.price / 100 + 1 || 0).toFixed(2),
+                            )
+                          : parseFloat((betData?.price || 0).toFixed(2))
+                      }
+                      className="outline-none border border-gray-200 bg-[#EDF0F7] text-center  rounded w-full  px-5"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleDecrease}
+                      className="absolute ay-center cursor-pointer  left-0 bg-[#051316] font-bold  w-4 flex-center text-white"
+                    >
+                      -
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleIncrease}
+                      className="absolute ay-center cursor-pointer  right-0 bg-[#051316] font-bold  w-4 flex-center text-white"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-col ">
+                  <label
+                    htmlFor=""
+                    className="text-[13px] font-inter leading-4"
+                  >
+                    Stakes
+                  </label>
+                  <div className="relative rounded-sm overflow-hidden">
+                    <input
+                      type="number"
+                      onChange={handleChange}
+                      value={betData?.stake}
+                      placeholder="Min:50.00"
+                      className="outline-none border border-gray-200 text-center  bg-[#EDF0F7]  rounded-sm w-full "
+                    />
+                    {/* <button
+                    onClick={decreaseStake}
+                    className="absolute ay-center  left-0 bg-[#051316] font-bold w-4 flex-center text-white"
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={increaseStake}
+                    className="absolute ay-center  right-0 bg-[#051316] font-bold w-4 flex-center text-white"
+                  >
+                    +
+                  </button> */}
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center justify-end">
+                <div
+                  className={` ${
+                    bets?.[0]?.betOn === 'BACK'
+                      ? ' bg-[#DAEDFF]'
+                      : ' bg-[#FFD6D6]'
+                  }  bg-[#DAEDFF] flex flex-col  p-2 rounded `}
                 >
-                  {item}
-                </button>
-              );
-            })}
+                  <p className="text-[#35495E] leading-4">
+                    {bets?.[0]?.betOn === 'BACK' ? 'Profit' : 'Liability'}
+                  </p>
+                  <p
+                    className={
+                      bets?.[0]?.betOn === 'BACK'
+                        ? 'text-[#219642] leading-4'
+                        : 'text-[#fa7272] leading-4'
+                    }
+                  >
+                    {bets?.[0]?.betOn === 'BACK'
+                      ? currentBetWinLossDatas?.calculation?.win.toFixed(2) ||
+                        0.0
+                      : currentBetWinLossDatas?.calculation?.loss.toFixed(2) ||
+                        0.0}
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <button
-            onClick={() => {
-              setBetData({
-                ...betData,
-                stake: 25000,
-              });
-            }}
-            className={`border border-gray-200 rounded-xl col-span-3 flex-center ${
-              25000 === betData?.stake ? 'bg-primary-700' : 'bg-white'
-            }`}
-          >
-            25000
-          </button>
+            {formError.stake && (
+              <div className="form-eror flex text-start text-14">
+                {formError.stake}
+              </div>
+            )}
+
+            <div className="grid grid-cols-5 px-3 gap-2  ">
+              {betStake &&
+                betStake.map((item) => {
+                  return (
+                    <button
+                      key={item}
+                      onClick={() => {
+                        setBetData({
+                          ...betData,
+                          stake: item,
+                        });
+                      }}
+                      className="border border-[#242629] bg-[#D5D5D5] rounded text-12 flex-center"
+                    >
+                      +{item}
+                    </button>
+                  );
+                })}
+            </div>
+            <div className="grid grid-cols-4 gap-2 px-5 mx-auto mt-1">
+              <button
+                onClick={() => {
+                  setBetData({
+                    ...betData,
+                    stake: 10000,
+                  });
+                }}
+                className="border border-[#242629] bg-[#D5D5D5] rounded text-12 flex-center"
+              >
+                +10000
+              </button>
+              <button
+                onClick={() => {
+                  setBetData({
+                    ...betData,
+                    stake: 25000,
+                  });
+                }}
+                className="border border-[#242629] bg-[#D5D5D5] rounded text-12 flex-center"
+              >
+                +25000
+              </button>
+              <button
+                onClick={() => {
+                  setBetData({ ...betData, stake: '' });
+                }}
+                className="border border-[#242629] bg-[#D5D5D5] rounded text-12 flex-center"
+              >
+                Clear
+              </button>
+              <button
+                // onClick={() => setBetData({ ...betData, stake: 25000 })}
+                className="border border-[#242629] bg-[#D5D5D5] rounded text-12 flex-center"
+              >
+                Edit Stake
+              </button>
+            </div>
+            <div className=" bg-[#EDF0F7] py-2 px-3 grid grid-cols-2 gap-5 mt-2">
+              <button
+                onClick={() => {
+                  handleRemoveBet(betData?.selectionId);
+                }}
+                className="border border-[#687488] bg-[#F4F4F4] text-[#687488] w-full py-1 flex-center gap-2 rounded-lg"
+              >
+                {reactIcons.newDelete}
+                Cancel
+              </button>
+              <button
+                disabled={
+                  betData?.stake === '' || betData?.stake === 0 || loading
+                    ? true
+                    : false
+                }
+                onClick={(e) => placeBet(e)}
+                className={`text-[#687488] w-full flex-center bg-[#BEC5D0]  gap-2  py-1 rounded-lg ${
+                  betData?.stake === '' || betData?.stake === 0
+                    ? 'bg-[#5c996f] border-[#5c996f] '
+                    : 'bg-[#0EAD69] border-[#0EAD69]'
+                }`}
+              >
+                {loading ? (
+                  <AiOutlineLoading3Quarters className="animate-spin text-14" />
+                ) : (
+                  reactIcons.checkMark
+                )}
+                Place Order
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-3 gap-2 px-2">
-          <button
-            onClick={() => setBetData({ ...betData, stake: 100 })}
-            className="border border-gray-200 bg-gray-200 rounded-xl flex-center"
-          >
-            Min
-          </button>
-          <button
-            onClick={() => setBetData({ ...betData, stake: 25000 })}
-            className="border border-gray-200 bg-gray-200 rounded-xl flex-center"
-          >
-            Max
-          </button>
-          <button
-            onClick={() => {
-              setBetData({ ...betData, stake: '' });
-            }}
-            className="border border-gray-200 bg-gray-200 rounded-xl flex-center"
-          >
-            Clear
-          </button>
-        </div>
-        <div className="flex items-center justify-end gap-2  p-2 mt-2">
-          <button
-            onClick={() => {
-              handleRemoveBet(betData?.selectionId);
-            }}
-            className="bg-[#bf3e35] text-white px-4 py-1 rounded-lg"
-          >
-            Cancel
-          </button>
-          <button
-            disabled={
-              betData?.stake === '' || betData?.stake === 0 || loading
-                ? true
-                : false
-            }
-            onClick={(e) => placeBet(e)}
-            className={`text-white px-4 flex gap-2 items-center py-1 rounded-lg ${
-              betData?.stake === '' || betData?.stake === 0
-                ? 'bg-[#5c996f] border-[#5c996f] '
-                : 'bg-[#0EAD69] border-[#0EAD69]'
-            }`}
-          >
-            {loading && (
-              <AiOutlineLoading3Quarters className="animate-spin text-14" />
-            )}{' '}
-            Place Order
-          </button>
-        </div>
-      </div>
+      )}
     </>
   );
 };

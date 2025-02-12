@@ -649,3 +649,25 @@ export const handleLogout = async () => {
   removeAuthCookie();
   toast.success('Logged Out Successfully...');
 };
+
+export const filterAndSortMatches = (matches, tab) => {
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const upcoming = new Date(today);
+  upcoming.setDate(today.getDate() + 2);
+
+  return matches
+    .filter((match) => {
+      const matchDate = new Date(match.matchDateTime);
+
+      if (tab === 'Today') {
+        return matchDate.toDateString() === today.toDateString();
+      }
+      if (tab === 'Tomorrow') {
+        return matchDate.toDateString() === tomorrow.toDateString();
+      }
+      return matchDate > upcoming;
+    })
+    .sort((a, b) => new Date(a.matchDateTime) - new Date(b.matchDateTime));
+};

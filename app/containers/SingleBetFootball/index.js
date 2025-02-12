@@ -154,17 +154,6 @@ const SingleBetFootball = () => {
           </div>
         </div>
       </div>
-      {/* <RunPosition
-        isOpen={isOpenModal}
-        handleClose={handleCloseModal}
-        data={{
-          userId: yolo_userID,
-          eventId: eventId,
-          selectionId: selectedID,
-          runner: selectedRunner,
-          market: selectedMarket,
-        }}
-      /> */}
     </>
   );
 };

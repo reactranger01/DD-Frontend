@@ -8,13 +8,22 @@ import {
 import PopularFixture from '@/components/Home/PopularFixture';
 import useCricketOuter from '@/hooks/useCricketOuter';
 import { popularList } from '@/utils/contants';
+import { filterAndSortMatches } from '@/utils/helper';
 import React, { useState } from 'react';
 
 const Cricket = () => {
   const { inplayFalse, inplayTrue } = useCricketOuter();
 
-  const [openTab, setOpenTab] = useState(1);
-
+  const [openTab, setOpenTab] = useState('Today');
+  const todayCricket = filterAndSortMatches(inplayFalse, 'Today');
+  const tomorrowCricket = filterAndSortMatches(inplayFalse, 'Tomorrow');
+  const upcomingCricket = filterAndSortMatches(inplayFalse, 'Upcoming');
+  const cricketData =
+    openTab == 'Today'
+      ? todayCricket
+      : openTab == 'Tomorrow'
+      ? tomorrowCricket
+      : upcomingCricket;
   return (
     <>
       <SmallDesc />
@@ -53,13 +62,13 @@ const Cricket = () => {
                             <a
                               className={
                                 'text-sm font-bold px-4 py-2 shadow-lg leading-normal flex items-center justify-center ' +
-                                (openTab === item.id
+                                (openTab === item.name
                                   ? 'text-primary-1300 border-b-[3px] border-primary-1300'
                                   : 'text-white border-0')
                               }
                               onClick={(e) => {
                                 e.preventDefault();
-                                setOpenTab(item.id);
+                                setOpenTab(item.name);
                               }}
                               data-toggle="tab"
                               href="#link1"
@@ -74,10 +83,7 @@ const Cricket = () => {
                     <div className="relative flex flex-col min-w-0 break-words w-full mt-4 font-inter">
                       <div className="flex-auto">
                         <div className="tab-content tab-space">
-                          <div
-                            className={openTab === 1 ? 'block' : 'hidden'}
-                            id="link1"
-                          >
+                          <div id="link1">
                             <div className="w-full flex flex-col pb-3 md:pb-8">
                               <div className="w-full md:flex flex-row items-center hidden">
                                 <ul className="bg-[#201c67] w-full grid grid-cols-5 items-center m-0 pl-3 rounded-md">
@@ -118,98 +124,9 @@ const Cricket = () => {
 
                               <PopularFixture
                                 // data={NewfilteredData}
-                                data={inplayFalse}
+                                data={cricketData}
                                 // fixtureEventName={fixtureEventName}
                               />
-                            </div>
-                          </div>
-                          <div
-                            className={openTab === 2 ? 'block' : 'hidden'}
-                            id="link1"
-                          >
-                            <div className="w-full flex flex-col pb-3 md:pb-8">
-                              <div className="w-full md:flex flex-row items-center hidden">
-                                <ul className="bg-[#201c67] w-full grid grid-cols-5 items-center m-0 pl-3 rounded-md">
-                                  <li className="col-span-2">
-                                    <div className="grid items-center grid-cols-2">
-                                      <span className="col-span-1 text-[13px] uppercase font-semibold text-white">
-                                        Match
-                                      </span>
-                                      <span className="col-span-1 flex justify-center text-[13px] uppercase font-semibold text-white">
-                                        Status
-                                      </span>
-                                    </div>
-                                  </li>
-                                  <li className="col-span-2 text-[13px] uppercase font-semibold text-center text-white">
-                                    Click on Odds to BET
-                                  </li>
-                                  <li className="col-span-1 bg-[#6778E3] flex justify-center flex-col items-center rounded-br-md rounded-tr-md py-1 leading-none">
-                                    <span className="uppercase text-[13px] font-semibold text-white">
-                                      Boost your BET
-                                    </span>
-                                    <p className="text-xs text-[#281960] !text-10 !xl:text-12 font-semibold">
-                                      Use Bookmaker And Fancy
-                                    </p>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div className="hidden md:grid grid-cols-5 items-center w-full relative text-[13px] text-[#ced8ea] bg-[#323232] pl-3">
-                                <div className="col-span-2 py-2">
-                                  <span>Teams</span>
-                                </div>
-                                <div className="col-span-2 flex items-center justify-around py-2">
-                                  <span>1</span>
-                                  <span>X</span>
-                                  <span>2</span>
-                                </div>
-                                <div className="col-span-1 bg-[#454545] h-full"></div>
-                              </div>
-
-                              <PopularFixture data={inplayFalse} />
-                            </div>
-                          </div>
-                          <div
-                            className={openTab === 3 ? 'block' : 'hidden'}
-                            id="link1"
-                          >
-                            <div className="w-full flex flex-col pb-3 md:pb-8">
-                              <div className="w-full md:flex flex-row items-center hidden">
-                                <ul className="bg-[#201c67] w-full grid grid-cols-5 items-center m-0 pl-3 rounded-md">
-                                  <li className="col-span-2">
-                                    <div className="grid items-center grid-cols-2">
-                                      <span className="col-span-1 text-[13px] uppercase font-semibold text-white">
-                                        Match
-                                      </span>
-                                      <span className="col-span-1 flex justify-center text-[13px] uppercase font-semibold text-white">
-                                        Status
-                                      </span>
-                                    </div>
-                                  </li>
-                                  <li className="col-span-2 text-[13px] uppercase font-semibold text-center text-white">
-                                    Click on Odds to BET
-                                  </li>
-                                  <li className="col-span-1 bg-[#6778E3] flex justify-center flex-col items-center rounded-br-md rounded-tr-md py-1 leading-none">
-                                    <span className="uppercase text-[13px] font-semibold text-white">
-                                      Boost your BET
-                                    </span>
-                                    <p className="text-xs text-[#281960] !text-10 !xl:text-12 font-semibold">
-                                      Use Bookmaker And Fancy
-                                    </p>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div className="hidden md:grid grid-cols-5 items-center w-full relative text-[13px] text-[#ced8ea] bg-[#323232] pl-3">
-                                <div className="col-span-2 py-2">
-                                  <span>Teams</span>
-                                </div>
-                                <div className="col-span-2 flex items-center justify-around py-2">
-                                  <span>1</span>
-                                  <span>X</span>
-                                  <span>2</span>
-                                </div>
-                                <div className="col-span-1 bg-[#454545] h-full"></div>
-                              </div>
-                              <PopularFixture data={inplayFalse} />
                             </div>
                           </div>
                         </div>

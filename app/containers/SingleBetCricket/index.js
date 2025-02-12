@@ -3,6 +3,7 @@
 import React from 'react';
 import {
   Banner,
+  BetSlip,
   BettingOption,
   BookmakersCricket,
   BottomHeaderOption,
@@ -203,9 +204,9 @@ const SingleBetCricket = () => {
               </div>
             </div>
           </div>
-          {/* <div className="xl:max-w-[390px] w-full hidden md:block">
-            <Banner wrapperClassName="hidden" />
-          </div> */}
+          <div className="xl:max-w-[390px] w-full hidden md:block">
+            <BetSlip wrapperClassName="hidden" />
+          </div>
         </div>
       </div>
       {/* <RunPosition

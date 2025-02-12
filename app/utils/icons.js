@@ -64,8 +64,12 @@ import { FiCalendar } from 'react-icons/fi';
 import { RxUpdate } from 'react-icons/rx';
 import { IoWallet } from 'react-icons/io5';
 import { FaCheck } from 'react-icons/fa';
+import { RiDeleteBinLine } from 'react-icons/ri';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 
 export const reactIcons = {
+  checkMark: <IoMdCheckmarkCircleOutline />,
+  newDelete: <RiDeleteBinLine />,
   doubleArrowR: <FaAngleDoubleRight />,
   user: <FaUser />,
   check: <FaCheck />,
