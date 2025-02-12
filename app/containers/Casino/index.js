@@ -1,5 +1,6 @@
 import {
-  Banner,
+  // Banner,
+  BetSlip,
   BottomHeader,
   HeroSlider,
   // InPlay,
@@ -23,7 +24,7 @@ const Casino = () => {
           {/* <Popular /> */}
         </div>
         <div className="col-span-1">
-          <Banner />
+          <BetSlip />
         </div>
       </div>
     </>

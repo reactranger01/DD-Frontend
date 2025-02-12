@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  Banner,
+  // Banner,
+  BetSlip,
   // BannerOption,
   BettingOption,
   BottomHeaderOption,
@@ -20,7 +21,7 @@ const MoreOption = () => {
             <BettingOption />
           </div>
           <div className="col-span-1">
-            <Banner />
+            <BetSlip />
           </div>
         </div>
       </div>

@@ -570,7 +570,6 @@ export const getFixtureData = async (
 
         setInplayTrue(inplayTrueData);
         setInplayFalse(inplayFalseData);
-        console.log(inplayTrueData);
       }
     }
   } catch (e) {

@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import DisableButton from '../DisableButton';
 import { fetchBetDetailsAction, fetchLiveTvAction } from '@/redux/actions';
 import { useDispatch } from 'react-redux';
@@ -9,14 +9,12 @@ import DateFormatter from '../DateFormatter';
 import { isMobile } from 'react-device-detect';
 
 const PopularFixtureTennis = ({ data }) => {
-  const [bets, setBets] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = isLoggedIn();
-  FixtureData;
-  const FixtureData1 = data;
 
   const addToBetPlace = (
+    competition_name,
     eventId,
     selectionId,
     betDetails,
@@ -24,38 +22,40 @@ const PopularFixtureTennis = ({ data }) => {
     OddsPrice,
     betType,
     selectType,
+    name,
+    market_id,
     _marketData,
+    sportId,
     minimumBet,
     maximumBet,
   ) => {
-    setBets([
-      {
-        marketId: String(_marketData?.marketId),
-        eventId: Number(eventId),
-        gameId: 2,
-        selectionId: String(selectionId),
-        betOn: selectType,
-        price: parseFloat(OddsPrice),
-        stake: '',
-        eventType: game,
-        competition: 'N/A',
-        event: `${_marketData['runners'][0].runnerName} v ${_marketData['runners'][1].runnerName}`,
-        market: betType,
-        gameType: betType,
-        nation: betDetails?.runnerName,
-        type: selectType,
-        calcFact: 0,
-        bettingOn: betType,
-        runners: 2,
-        row: 1,
-        matchName: `${_marketData['runners'][0].runnerName} v ${_marketData['runners'][1].runnerName}`,
-        percent: 100,
-        selection: betDetails?.runnerName,
-        minimumBet: minimumBet || '',
-        maximumBet: maximumBet || '',
-        _marketData,
-      },
-    ]);
+    const bet = {
+      marketId: String(market_id),
+      eventId: Number(eventId),
+      gameId: Number(sportId),
+      selectionId: String(selectionId),
+      betOn: selectType,
+      price: parseFloat(OddsPrice),
+      stake: '',
+      eventType: game,
+      competition: competition_name,
+      event: name,
+      market: betType,
+      gameType: betType,
+      nation: betDetails?.runnerName,
+      type: selectType,
+      calcFact: 0,
+      bettingOn: betType,
+      runners: 2,
+      row: 1,
+      matchName: name,
+      percent: 100,
+      selection: betDetails?.runnerName,
+      _marketData,
+      minimumBet: minimumBet || '',
+      maximumBet: maximumBet || '',
+    };
+    dispatch(fetchBetDetailsAction([bet]));
     if (!isMobile) {
       window.scrollTo({
         top: 0,
@@ -65,10 +65,6 @@ const PopularFixtureTennis = ({ data }) => {
     }
   };
 
-  useEffect(() => {
-    if (bets.length > 0) dispatch(fetchBetDetailsAction(bets));
-  }, [bets, dispatch]);
-
   const handleLiveTv = (eventId) => {
     dispatch(
       fetchLiveTvAction({ eventid: eventId, tvshow: true, game: 'tennis' }),
@@ -77,9 +73,7 @@ const PopularFixtureTennis = ({ data }) => {
   const totalMatched = 0;
   const totalMatchedCss = 0;
   // eslint-disable-next-line
-  const FixtureData = FixtureData1.sort((a, b) => {
-    return new Date(a.matchDateTime) - new Date(b.matchDateTime);
-  });
+
   return (
     <>
       {' '}

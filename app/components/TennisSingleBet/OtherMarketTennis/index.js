@@ -2,12 +2,13 @@ import BlueButton from '@/components/BlueButton';
 import BettingOption from '@/components/MoreOption/BettingOption';
 import PinkButton from '@/components/PinkButton';
 import StatusButton from '@/components/StatusButton';
+import { fetchBetDetailsAction } from '@/redux/actions';
 import { isLoggedIn } from '@/utils/apiHandlers';
 import { updatePlacedBetCalculation } from '@/utils/helper';
 import { reactIcons } from '@/utils/icons';
 import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +21,6 @@ const OtherMarketTennis = ({
 }) => {
   const navigate = useNavigate();
   const isLogin = isLoggedIn();
-  const [bets, setBets] = useState([]);
   const dispatch = useDispatch();
   const inplay = data?.inplay;
   const isMobile = useMediaQuery('(max-width:1024px)');
@@ -44,34 +44,33 @@ const OtherMarketTennis = ({
   ) => {
     console.log('minmax', minLimitOdds, maxLimitOdds);
 
-    setBets([
-      {
-        marketId: String(_marketData?.market_id),
-        eventId: Number(eventId),
-        gameId: 1,
-        selectionId: String(selectionId),
-        betOn: selectType,
-        price: parseFloat(OddsPrice),
-        stake: '',
-        eventType: game,
-        competition: competition_name,
-        event: data?.name,
-        market: _marketData?.market_name,
-        gameType: _marketData?.market_name,
-        nation: betDetails,
-        type: selectType,
-        calcFact: 0,
-        bettingOn: betType,
-        runners: 2,
-        row: 1,
-        matchName: data?.name,
-        percent: 100,
-        selection: betDetails,
-        minimumBet: minimumBet || '',
-        maximumBet: maximumBet || '',
-        _marketData,
-      },
-    ]);
+    const bet = {
+      marketId: String(_marketData?.market_id),
+      eventId: Number(eventId),
+      gameId: 1,
+      selectionId: String(selectionId),
+      betOn: selectType,
+      price: parseFloat(OddsPrice),
+      stake: '',
+      eventType: game,
+      competition: competition_name,
+      event: data?.name,
+      market: _marketData?.market_name,
+      gameType: _marketData?.market_name,
+      nation: betDetails,
+      type: selectType,
+      calcFact: 0,
+      bettingOn: betType,
+      runners: 2,
+      row: 1,
+      matchName: data?.name,
+      percent: 100,
+      selection: betDetails,
+      minimumBet: minimumBet || '',
+      maximumBet: maximumBet || '',
+      _marketData,
+    };
+    dispatch(fetchBetDetailsAction([bet]));
     if (!isMobile) {
       window.scrollTo({
         top: 0,
@@ -80,14 +79,7 @@ const OtherMarketTennis = ({
       });
     }
   };
-  useEffect(() => {
-    if (bets?.length > 0) {
-      // dispatch(fetchBetDetailsAction(bets));
-      if (isMobile) {
-        // dispatch(setActiveBetSlipIndex(bets[0]?.selectionId));
-      }
-    }
-  }, [bets, dispatch, isMobile]);
+
   let minLimitOdds, maxLimitOdds;
   if (inplay) {
     minLimitOdds = data.inPlayMinLimit;

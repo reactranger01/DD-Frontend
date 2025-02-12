@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  Banner,
+  BetSlip,
+  // Banner,
   BottomHeaderOption,
   MatchoddsFootball,
   OtherMarketFootball,
@@ -149,7 +150,7 @@ const SingleBetFootball = () => {
             </div>
           </div>
           <div className="xl:max-w-[390px] w-full hidden md:block">
-            <Banner wrapperClassName="hidden" />
+            <BetSlip wrapperClassName="hidden" />
           </div>
         </div>
       </div>

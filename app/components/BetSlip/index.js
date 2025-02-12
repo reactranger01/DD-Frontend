@@ -16,7 +16,8 @@ import { isYupError, parseYupError } from '@/utils/Yup';
 import { calcCurrentBetStats } from '@/utils/helper';
 import { toast } from 'react-toastify';
 import InputField from '../FormElements/InputField';
-const NewBetSlip = () => {
+// ORIGINAL BETSLIP
+const BetSlip = () => {
   const [betData, setBetData] = useState({});
   const [currentBetWinLossDatas, setCurrentBetWinLossData] = useState(null);
   const bets = useSelector((state) => state.bet.selectedBet);
@@ -27,7 +28,7 @@ const NewBetSlip = () => {
   const [formError, setFormError] = useState({
     stake: '',
   });
-
+  console.log(bets, 'bets');
   useEffect(() => {
     setBetData(bets?.[0]);
     setEnent_ID(bets?.[0]?.eventId);
@@ -96,7 +97,6 @@ const NewBetSlip = () => {
   const handleProfitzero = () => {
     dispatch(fetchCurrentCalculationAction(null));
   };
-  console.log(betData, 'userInfo', userInfo);
   const handleRestrictedGames = async (gameId) => {
     if (userInfo?.chip_setting?.includes(gameId)) {
       return true;
@@ -222,7 +222,6 @@ const NewBetSlip = () => {
       setCurrentBetWinLossData(calculationData);
     }
   }, [betData, bets]);
-  console.log('betDatathoos', betData);
   return (
     <>
       <div className="w-full pt-5">
@@ -452,4 +451,4 @@ const NewBetSlip = () => {
   );
 };
 
-export default NewBetSlip;
+export default BetSlip;

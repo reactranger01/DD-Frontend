@@ -1,6 +1,6 @@
 import BettingOption from '@/components/MoreOption/BettingOption';
 import { isLoggedIn } from '@/utils/apiHandlers';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import BlueButton from '@/components/BlueButton';
 import PinkButton from '@/components/PinkButton';
 import { reactIcons } from '@/utils/icons';
-import { toast } from 'react-toastify';
+import { fetchBetDetailsAction } from '@/redux/actions';
 
 const MatchOddsCricket = ({
   heading,
@@ -19,24 +19,12 @@ const MatchOddsCricket = ({
 }) => {
   const navigate = useNavigate();
   const isLogin = isLoggedIn();
-  const [bets, setBets] = useState([]);
   const dispatch = useDispatch();
   const isMobile = useMediaQuery('(max-width:1024px)');
   const calculation = useSelector((state) => state?.calculation?.currentValue);
   const updatedCalculation = calculation
     ? updatePlacedBetCalculation(calculation, heading, placedBetWinLossDatas)
     : placedBetWinLossDatas;
-
-  useEffect(() => {
-    if (bets?.length > 0) {
-      // dispatch(fetchBetDetailsAction(bets));
-      if (isMobile) {
-        // dispatch(setActiveBetSlipIndex(bets[0]?.selectionId));
-      }
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bets, dispatch, isMobile]);
 
   const addToBetPlace = (
     eventId,
@@ -50,39 +38,37 @@ const MatchOddsCricket = ({
     minBetLimit,
     maxBetLimit,
   ) => {
-    if (OddsPrice > 1) {
-      setBets([
-        {
-          marketId: String(data?.market_id),
-          eventId: Number(eventId),
-          gameId: Number(data?.sportId),
-          selectionId: String(selectionId),
-          betOn: selectType,
-          price: parseFloat(OddsPrice),
-          stake: '',
-          eventType: game,
-          competition: competition_name,
-          event: data?.name,
-          market: _marketData.market_name,
-          gameType: _marketData.market_name,
-          nation: betDetails,
-          type: selectType,
-          calcFact: 0,
-          bettingOn: betType,
-          runners: 2,
-          row: 1,
-          matchName: data?.name,
-          percent: 100,
-          selection: betDetails,
-          minimumBet: minBetLimit,
-          maximumBet: maxBetLimit,
-          _marketData,
-        },
-      ]);
-    } else {
-      toast.error('Market not available');
-    }
+    // Create the bet object
+    const bet = {
+      marketId: String(data?.market_id),
+      eventId: Number(eventId),
+      gameId: Number(data?.sportId),
+      selectionId: String(selectionId),
+      betOn: selectType,
+      price: parseFloat(OddsPrice),
+      stake: '',
+      eventType: game,
+      competition: competition_name,
+      event: data?.name,
+      market: _marketData.market_name,
+      gameType: _marketData.market_name,
+      nation: betDetails,
+      type: selectType,
+      calcFact: 0,
+      bettingOn: betType,
+      runners: 2,
+      row: 1,
+      matchName: data?.name,
+      percent: 100,
+      selection: betDetails,
+      minimumBet: minBetLimit,
+      maximumBet: maxBetLimit,
+      _marketData,
+    };
+
+    dispatch(fetchBetDetailsAction([bet]));
   };
+
   let minLimitOdds, maxLimitOdds;
   if (data?.inplay) {
     minLimitOdds = data?.inPlayMinLimit;

@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import DisableButton from '../DisableButton';
 import { isLoggedIn } from '@/utils/apiHandlers';
@@ -9,12 +9,8 @@ import DateFormatter from '../DateFormatter';
 
 const PopularFixture = ({ data }) => {
   const navigate = useNavigate();
-  const [bets, setBets] = useState([]);
   const isLogin = isLoggedIn();
   const dispatch = useDispatch();
-
-  const addToNormalBetPlace = () => {};
-
   const addToBetPlace = (
     competition_name,
     eventId,
@@ -31,39 +27,36 @@ const PopularFixture = ({ data }) => {
     minBetLimit,
     maxBetLimit,
   ) => {
-    setBets([
-      {
-        marketId: String(market_id),
-        eventId: Number(eventId),
-        gameId: Number(sportId),
-        selectionId: String(selectionId),
-        betOn: selectType,
-        price: parseFloat(OddsPrice),
-        stake: '',
-        eventType: game,
-        competition: competition_name,
-        event: name,
-        market: betType,
-        gameType: betType,
-        nation: betDetails?.runnerName,
-        type: selectType,
-        calcFact: 0,
-        bettingOn: betType,
-        runners: 2,
-        row: 1,
-        matchName: name,
-        percent: 100,
-        selection: betDetails?.runnerName,
-        _marketData,
-        minimumBet: minBetLimit,
-        maximumBet: maxBetLimit,
-      },
-    ]);
-  };
+    // Create the bet object
+    const bet = {
+      marketId: String(market_id),
+      eventId: Number(eventId),
+      gameId: Number(sportId),
+      selectionId: String(selectionId),
+      betOn: selectType,
+      price: parseFloat(OddsPrice),
+      stake: '',
+      eventType: game,
+      competition: competition_name,
+      event: name,
+      market: betType,
+      gameType: betType,
+      nation: betDetails?.runnerName,
+      type: selectType,
+      calcFact: 0,
+      bettingOn: betType,
+      runners: 2,
+      row: 1,
+      matchName: name,
+      percent: 100,
+      selection: betDetails?.runnerName,
+      _marketData,
+      minimumBet: minBetLimit,
+      maximumBet: maxBetLimit,
+    };
 
-  useEffect(() => {
-    if (bets?.length > 0) dispatch(fetchBetDetailsAction(bets));
-  }, [bets, dispatch]);
+    dispatch(fetchBetDetailsAction([bet]));
+  };
 
   const handleLiveTv = (eventId) => {
     dispatch(
@@ -72,7 +65,6 @@ const PopularFixture = ({ data }) => {
   };
   const totalMatched = 0;
   const totalMatchedCss = 0;
-  console.log(data, 'data');
   return (
     <>
       {data?.length === 0 ? (
@@ -376,21 +368,21 @@ const PopularFixture = ({ data }) => {
                                       ? true
                                       : false
                                   }
-                                  onClick={() => {
-                                    isLogin
-                                      ? addToNormalBetPlace(
-                                          _items,
-                                          'BACK',
-                                          index,
-                                          _items?.session?.BackPrice1,
-                                          _items.session?.gtype,
-                                          `${_items?.odds?.runners?.[0]?.runnerName} 'vs' ${_items?.odds?.runners?.[1]?.runnerName}`,
-                                          _items.session.BackSize1,
-                                          _items.session.RunnerName,
-                                          _items.session,
-                                        )
-                                      : navigate('/login');
-                                  }}
+                                  // onClick={() => {
+                                  //   isLogin
+                                  //     ? addToNormalBetPlace(
+                                  //         _items,
+                                  //         'BACK',
+                                  //         index,
+                                  //         _items?.session?.BackPrice1,
+                                  //         _items.session?.gtype,
+                                  //         `${_items?.odds?.runners?.[0]?.runnerName} 'vs' ${_items?.odds?.runners?.[1]?.runnerName}`,
+                                  //         _items.session.BackSize1,
+                                  //         _items.session.RunnerName,
+                                  //         _items.session,
+                                  //       )
+                                  //     : navigate('/login');
+                                  // }}
                                   className={`col-span-1 min-w-[45px] flex items-center justify-center px-2 min-h-[30px] cursor-pointer border-2  ${
                                     _items?.total_matched < totalMatchedCss
                                       ? 'bg-gray-300 text-gray-400'
@@ -411,21 +403,21 @@ const PopularFixture = ({ data }) => {
                                       ? true
                                       : false
                                   }
-                                  onClick={() => {
-                                    isLogin
-                                      ? addToNormalBetPlace(
-                                          _items,
-                                          'LAY',
-                                          index,
-                                          _items.session.LayPrice1,
-                                          _items.session?.gtype,
-                                          `${_items?.odds?.runners?.[0]?.runnerName} 'vs' ${_items?.odds?.runners?.[1]?.runnerName}`,
-                                          _items.session.LaySize1,
-                                          _items.session.RunnerName,
-                                          _items.session,
-                                        )
-                                      : navigate('/login');
-                                  }}
+                                  // onClick={() => {
+                                  //   isLogin
+                                  //     ? addToNormalBetPlace(
+                                  //         _items,
+                                  //         'LAY',
+                                  //         index,
+                                  //         _items.session.LayPrice1,
+                                  //         _items.session?.gtype,
+                                  //         `${_items?.odds?.runners?.[0]?.runnerName} 'vs' ${_items?.odds?.runners?.[1]?.runnerName}`,
+                                  //         _items.session.LaySize1,
+                                  //         _items.session.RunnerName,
+                                  //         _items.session,
+                                  //       )
+                                  //     : navigate('/login');
+                                  // }}
                                   className={`col-span-1  min-w-[45px]  px-2  flex items-center  justify-center min-h-[30px] cursor-pointer border-2 ${
                                     _items?.total_matched < totalMatchedCss
                                       ? 'bg-gray-300 text-gray-400'

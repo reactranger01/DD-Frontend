@@ -1,5 +1,5 @@
 import './i18n';
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,19 +44,19 @@ import {
   ViewBetDetails,
 } from './containers/pageListAsync';
 import PrivateRoute from './containers/auth/PrivateRoute';
-import { useDispatch } from 'react-redux';
-import { fetchBetDetailsAction } from './redux/actions';
-import { loadStateFromLocalStorage } from '.';
+// import { useDispatch } from 'react-redux';
+// import { fetchBetDetailsAction } from './redux/actions';
+// import { loadStateFromLocalStorage } from '.';
 import ScrollToTop from './components/ScrollToTop';
 // import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (loadStateFromLocalStorage()) {
-      dispatch(fetchBetDetailsAction(loadStateFromLocalStorage().selectedBet));
-    }
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (loadStateFromLocalStorage()) {
+  //     dispatch(fetchBetDetailsAction(loadStateFromLocalStorage().selectedBet));
+  //   }
+  // }, [dispatch]);
 
   return (
     <Fragment>

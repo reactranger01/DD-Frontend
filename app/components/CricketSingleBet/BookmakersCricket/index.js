@@ -2,13 +2,14 @@ import BlueButton from '@/components/BlueButton';
 import BettingOption from '@/components/MoreOption/BettingOption';
 import PinkButton from '@/components/PinkButton';
 import StatusButton from '@/components/StatusButton';
+import { fetchBetDetailsAction } from '@/redux/actions';
 import { isLoggedIn } from '@/utils/apiHandlers';
 import { updatePlacedBetCalculation } from '@/utils/helper';
 import { reactIcons } from '@/utils/icons';
 import { intToString } from '@/utils/mergeData';
 import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -24,7 +25,6 @@ const BookmakersCricket = ({
   const navigate = useNavigate();
   const isLogin = isLoggedIn();
   const EventId = data['0']?.EventID;
-  const [bets, setBets] = useState([]);
   const isMobile = useMediaQuery('(max-width:1024px)');
   const calculation = useSelector((state) => state?.calculation?.currentValue);
   const updatedCalculation = calculation
@@ -36,14 +36,6 @@ const BookmakersCricket = ({
     : placedBetWinLossBookmakerData;
   const inplay = oddsData?.inplay;
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (bets?.length > 0) {
-      //   dispatch(fetchBetDetailsAction(bets));
-      if (isMobile) {
-        // dispatch(setActiveBetSlipIndex(bets[0]?.selectionId));
-      }
-    }
-  }, [bets, dispatch, isMobile]);
 
   const addToBetPlace = (
     eventId,
@@ -59,40 +51,45 @@ const BookmakersCricket = ({
     maximumBet,
   ) => {
     console.log(OddsPrice, 'OddsPrice');
+
     if (OddsPrice > 1) {
       console.log('bookmaker data', eventId);
-      setBets([
-        {
-          marketId: String(data?.market_id),
-          eventId: Number(eventId || EventId),
-          gameId: 4,
-          selectionId: String(selectionId),
-          betOn: selectType,
-          price: parseFloat(OddsPrice),
-          stake: '',
-          eventType: game,
-          competition: competition_name,
-          event: matchName,
-          market: 'bookmaker',
-          gameType: 'bookmaker',
-          nation: betDetails,
-          type: selectType,
-          calcFact: 0,
-          bettingOn: 'bookmaker',
-          runners: 2,
-          row: 1,
-          matchName: matchName,
-          percent: 100,
-          selection: betDetails,
-          minimumBet: minimumBet,
-          maximumBet: maximumBet,
-          _marketData,
-        },
-      ]);
+
+      // Create the bet object
+      const bet = {
+        marketId: String(data?.market_id),
+        eventId: Number(eventId || EventId),
+        gameId: 4,
+        selectionId: String(selectionId),
+        betOn: selectType,
+        price: parseFloat(OddsPrice),
+        stake: '',
+        eventType: game,
+        competition: competition_name,
+        event: matchName,
+        market: 'bookmaker',
+        gameType: 'bookmaker',
+        nation: betDetails,
+        type: selectType,
+        calcFact: 0,
+        bettingOn: 'bookmaker',
+        runners: 2,
+        row: 1,
+        matchName: matchName,
+        percent: 100,
+        selection: betDetails,
+        minimumBet: minimumBet,
+        maximumBet: maximumBet,
+        _marketData,
+      };
+
+      // Dispatch action directly with the bet data
+      dispatch(fetchBetDetailsAction([bet]));
     } else {
       toast.error('Market not available');
     }
   };
+
   return (
     <div className="w-full flex items-start bg-[#ccc]-200 mb-5 md:mb-10">
       <div className="w-full flex flex-col">

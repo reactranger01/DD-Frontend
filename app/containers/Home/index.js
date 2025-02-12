@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Banner,
+  // Banner,
+  BetSlip,
   BottomHeader,
   HeroSection,
   HeroSectionWebSlider,
@@ -15,7 +16,7 @@ import useInplayOuter from '@/hooks/useInplayOuter';
 
 const Home = () => {
   const location = useLocation();
-  const [search, setSearch] = useState('');
+  // const [search, setSearch] = useState('');
   const {
     // isLoading,
     // setOpenModal,
@@ -64,10 +65,10 @@ const Home = () => {
           />
         </div>
         <div className="xl:max-w-[390px] w-full hidden md:block">
-          <Banner
-            name={'search'}
-            value={search}
-            onChangeHandler={(event) => setSearch(event.target.value)}
+          <BetSlip
+          // name={'search'}
+          // value={search}
+          // onChangeHandler={(event) => setSearch(event.target.value)}
           />
         </div>
       </div>

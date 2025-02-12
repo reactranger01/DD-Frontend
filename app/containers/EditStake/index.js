@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  Banner,
+  // Banner,
+  BetSlip,
   BottomHeader,
   HeroSlider,
   // InPlay,
@@ -22,7 +23,7 @@ const EditStake = () => {
           {/* <Popular /> */}
         </div>
         <div className="col-span-1">
-          <Banner />
+          <BetSlip />
         </div>
       </div>
     </>
