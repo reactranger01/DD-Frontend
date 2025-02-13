@@ -131,7 +131,7 @@ const Footer = () => {
               pick Yolo247 as your online casino and sports betting partner:
             </p>
 
-            <h3 className="mt-4 font-bold">imple & Easy Login</h3>
+            <h3 className="mt-4 font-bold text-16">imple & Easy Login</h3>
 
             <p className="mt-4">
               he magic of online gaming and sports betting lies in their

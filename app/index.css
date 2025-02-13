@@ -1138,3 +1138,47 @@ right section
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.today-filter {
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 20px;
+  margin-right: 5px;
+  transform: skew(338deg);
+  position: relative;
+  border-radius: 5px;
+  background: linear-gradient(
+    92.92deg,
+    rgb(111, 109, 230) 0%,
+    rgb(49, 45, 185) 93.54%
+  );
+  color: rgb(255, 255, 255);
+}
+.today-filter-active {
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 20px;
+  margin-right: 5px;
+  transform: skew(338deg);
+  position: relative;
+  border-radius: 5px;
+  background: linear-gradient(
+    270deg,
+    rgb(255, 255, 255) -4.14%,
+    rgba(241, 241, 241, 0.7) 84.48%
+  );
+  color: rgb(0, 0, 0);
+}
+
+.popular-div {
+  font-size: 11px;
+  padding-right: 20px;
+  clip-path: polygon(0px 0px, 100% 0%, 85% 100%, 0% 100%);
+  margin-top: 5px;
+}

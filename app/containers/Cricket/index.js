@@ -40,16 +40,20 @@ const Cricket = () => {
           <InplayCricket fixtureData={inplayTrue} />
           <div className="">
             <div className="relative">
-              <div className="shape-rect h-[35px] flex">
+              <div className="shape-rect h-[35px]  hidden md:flex">
                 <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
                   Popular
                 </div>
                 <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
               </div>
+              <div className="md:hidden popular-div my-2 text-white">
+                POPULAR
+              </div>
               <div className="z-10 h-full overflow-auto custom-scroll">
                 <div className="flex flex-wrap">
                   <div className="w-full">
-                    <div className="w-full flex justify-between items-center">
+                    {/* For Desktop */}
+                    <div className="hidden w-full md:flex justify-between items-center">
                       <ul
                         className="flex mb-0 list-none w-full flex-wrap flex-row border-b border-[#ffffff]"
                         role="tablist"
@@ -77,6 +81,31 @@ const Cricket = () => {
                               {item.name}
                             </a>
                           </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="w-full flex md:hidden justify-between items-center">
+                      <ul
+                        className="flex mb-0 -ml-3 my-2 list-none w-full flex-wrap flex-row"
+                        role="tablist"
+                      >
+                        {popularList.map((item, index) => (
+                          <div
+                            key={index}
+                            className={
+                              openTab === item.name
+                                ? 'today-filter'
+                                : 'today-filter-active'
+                            }
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setOpenTab(item.name);
+                            }}
+                          >
+                            <p className="skew-x-12">
+                              {item.name.toUpperCase()}
+                            </p>
+                          </div>
                         ))}
                       </ul>
                     </div>
