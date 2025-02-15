@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         josefin: ['Josefin', 'sans-serif'],
+        mont: ['Montserrat', 'sans-serif'],
         rajdhani: ['Rajdhani', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
         arial: ['Arial', 'Helvetica', 'sans-serif'],

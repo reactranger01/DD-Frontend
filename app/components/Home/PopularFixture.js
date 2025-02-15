@@ -472,7 +472,7 @@ const PopularFixture = ({ data }) => {
                   <div className="block md:hidden bg-white mb-1">
                     <MobileMatchHeading data={_items} sport="cricket" />
                     {/* Mobile ODDS */}
-                    <div className="flex my-2">
+                    <div className="flex my-2 h-[40px]">
                       <div className="min-w-[35px] sm:w-[70px] grid place-content-center">
                         <img
                           src="/images/home/star-yellow.png"

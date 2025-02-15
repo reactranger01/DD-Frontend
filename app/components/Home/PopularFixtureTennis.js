@@ -7,6 +7,7 @@ import { isLoggedIn } from '@/utils/apiHandlers';
 import { useNavigate } from 'react-router-dom';
 import DateFormatter from '../DateFormatter';
 import { isMobile } from 'react-device-detect';
+import MobileMatchHeading from '../MobileMatchHeading';
 
 const PopularFixtureTennis = ({ data }) => {
   const dispatch = useDispatch();
@@ -408,7 +409,7 @@ const PopularFixtureTennis = ({ data }) => {
                   )} */}
                   {/* mobile table START */}
                   <div className="block md:hidden bg-white mb-1">
-                    <div
+                    {/* <div
                       onClick={() => {
                         if (_items?.odds?.totalMatched < totalMatchedCss) {
                           return; // Prevent navigation if isDisabled is true
@@ -464,351 +465,209 @@ const PopularFixtureTennis = ({ data }) => {
                           </>
                         )}
                       </div>
-                    </div>
-                    <div className="flex h-[60px]">
+                    </div> */}
+                    <MobileMatchHeading data={_items} sport="tennis" />
+
+                    <div className="flex my-2 h-[40px]">
                       <div className="min-w-[35px] sm:w-[70px] grid place-content-center">
                         <img
                           src="/images/home/star-yellow.png"
-                          className="w-6 h-6"
+                          className="w-4 md:w-6 object-cover"
                           alt="star"
                         />
                       </div>
-                      <div className="flex-1 flex items-center rounded-bl-md px-2 gap-3">
-                        <div className="flex-1 flex items-center gap-[5px] ">
-                          {_items?.odds?.runners?.[0]?.ex?.availableToBack?.[0]
-                            ?.price ? (
-                            <button
-                              disabled={
-                                _items?.odds?.totalMatched < totalMatched
-                                  ? true
-                                  : false
-                              }
-                              onClick={async () => {
-                                if (isLogin) {
-                                  await addToBetPlace(
-                                    _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[0]?.selectionId,
-                                    _items?.odds?.runners?.[0],
-                                    'Tennis',
-                                    _items?.odds?.runners?.[0]?.ex
-                                      ?.availableToBack?.[0]?.price,
-                                    _items?.marketName,
-                                    'BACK',
-                                    _items?.odds,
-                                    minLimitOdds,
-                                    maxLimitOdds,
-                                  );
-                                  navigate('/bet-details');
-                                } else {
-                                  navigate('/login');
-                                }
-                              }}
-                              className={`blue-btn flex-1 flex flex-col items-center justify-center w-[43px] h-[45px]  min-w-[45px] max-w-[45px] md:max-w-auto  border-2  rounded-[4px] gap-[2px]  ${
-                                _items?.odds?.totalMatched < totalMatchedCss
-                                  ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-secondary-100 text-white'
-                              }`}
-                            >
-                              {/* <span className="text-14 font-semibold leading-[16px]">
-                              {_items?.odds?.runners?.[0]?.back?.[0]?.price ||
-                                '-'}
-                              </span> */}
-
-                              <>
-                                <span className="text-14 font-semibold leading-[16px]">
-                                  {_items?.odds?.runners?.[0]?.ex
-                                    ?.availableToBack?.[0]?.price || '-'}
-                                </span>
-                              </>
-
-                              {/* <span className="text-[8px] font-semibold leading-[10px]">
-                              {_items?.odds?.runners?.[0]?.back?.[0]?.size}
-                            </span> */}
-                              <span className="text-[8px] font-semibold leading-[10px]">
-                                {
-                                  _items?.odds?.runners?.[0]?.ex
-                                    ?.availableToBack?.[0]?.size
-                                }
-                              </span>
-                            </button>
-                          ) : (
-                            <DisableButton btncolor={'blue'} />
-                          )}
-
-                          {_items?.odds?.runners?.[0]?.ex?.availableToLay?.[0]
-                            ?.price ? (
-                            <button
-                              disabled={
-                                _items?.odds?.totalMatched < totalMatched
-                                  ? true
-                                  : false
-                              }
-                              onClick={async () => {
-                                if (isLogin) {
-                                  await addToBetPlace(
-                                    _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[0]?.selectionId,
-                                    _items?.odds?.runners?.[0],
-                                    'Tennis',
-                                    _items?.odds?.runners?.[0]?.ex
-                                      ?.availableToLay?.[0]?.price,
-                                    _items?.marketName,
-                                    'LAY',
-                                    _items?.odds,
-                                    minLimitOdds,
-                                    maxLimitOdds,
-                                  );
-                                  navigate('/bet-details');
-                                } else {
-                                  navigate('/login');
-                                }
-                              }}
-                              className={`pink-btn  flex-1 flex-shrink-0 flex flex-col items-center justify-center w-[45px] h-[45px] borde-2  rounded-[4px] gap-[2px] min-w-[45px] max-w-[45px] md:max-w-auto ${
-                                _items?.odds?.totalMatched < totalMatched
-                                  ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-[#FF649E]  text-white'
-                              }`}
-                            >
-                              {/* <span className="text-14 font-semibold leading-[16px]">
-                              {_items?.odds?.runners?.[0]?.lay?.[0]?.price ||
-                                '-'}
-                            </span> */}
-
-                              <>
-                                <span className="text-14 font-semibold leading-[16px]">
-                                  {_items?.odds?.runners?.[0]?.ex
-                                    ?.availableToLay?.[0]?.price || '-'}
-                                </span>
-                              </>
-
-                              {/* <span className="text-[8px] font-semibold leading-[10px]">
-                              {_items?.odds?.runners?.[0]?.lay?.[0]?.size}
-                            </span> */}
-                              <span className="text-[8px] font-semibold leading-[10px]">
-                                {
-                                  _items?.odds?.runners?.[0]?.ex
-                                    ?.availableToLay?.[0]?.size
-                                }
-                              </span>
-                            </button>
-                          ) : (
-                            <DisableButton btncolor={'pink'} />
-                          )}
+                      <div className="grid grid-cols-3 gap-2 h-full w-full text-black font-bold text-[12px] mr-2">
+                        <div className="grid grid-cols-2 gap-1">
+                          <div className="">
+                            {_items?.runners?.[0]?.backPrice1 ? (
+                              <button
+                                className="col-span-1 h-full w-full flex items-center justify-center cursor-pointer bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]"
+                                onClick={() => {
+                                  isLogin
+                                    ? addToBetPlace(
+                                        _items?.competition_name,
+                                        _items?.event_id || _items?.matchId,
+                                        _items?.runners?.[0]?.selectionId,
+                                        _items?.runners?.[0],
+                                        'Tennis',
+                                        _items?.runners?.[0]?.backPrice1,
+                                        _items?.market_name,
+                                        'BACK',
+                                        _items?.name,
+                                        _items?.market_id,
+                                        _items?.runners,
+                                        _items?.sportId,
+                                        minLimitOdds,
+                                        maxLimitOdds,
+                                      )
+                                    : navigate('/login');
+                                }}
+                              >
+                                {_items?.runners?.[0]?.backPrice1}
+                              </button>
+                            ) : (
+                              <DisableButton btncolor={'blue'} />
+                            )}
+                          </div>
+                          <div className="">
+                            {_items?.runners?.[0]?.layPrice1 ? (
+                              <button
+                                className="col-span-1 flex items-center justify-center cursor-pointer bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58] w-full h-full"
+                                onClick={() => {
+                                  isLogin
+                                    ? addToBetPlace(
+                                        _items?.competition_name,
+                                        _items?.event_id || _items?.matchId,
+                                        _items?.runners?.[0]?.selectionId,
+                                        _items?.runners?.[0],
+                                        'Tennis',
+                                        _items?.runners?.[0]?.layPrice1,
+                                        _items?.market_name,
+                                        'LAY',
+                                        _items?.name,
+                                        _items?.market_id,
+                                        _items?.runners,
+                                        _items?.sportId,
+                                        minLimitOdds,
+                                        maxLimitOdds,
+                                      )
+                                    : navigate('/login');
+                                }}
+                              >
+                                {_items?.runners?.[0]?.layPrice1 || '-'}
+                              </button>
+                            ) : (
+                              <DisableButton btncolor={'pink'} />
+                            )}
+                          </div>
                         </div>
-
-                        {/* Draw START */}
-                        <div className="flex-1 flex items-center justify-center gap-[5px]">
-                          {_items?.odds?.runners?.[2]?.ex?.availableToBack?.[0]
-                            ?.price ? (
-                            <button
-                              disabled={
-                                _items?.odds?.totalMatched < totalMatched
-                                  ? true
-                                  : false
-                              }
-                              onClick={async () => {
-                                if (isLogin) {
-                                  await addToBetPlace(
-                                    _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[2]?.selectionId,
-                                    _items?.odds?.runners?.[2],
-                                    'Tennis',
-                                    _items?.odds?.runners?.[2]?.ex
-                                      ?.availableToBack?.[0]?.price,
-                                    _items?.marketName,
-                                    'BACK',
-                                    _items?.odds,
-                                    minLimitOdds,
-                                    maxLimitOdds,
-                                  );
-                                  navigate('/bet-details');
-                                } else {
-                                  navigate('/login');
-                                }
-                              }}
-                              className={`blue-btn  flex-1 flex-shrink-0 flex flex-col items-center justify-center w-[45px] h-[45px]  rounded-[4px]  min-w-[45px] max-w-[45px] md:max-w-auto text-white gap-[2px] ${
-                                _items?.odds?.runners?.[2]?.ex
-                                  ?.availableToBack?.[0]?.price
-                                  ? 'bg-secondary-100'
-                                  : 'bg-[#a3a3a3]'
-                              }  ${
-                                _items?.odds?.totalMatched < totalMatchedCss
-                                  ? 'bg-gray-300 text-gray-400'
-                                  : 'bg-secondary-100 text-white'
-                              }`}
-                            >
-                              <span className="text-14 font-semibold leading-[16px]">
-                                {_items?.odds?.runners?.[2]?.ex
-                                  ?.availableToBack?.[0]?.price || '-'}
-                              </span>
-
-                              <span className="text-[8px] font-semibold leading-[10px]">
-                                {_items?.odds?.runners?.[2]?.ex
-                                  ?.availableToBack?.[0]?.size || '-'}
-                              </span>
-                            </button>
-                          ) : (
-                            <DisableButton btncolor={'blue'} />
-                          )}
-
-                          {_items?.odds?.runners?.[2]?.ex?.availableToLay?.[0]
-                            ?.price ? (
-                            <button
-                              disabled={
-                                _items?.odds?.totalMatched < totalMatched
-                                  ? true
-                                  : false
-                              }
-                              onClick={async () => {
-                                if (isLogin) {
-                                  await addToBetPlace(
-                                    _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[2]?.selectionId,
-                                    _items?.odds?.runners?.[2],
-                                    'Tennis',
-                                    _items?.odds?.runners?.[2]?.ex
-                                      ?.availableToLay?.[0]?.price,
-                                    _items?.marketName,
-                                    'LAY',
-                                    _items?.odds,
-                                    minLimitOdds,
-                                    maxLimitOdds,
-                                  );
-                                  navigate('/bet-details');
-                                } else {
-                                  navigate('/login');
-                                }
-                              }}
-                              className={`pink-btn  flex-1 flex-shrink-0 flex flex-col items-center justify-center w-[45px] h-[45px] rounded-[4px]  min-w-[45px] max-w-[45px] md:max-w-auto text-white gap-[2px] ${
-                                _items?.odds?.runners?.[2]?.ex
-                                  ?.availableToLay?.[0]?.price
-                                  ? 'bg-[#FF649E]'
-                                  : 'bg-[#a3a3a3]'
-                              } ${
-                                _items?.odds?.totalMatched < 25000
-                                  ? 'bg-gray-300 text-gray-400'
-                                  : ' bg-[#FF649E] hover:border-2 hover:border-[#d44a58]'
-                              }`}
-                            >
-                              <span className="text-14 font-semibold leading-[16px]">
-                                {_items?.odds?.runners?.[2]?.ex
-                                  ?.availableToLay?.[0]?.price || '-'}
-                              </span>
-                              <span className="text-[8px] font-semibold leading-[10px]">
-                                {_items?.odds?.runners?.[2]?.ex
-                                  ?.availableToLay?.[0]?.size || '-'}
-                              </span>
-                            </button>
-                          ) : (
-                            <DisableButton btncolor={'pink'} />
-                          )}
+                        <div className="grid grid-cols-2 gap-1">
+                          <div className="">
+                            {_items?.runners?.[2]?.backPrice1 ? (
+                              <button
+                                className="col-span-1 h-full w-full flex items-center justify-center cursor-pointer bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]"
+                                onClick={() => {
+                                  isLogin
+                                    ? addToBetPlace(
+                                        _items?.competition_name,
+                                        _items?.event_id || _items?.matchId,
+                                        _items?.runners?.[2]?.selectionId,
+                                        _items?.runners?.[2],
+                                        'Tennis',
+                                        _items?.runners?.[2]?.backPrice1,
+                                        _items?.market_name,
+                                        'BACK',
+                                        _items?.name,
+                                        _items?.market_id,
+                                        _items?.runners,
+                                        _items?.sportId,
+                                        minLimitOdds,
+                                        maxLimitOdds,
+                                      )
+                                    : navigate('/login');
+                                }}
+                              >
+                                {_items?.runners?.[2]?.backPrice1 || '-'}
+                              </button>
+                            ) : (
+                              <DisableButton btncolor={'blue'} />
+                            )}
+                          </div>
+                          <div className="">
+                            {_items?.runners?.[2]?.layPrice1 ? (
+                              <button
+                                className="col-span-1 flex items-center justify-center cursor-pointer bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58] w-full h-full"
+                                onClick={() => {
+                                  isLogin
+                                    ? addToBetPlace(
+                                        _items?.competition_name,
+                                        _items?.event_id || _items?.matchId,
+                                        _items?.runners?.[2]?.selectionId,
+                                        _items?.runners?.[2],
+                                        'Tennis',
+                                        _items?.runners?.[2]?.layPrice1,
+                                        _items?.market_name,
+                                        'LAY',
+                                        _items?.name,
+                                        _items?.market_id,
+                                        _items?.runners,
+                                        _items?.sportId,
+                                        minLimitOdds,
+                                        maxLimitOdds,
+                                      )
+                                    : navigate('/login');
+                                }}
+                              >
+                                {_items?.runners?.[2]?.layPrice1 || '-'}
+                              </button>
+                            ) : (
+                              <DisableButton btncolor={'pink'} />
+                            )}
+                          </div>
                         </div>
-                        {/* Draw END */}
-
-                        <div className="flex-1 flex items-center gap-[5px]">
-                          {_items?.odds?.runners?.[1]?.ex?.availableToBack?.[0]
-                            ?.price ? (
-                            <button
-                              disabled={
-                                _items?.odds?.totalMatched < totalMatched
-                                  ? true
-                                  : false
-                              }
-                              onClick={async () => {
-                                if (isLogin) {
-                                  await addToBetPlace(
-                                    _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[1]?.selectionId,
-                                    _items?.odds?.runners?.[1],
-                                    'Tennis',
-                                    _items?.odds?.runners?.[1]?.ex
-                                      ?.availableToBack?.[0]?.price,
-                                    _items?.marketName,
-                                    'BACK',
-                                    _items?.odds,
-                                    minLimitOdds,
-                                    maxLimitOdds,
-                                  );
-                                  navigate('/bet-details');
-                                } else {
-                                  navigate('/login');
-                                }
-                              }}
-                              className={`blue-btn flex-1 flex flex-col items-center justify-center w-[43px] h-[45px]  min-w-[45px] max-w-[45px] md:max-w-auto  border-2  rounded-[4px] gap-[2px] ${
-                                _items?.odds?.totalMatched < totalMatchedCss
-                                  ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-secondary-100 text-white'
-                              }`}
-                            >
-                              <>
-                                <span className="text-14 font-semibold leading-[16px]">
-                                  {_items?.odds?.runners?.[1]?.ex
-                                    ?.availableToBack?.[0]?.price || '-'}
-                                </span>
-                              </>
-
-                              <span className="text-[8px] font-semibold leading-[10px]">
-                                {
-                                  _items?.odds?.runners?.[1]?.ex
-                                    ?.availableToBack?.[0]?.size
-                                }
-                              </span>
-                            </button>
-                          ) : (
-                            <DisableButton btncolor={'blue'} />
-                          )}
-
-                          {_items?.odds?.runners?.[1]?.ex?.availableToLay?.[0]
-                            ?.price ? (
-                            <button
-                              disabled={
-                                _items?.odds?.totalMatched < totalMatched
-                                  ? true
-                                  : false
-                              }
-                              onClick={async () => {
-                                if (isLogin) {
-                                  await addToBetPlace(
-                                    _items?.event_id || _items?.matchId,
-                                    _items?.odds?.runners?.[1]?.selectionId,
-                                    _items?.odds?.runners?.[1],
-                                    'Tennis',
-                                    _items?.odds?.runners?.[1]?.ex
-                                      ?.availableToLay?.[0]?.price,
-                                    _items?.marketName,
-                                    'LAY',
-                                    _items?.odds,
-                                    minLimitOdds,
-                                    maxLimitOdds,
-                                  );
-                                  navigate('/bet-details');
-                                } else {
-                                  navigate('/login');
-                                }
-                              }}
-                              className={`pink-btn  flex-1 flex-shrink-0 flex flex-col items-center justify-center w-[45px] h-[45px] borde-2  rounded-[4px] gap-[2px] min-w-[45px] max-w-[45px] md:max-w-auto ${
-                                _items?.odds?.totalMatched < totalMatchedCss
-                                  ? 'bg-gray-300 text-gray-400 '
-                                  : 'bg-[#FF649E]  text-white'
-                              }`}
-                            >
-                              <>
-                                <span className="text-14 font-semibold leading-[16px]">
-                                  {_items?.odds?.runners?.[1]?.ex
-                                    ?.availableToLay?.[0]?.price || '-'}
-                                </span>
-                              </>
-
-                              <span className="text-[8px] font-semibold leading-[10px]">
-                                {
-                                  _items?.odds?.runners?.[1]?.ex
-                                    ?.availableToLay?.[0]?.size
-                                }
-                              </span>
-                            </button>
-                          ) : (
-                            <DisableButton btncolor={'pink'} />
-                          )}
+                        <div className="grid grid-cols-2 gap-1">
+                          <div className="">
+                            {_items?.runners?.[1]?.backPrice1 ? (
+                              <button
+                                className="col-span-1 h-full w-full flex items-center justify-center cursor-pointer bg-[#82CFFF] hover:border-2 hover:border-[#469dd3]"
+                                onClick={() => {
+                                  isLogin
+                                    ? addToBetPlace(
+                                        _items?.competition_name,
+                                        _items?.event_id || _items?.matchId,
+                                        _items?.runners?.[1]?.selectionId,
+                                        _items?.runners?.[1],
+                                        'Tennis',
+                                        _items?.runners?.[1]?.backPrice1,
+                                        _items?.market_name,
+                                        'BACK',
+                                        _items?.name,
+                                        _items?.market_id,
+                                        _items?.runners,
+                                        _items?.sportId,
+                                        minLimitOdds,
+                                        maxLimitOdds,
+                                      )
+                                    : navigate('/login');
+                                }}
+                              >
+                                {_items?.runners?.[1]?.backPrice1 || '-'}
+                              </button>
+                            ) : (
+                              <DisableButton btncolor={'blue'} />
+                            )}
+                          </div>
+                          <div className="">
+                            {_items?.runners?.[1]?.layPrice1 ? (
+                              <button
+                                className="col-span-1 flex items-center justify-center cursor-pointer bg-[#FFB5BD]  hover:border-2 hover:border-[#d44a58] w-full h-full"
+                                onClick={() => {
+                                  isLogin
+                                    ? addToBetPlace(
+                                        _items?.competition_name,
+                                        _items?.event_id || _items?.matchId,
+                                        _items?.runners?.[1]?.selectionId,
+                                        _items?.runners?.[1],
+                                        'Tennis',
+                                        _items?.runners?.[1]?.layPrice1,
+                                        _items?.market_name,
+                                        'LAY',
+                                        _items?.name,
+                                        _items?.market_id,
+                                        _items?.runners,
+                                        _items?.sportId,
+                                        minLimitOdds,
+                                        maxLimitOdds,
+                                      )
+                                    : navigate('/login');
+                                }}
+                              >
+                                {_items?.runners?.[1]?.layPrice1 || '-'}
+                              </button>
+                            ) : (
+                              <DisableButton btncolor={'pink'} />
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>

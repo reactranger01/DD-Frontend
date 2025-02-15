@@ -15,7 +15,7 @@
     "lint-staged": "lint-staged",
     "commitlint": "commitlint",
     "build:clean": "rimraf ./build",
-    "build:mount": "npm run build:clean && mv tempDist build",
+    "build:mount": "npm run build:clean && move tempDist build",
     "build": "webpack --color --progress --config webpack/webpack.prod.js",
     "postbuild": "npm run build:mount"
   },
@@ -80,6 +80,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "lint-staged": "^13.2.2",
     "mini-css-extract-plugin": "^2.7.6",
+    "mv": "^2.1.1",
     "postcss-loader": "^7.2.4",
     "postcss-preset-env": "^8.3.2",
     "postcss-sort-media-queries": "^5.2.0",

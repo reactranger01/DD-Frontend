@@ -46,7 +46,7 @@ const Cricket = () => {
                 </div>
                 <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
               </div>
-              <div className="md:hidden popular-div my-2 text-white">
+              <div className="md:hidden popular-div font-mont mr-2 text-12 my-2 text-white">
                 POPULAR
               </div>
               <div className="z-10 h-full overflow-auto custom-scroll">
@@ -102,7 +102,7 @@ const Cricket = () => {
                               setOpenTab(item.name);
                             }}
                           >
-                            <p className="skew-x-12">
+                            <p className="skew-x-[20deg]">
                               {item.name.toUpperCase()}
                             </p>
                           </div>
