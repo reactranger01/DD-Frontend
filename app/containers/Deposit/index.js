@@ -648,7 +648,7 @@ const Deposit = () => {
                       <p className="text-12 leading-5">
                         <span className="text-red-700">*</span> PLEASE VERIFY
                         THE PAYMENT DETAILS BEFORE MAKING A BANK TRANSFER
-                        DEPOSIT AS THEY MAY CHANGE FROM TIME TO TIME. SHIV11
+                        DEPOSIT AS THEY MAY CHANGE FROM TIME TO TIME. YOLO 247
                         WILL NOT BE RESPONSIBLE FOR ANY TRANSACTION MADE TO AN
                         OLD/ INACTIVE ACCOUNT.
                       </p>
@@ -913,7 +913,7 @@ const Deposit = () => {
                       <p className="text-12 leading-5">
                         <span className="text-red-700">*</span> PLEASE VERIFY
                         THE PAYMENT DETAILS BEFORE MAKING A BANK TRANSFER
-                        DEPOSIT AS THEY MAY CHANGE FROM TIME TO TIME. SHIV11
+                        DEPOSIT AS THEY MAY CHANGE FROM TIME TO TIME. YOLO 247
                         WILL NOT BE RESPONSIBLE FOR ANY TRANSACTION MADE TO AN
                         OLD/ INACTIVE ACCOUNT.
                       </p>

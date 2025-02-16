@@ -13,6 +13,7 @@ import moment from 'moment';
 
 import { reactIcons } from '@/utils/icons';
 import useTennisInner from '@/hooks/useTennisInner';
+import { useMediaQuery } from '@mui/material';
 
 const SingleBetTennis = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const SingleBetTennis = () => {
     placedBetWinLossDatas,
     fixtureEventName,
   } = useTennisInner();
+  const isMobile = useMediaQuery('(max-width:768px)');
+
   return (
     <>
       <SmallDesc />
@@ -30,7 +33,7 @@ const SingleBetTennis = () => {
         className="w-full h-auto bg-cover bg-no-repeat bg-right-top bg-fixed md:px-2 px-0 "
         style={{ backgroundImage: 'url("/images/more-option-bg.jpg")' }}
       >
-        <BottomHeaderOption />
+        {!isMobile && <BottomHeaderOption />}
         <div className="flex justify-between w-full bg-cover h-auto bg-no-repeat bg-right-top bg-fixed md:px-2 gap-3  xl:gap-5 flex-col xl:flex-row">
           {/* flex justify-between w-full h-auto bg-cover bg-no-repeat bg-right-top bg-fixed md:px-2 gap-3 xl:gap-5 flex-col xl:flex-row" */}
           <div className="flex-1">
@@ -43,7 +46,7 @@ const SingleBetTennis = () => {
                   >
                     {reactIcons.close}
                   </button>
-                  <div className="md:w-16 px-4  w-full bg-transparent md:h-10 h-9 md:rounded-md  top-[10px] left-0 flex items-center justify-between md:justify-center">
+                  <div className="md:w-16 px-4 hidden  w-full bg-transparent md:h-10 h-9 md:rounded-md  top-[10px] left-0 md:flex items-center justify-between md:justify-center">
                     <button
                       onClick={() => navigate(-1)}
                       className="text-white font-arial font-semibold"
@@ -57,7 +60,7 @@ const SingleBetTennis = () => {
                       <img
                         src="/images/home/tennis.png"
                         alt="ball"
-                        className="w-6 h-6"
+                        className="w-4 h-4 md:w-6 md:h-6"
                       />
                     </div>
                     <div
@@ -66,8 +69,8 @@ const SingleBetTennis = () => {
                         backgroundImage: 'url("/images/more-option/india.png")',
                       }}
                     ></div>
-                    <div className="text-white capitalize font-inter">
-                      {matchData?.name || ''}
+                    <div className="text-white capitalize font-inter text-12 md:text-16">
+                      {matchData?.name}
                     </div>
                     <div
                       className="w-5 h-6 md:flex hidden pl-3 bg-no-repeat bg-contain bg-center mx-2"

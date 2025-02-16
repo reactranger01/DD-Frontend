@@ -475,25 +475,6 @@ const Banner = ({ value, onChangeHandler, name, wrapperClassName }) => {
 
   return (
     <div className="py-5">
-      {/* <div className="flex items-center max-w-sm ml-auto pr-5">
-        <label htmlFor="search" className="sr-only">
-          Search
-        </label>
-        <div className="relative w-full">
-          <div className="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none text-22 text-white">
-            {reactIcons.search}
-          </div>
-          <input
-            type="text"
-            id="search"
-            className="bg-[#1C77FF] border border-gray-300 font-semibold text-white outline-none text-md rounded-lg block w-full pl-10 p-2 h-[44px] mt-[5px] font-inter"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={handleSearch}
-            required
-          />
-        </div>
-      </div> */}
       <div className="relative">
         <div className="h-full overflow-auto custom-scroll">
           <div className="flex flex-wrap">
@@ -896,17 +877,6 @@ const Banner = ({ value, onChangeHandler, name, wrapperClassName }) => {
                   </div>
                 </div>
               )}
-              {/* <div className="relative flex flex-col min-w-0 break-words w-full  font-inter">
-                <div className="w-full flex flex-col pb-8">
-                  <div className="w-full flex flex-row items-center h-[413px] border border-white rounded-md overflow-hidden">
-                    <img
-                      src="/images/home/ball.jpg"
-                      alt="ball"
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
