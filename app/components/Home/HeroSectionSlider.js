@@ -13,11 +13,11 @@ const HeroSectionSlider = () => {
     navigate(path);
   };
   return (
-    <div className="swiper-main">
+    <div className="swiper-main mb-3">
       <Swiper
         breakpoints={{
           400: {
-            slidesPerView: 2,
+            slidesPerView: 3.2,
             spaceBetween: 20,
           },
           500: {
@@ -34,7 +34,8 @@ const HeroSectionSlider = () => {
           },
         }}
         modules={[Autoplay]}
-        slidesPerView={2}
+        slidesPerView={3.2}
+        spaceBetween={10}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -51,7 +52,7 @@ const HeroSectionSlider = () => {
               src={item.url}
               alt={item.url}
               onClick={() => handleNavigate(item.path)}
-              className="w-[180px] h-[106px] border rounded-md border-white"
+              className="w-full object-cover h-[150px] border rounded-xl border-white"
             />
           </SwiperSlide>
         ))}

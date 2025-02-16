@@ -35,7 +35,7 @@ import Profile from './containers/Profile';
 import {
   AddAccount,
   AddUpi,
-  AviatorTable,
+  // AviatorTable,
   Cricket,
   EditBankAccountDetails,
   Football,
@@ -270,7 +270,7 @@ function App() {
             />
           </Route>
           <Route path="/casino-table/:game/:id" element={<Maintenence />} />
-          <Route path="/aviator" element={<AviatorTable />} />
+          <Route path="/aviator" element={<Maintenence />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

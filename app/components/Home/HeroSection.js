@@ -45,9 +45,9 @@ const HeroSection = () => {
           ]
         : buttonId === 'bonusButton'
         ? [
-            { imageUrl: '/images/bonus-slide1.png', path: '#' },
-            { imageUrl: '/images/bonus-slide2.jpg', path: '#' },
-            { imageUrl: '/images/bonus-slide3.jpg', path: '#' },
+            { imageUrl: '/images/aviator-slide1.jpg', path: '/aviator' },
+            { imageUrl: '/images/aviator-slide2.png', path: '/aviator' },
+            { imageUrl: '/images/aviator-slide3.jpg', path: '/aviator' },
           ]
         : [
             {

@@ -3,19 +3,25 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DisableButton from '../DisableButton';
 import { isLoggedIn } from '@/utils/apiHandlers';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchBetDetailsAction, fetchLiveTvAction } from '@/redux/actions';
 import DateFormatter from '../DateFormatter';
-import { isMobile } from 'react-device-detect';
 import MobileMatchHeading from '../MobileMatchHeading';
+import { BetSlip } from '..';
+import { useMediaQuery } from '@mui/material';
+import { setActiveBetSlipIndex } from '@/redux/Slices/newBetSlice';
 
 const PopularFixtureFootball = ({ data }) => {
   const FixtureData1 = data;
+  const activeBetSlip = useSelector((state) => state.activeNewBet.activeIndex);
+  const betData = useSelector((state) => state.bet.selectedBet);
+  const isSmallScreen = useMediaQuery('(max-width:1279px)');
   const navigate = useNavigate();
   const isLogin = isLoggedIn();
   const [bets, setBets] = useState([]);
   const dispatch = useDispatch();
   const addToBetPlace = (
+    competition_name,
     eventId,
     selectionId,
     betDetails,
@@ -23,22 +29,25 @@ const PopularFixtureFootball = ({ data }) => {
     OddsPrice,
     betType,
     selectType,
+    name,
+    market_id,
     _marketData,
+    sportId,
     minimumBet,
     maximumBet,
   ) => {
     setBets([
       {
-        marketId: String(_marketData?.marketId),
+        marketId: String(market_id),
         eventId: Number(eventId),
-        gameId: 1,
+        gameId: Number(sportId),
         selectionId: String(selectionId),
         betOn: selectType,
         price: parseFloat(OddsPrice),
         stake: '',
         eventType: game,
-        competition: 'N/A',
-        event: `${_marketData['runners'][0].runnerName} v ${_marketData['runners'][1].runnerName}`,
+        competition: competition_name,
+        event: name,
         market: betType,
         gameType: betType,
         nation: betDetails?.runnerName,
@@ -47,7 +56,7 @@ const PopularFixtureFootball = ({ data }) => {
         bettingOn: betType,
         runners: 2,
         row: 1,
-        matchName: `${_marketData['runners'][0].runnerName} v ${_marketData['runners'][1].runnerName}`,
+        matchName: name,
         percent: 100,
         selection: betDetails?.runnerName,
         minimumBet: minimumBet || '',
@@ -55,14 +64,9 @@ const PopularFixtureFootball = ({ data }) => {
         _marketData,
       },
     ]);
-    if (!isMobile) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
+    dispatch(setActiveBetSlipIndex(eventId));
   };
+
   useEffect(() => {
     if (bets.length > 0) dispatch(fetchBetDetailsAction(bets));
   }, [bets, dispatch]);
@@ -704,6 +708,10 @@ const PopularFixtureFootball = ({ data }) => {
                       </div>
                     </div>
                   </div>
+                  {isLoggedIn() &&
+                    betData?.length > 0 &&
+                    isSmallScreen &&
+                    activeBetSlip == Number(_items?.matchId) && <BetSlip />}
                   {/* mobile table END */}
                 </>
               );

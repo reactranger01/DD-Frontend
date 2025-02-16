@@ -158,7 +158,7 @@ const SingleBetCricket = () => {
               </div>
             </div>
           </div>
-          <div className="xl:max-w-[390px] w-full hidden md:block">
+          <div className="xl:max-w-[390px] w-full hidden xl:block">
             <BetSlip wrapperClassName="hidden" />
           </div>
         </div>

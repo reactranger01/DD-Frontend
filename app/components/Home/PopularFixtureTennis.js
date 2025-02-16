@@ -2,17 +2,22 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 import DisableButton from '../DisableButton';
 import { fetchBetDetailsAction, fetchLiveTvAction } from '@/redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedIn } from '@/utils/apiHandlers';
 import { useNavigate } from 'react-router-dom';
 import DateFormatter from '../DateFormatter';
-import { isMobile } from 'react-device-detect';
 import MobileMatchHeading from '../MobileMatchHeading';
+import { setActiveBetSlipIndex } from '@/redux/Slices/newBetSlice';
+import { useMediaQuery } from '@mui/material';
+import { BetSlip } from '..';
 
 const PopularFixtureTennis = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = isLoggedIn();
+  const isSmallScreen = useMediaQuery('(max-width:1279px)');
+  const activeBetSlip = useSelector((state) => state.activeNewBet.activeIndex);
+  const betData = useSelector((state) => state.bet.selectedBet);
 
   const addToBetPlace = (
     competition_name,
@@ -57,7 +62,9 @@ const PopularFixtureTennis = ({ data }) => {
       maximumBet: maximumBet || '',
     };
     dispatch(fetchBetDetailsAction([bet]));
-    if (!isMobile) {
+    dispatch(setActiveBetSlipIndex(eventId));
+
+    if (!isSmallScreen) {
       window.scrollTo({
         top: 0,
         left: 0,
@@ -672,6 +679,11 @@ const PopularFixtureTennis = ({ data }) => {
                       </div>
                     </div>
                   </div>
+                  {isLoggedIn() &&
+                    betData?.length > 0 &&
+                    isSmallScreen &&
+                    activeBetSlip == Number(_items?.matchId) && <BetSlip />}
+
                   {/* mobile table END */}
                 </>
               );

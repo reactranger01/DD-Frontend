@@ -224,7 +224,7 @@ const BetSlip = () => {
 
   return (
     <>
-      <div className="w-full pt-5">
+      <div className="hidden xl:block w-full pt-5">
         <div className="mb-1">
           <InputField
             placeholder="Search"

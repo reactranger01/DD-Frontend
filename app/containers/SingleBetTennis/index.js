@@ -130,7 +130,7 @@ const SingleBetTennis = () => {
               </div>
             </div>
           </div>
-          <div className="xl:max-w-[390px] w-full hidden md:block">
+          <div className="xl:max-w-[390px] w-full hidden xl:block">
             <Banner wrapperClassName="hidden" />
           </div>
         </div>

@@ -247,7 +247,11 @@ const Login = () => {
               >
                 <div className="flex w-full items-center justify-between">
                   <div>
-                    <img src="/images/logo.png" alt="logo" className="w-10" />
+                    <img
+                      src="/images/yoloLogo.webp"
+                      alt="logo"
+                      className="w-10"
+                    />
                   </div>
                   <div>
                     <p className="mr-3 font-semibold text-white">
@@ -391,7 +395,11 @@ const Login = () => {
               >
                 <div className="flex w-full items-center justify-between">
                   <div>
-                    <img src="/images/logo.png" alt="logo" className="w-10" />
+                    <img
+                      src="/images/yoloLogo.webp"
+                      alt="logo"
+                      className="w-10"
+                    />
                   </div>
                   <div>
                     <p className="mr-3 font-semibold text-white">

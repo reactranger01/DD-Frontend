@@ -134,32 +134,27 @@ export const socialImageList = [
 export const heroSectionImages = [
   {
     id: 1,
-    url: '/images/h-slide1.png',
+    url: '/images/newCasinoHome/1.webp',
     path: '/casino-table/all/0',
   },
   {
     id: 2,
-    url: '/images/h-slide2.png',
+    url: '/images/newCasinoHome/2.webp',
     path: '/casino-table/all/0',
   },
   {
     id: 3,
-    url: '/images/h-slide3.png',
+    url: '/images/newCasinoHome/3.webp',
     path: '/casino-table/all/0',
   },
   {
     id: 4,
-    url: '/images/h-slide4.png',
+    url: '/images/newCasinoHome/5.webp',
     path: '/casino-table/all/0',
   },
   {
     id: 5,
-    url: '/images/h-slide5.png',
-    path: '/casino-table/all/0',
-  },
-  {
-    id: 6,
-    url: '/images/h-slide6.png',
+    url: '/images/newCasinoHome/6.webp',
     path: '/casino-table/all/0',
   },
 ];

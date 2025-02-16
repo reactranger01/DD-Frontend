@@ -3,14 +3,21 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import DisableButton from '../DisableButton';
 import { isLoggedIn } from '@/utils/apiHandlers';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchBetDetailsAction, fetchLiveTvAction } from '@/redux/actions';
 import DateFormatter from '../DateFormatter';
 import MobileMatchHeading from '../MobileMatchHeading';
+import { useMediaQuery } from '@mui/material';
+import { BetSlip } from '..';
+import { setActiveBetSlipIndex } from '@/redux/Slices/newBetSlice';
 
 const PopularFixture = ({ data }) => {
   const navigate = useNavigate();
   const isLogin = isLoggedIn();
+  const activeBetSlip = useSelector((state) => state.activeNewBet.activeIndex);
+  const betData = useSelector((state) => state.bet.selectedBet);
+  const isSmallScreen = useMediaQuery('(max-width:1279px)');
+  console.log(isLogin, 'isLogin');
   const dispatch = useDispatch();
   const addToBetPlace = (
     competition_name,
@@ -57,8 +64,8 @@ const PopularFixture = ({ data }) => {
     };
 
     dispatch(fetchBetDetailsAction([bet]));
+    dispatch(setActiveBetSlipIndex(eventId));
   };
-
   const handleLiveTv = (eventId) => {
     dispatch(
       fetchLiveTvAction({ eventid: eventId, tvshow: true, game: 'cricket' }),
@@ -66,7 +73,6 @@ const PopularFixture = ({ data }) => {
   };
   const totalMatched = 0;
   const totalMatchedCss = 0;
-  console.log(data, 'data');
   return (
     <>
       {data?.length === 0 ? (
@@ -85,6 +91,7 @@ const PopularFixture = ({ data }) => {
                 minLimitOdds = _items?.offPlayMinLimit;
                 maxLimitOdds = _items?.offPlayMaxLimit;
               }
+              console.log(_items, 'itemss');
               return (
                 <>
                   {/* Only Desktop Start */}
@@ -467,6 +474,7 @@ const PopularFixture = ({ data }) => {
                       </div>
                     </div>
                   </div>
+
                   {/* Only Desktop End */}
                   {/* Only Mobile Start */}
 
@@ -679,6 +687,10 @@ const PopularFixture = ({ data }) => {
                       </div>
                     </div>
                   </div>
+                  {isLoggedIn() &&
+                    betData?.length > 0 &&
+                    isSmallScreen &&
+                    activeBetSlip == Number(_items?.matchId) && <BetSlip />}
                   {/* Only Mobile End */}
                 </>
               );

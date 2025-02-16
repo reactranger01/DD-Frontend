@@ -154,7 +154,11 @@ const Signup = () => {
               >
                 <div className="flex w-full items-center justify-between">
                   <div>
-                    <img src="/images/logo.png" className="w-10" alt="logo" />
+                    <img
+                      src="/images/yoloLogo.webp"
+                      className="w-10"
+                      alt="logo"
+                    />
                   </div>
                   <div>
                     <p className="mr-3 font-semibold text-white">
