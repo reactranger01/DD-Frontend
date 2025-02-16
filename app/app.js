@@ -22,13 +22,13 @@ import {
   WalletTransaction,
   MyBets,
   ProfitAndLoss,
-  CasinoStatement,
+  // CasinoStatement,
   AccountStatement,
   TunroverStatement,
   SingleBetCricket,
   SingleBetFootball,
   SingleBetTennis,
-  CasinoTable,
+  // CasinoTable,
   Upi,
 } from '@containers/pageListAsync';
 import Profile from './containers/Profile';
@@ -49,6 +49,7 @@ import PrivateRoute from './containers/auth/PrivateRoute';
 // import { loadStateFromLocalStorage } from '.';
 import ScrollToTop from './components/ScrollToTop';
 import AllMobileHome from './components/Home/AllMobileHome';
+import Maintenence from './containers/Maintenece';
 // import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -80,14 +81,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/*" element={<NotFound />} />
-
           <Route path="/" element={<Main />}>
             <Route index element={<Home />} />
+            <Route path="/maintenence" element={<AllMobileHome />} />
             <Route path="/cricket" element={<Cricket />} />
             <Route path="/all" element={<AllMobileHome />} />
             <Route path="/in-play" element={<Home />} />
             <Route path="/football" element={<Football />} />
-            <Route path="/casino" element={<MoreOption />} />
+            <Route path="/casino" element={<Maintenence />} />
             <Route path="/tennis" element={<Tennis />} />
             <Route path="/click-bet" element={<ClickBet />} />
             <Route path="/bet-details" element={<ViewBetDetails />} />
@@ -238,7 +239,7 @@ function App() {
               path="/profile/casino-statement"
               element={
                 <PrivateRoute>
-                  <CasinoStatement />
+                  <Maintenence />
                 </PrivateRoute>
               }
             />
@@ -268,7 +269,7 @@ function App() {
               }
             />
           </Route>
-          <Route path="/casino-table/:game/:id" element={<CasinoTable />} />
+          <Route path="/casino-table/:game/:id" element={<Maintenence />} />
           <Route path="/aviator" element={<AviatorTable />} />
         </Routes>
       </BrowserRouter>

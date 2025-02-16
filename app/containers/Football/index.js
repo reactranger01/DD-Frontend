@@ -37,7 +37,6 @@ const Football = () => {
       </div>
       <BottomHeader />
       {isMobile && <HeadingSportsMobile />}
-
       <div
         className="flex justify-between w-full h-auto bg-cover bg-no-repeat bg-right-top bg-fixed md:px-2 gap-3 xl:gap-5 flex-col xl:flex-row"
         style={{ backgroundImage: 'url("/images/newBanners/allBg.webp")' }}
@@ -46,17 +45,19 @@ const Football = () => {
           <InplayFootball fixtureData={inplayTrue} />
           <div className="">
             <div className="relative">
-              <div className="shape-rect h-[35px] flex">
+              <div className="shape-rect h-[35px] hidden md:flex">
                 <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
                   Popular
                 </div>
                 <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
               </div>
-
+              <div className="md:hidden font-semibold pl-3 popular-div font-mont mr-2 text-[11px] mt-3 text-white bg-black w-fit">
+                POPULAR
+              </div>
               <div className="h-full overflow-auto custom-scroll">
                 <div className="flex flex-wrap">
                   <div className="w-full">
-                    <div className="w-full flex justify-between items-center">
+                    <div className="w-full hidden md:flex justify-between items-center">
                       <ul
                         className="flex mb-0 list-none w-full flex-wrap flex-row border-b border-[#ffffff]"
                         role="tablist"
@@ -84,6 +85,31 @@ const Football = () => {
                               {item.name}
                             </a>
                           </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="w-full flex md:hidden justify-between items-center">
+                      <ul
+                        className="flex mb-0 -ml-3 my-2 list-none w-full flex-wrap flex-row"
+                        role="tablist"
+                      >
+                        {popularList.map((item, index) => (
+                          <div
+                            key={index}
+                            className={
+                              openTab === item.name
+                                ? 'today-filter'
+                                : 'today-filter-active'
+                            }
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setOpenTab(item.name);
+                            }}
+                          >
+                            <p className="skew-x-[20deg]">
+                              {item.name.toUpperCase()}
+                            </p>
+                          </div>
                         ))}
                       </ul>
                     </div>

@@ -21,14 +21,14 @@ import { sidebarTabs } from '@/utils/contants';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import RightBar from './RightBar';
 import { numberWithCommas } from '@/utils/numberWithCommas';
-import CasinoBox from '../HoverBox/CasinoBox';
+// import CasinoBox from '../HoverBox/CasinoBox';
 import SportsBox from '../HoverBox/SportsBox';
 // import AviatorBox from '../HoverBox/AviatorBox';
 
 function Header() {
   const isMobileView = useMediaQuery('(max-width:600px)');
   const [isSportsHovered, setIsSportsHovered] = useState(false);
-  const [isCasinoHovered, setIsCasinoHovered] = useState(false);
+  // const [isCasinoHovered, setIsCasinoHovered] = useState(false);
   // const [isAviatorHovered, setIsAviatorHovered] = useState(false);
   const userDetails = useSelector((state) => state?.userDetails.data);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -147,13 +147,13 @@ function Header() {
         <div className="flex-1 flex-grow flex items-center lg:justify-between justify-end">
           <div className="hidden text-sm lg:flex items-center py-2">
             <button
-              onMouseEnter={() => setIsCasinoHovered(true)}
-              onMouseLeave={() => setIsCasinoHovered(false)}
+              // onMouseEnter={() => setIsCasinoHovered(true)}
+              // onMouseLeave={() => setIsCasinoHovered(false)}
               className=" top-buttons  btn-skew font-bold py-2 px-2  rounded mr-2 hidden md:flex justify-center min-w-[70px] lg:min-w-[unset]"
             >
               <span>CASINO</span>
             </button>
-            <CasinoBox isHovered={isCasinoHovered} />
+            {/* <CasinoBox isHovered={isCasinoHovered} /> */}
             <button
               onMouseEnter={() => setIsSportsHovered(true)}
               onMouseLeave={() => setIsSportsHovered(false)}
