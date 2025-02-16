@@ -1,4 +1,4 @@
-import { inPlayList } from '@/utils/contants';
+import { inPlayList, popularList } from '@/utils/contants';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PopularFixture from './PopularFixture';
@@ -11,20 +11,62 @@ const InPlayAll = ({
   inplayTrueTennis,
 }) => {
   const [openTab, setOpenTab] = useState(1);
+  const [openTabMob, setOpenTabMob] = useState('Today');
+
   return (
     <div className="py-5">
       <div className="relative">
-        <div className="shape-rect h-[35px] flex">
+        {/* only desktop */}
+        <div className="shape-rect h-[35px] hidden md:flex">
           <div className="bg-secondary-100 h-full w-[120px] md:w-[250px] flex items-center p-[10px] font-medium text-white text-20">
             IN-PLAY
           </div>
           <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
         </div>
 
+        {/* only mobile */}
+        <div className="grid grid-cols-3 md:hidden -ml-3  w-full shadow-xl shadow-gray-900">
+          <div className="mobile-skew">
+            <p className="skew-x-[20deg]">IN-PLAY</p>
+          </div>
+          <div className="mobile-skew-active">
+            <p className="skew-x-[20deg]">Boost Your Bets</p>
+          </div>
+          <div className="mobile-skew  -mr-4">
+            <p className="skew-x-[20deg]">Click on Odds to BET</p>
+          </div>
+        </div>
+        <div className="md:hidden font-semibold pl-3 popular-div font-mont mr-2 text-[11px] mt-3 text-white bg-black w-fit">
+          POPULAR
+        </div>
+        <div className="w-full flex md:hidden justify-between items-center">
+          <ul
+            className="flex mb-0 -ml-3 my-2 list-none w-full flex-wrap flex-row"
+            role="tablist"
+          >
+            {popularList.map((item, index) => (
+              <div
+                key={index}
+                className={
+                  openTabMob === item.name
+                    ? 'today-filter'
+                    : 'today-filter-active'
+                }
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenTabMob(item.name);
+                }}
+              >
+                <p className="skew-x-[20deg]">{item.name.toUpperCase()}</p>
+              </div>
+            ))}
+          </ul>
+        </div>
+
         <div className="h-full overflow-auto custom-scroll">
           <div className="flex flex-wrap">
             <div className="w-full">
-              <div className="w-full flex justify-between items-center">
+              <div className="w-full hidden md:flex justify-between items-center">
                 <ul
                   className="flex mb-0 list-none w-full flex-wrap flex-row border-b border-[#ffffff]"
                   role="tablist"

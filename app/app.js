@@ -48,6 +48,7 @@ import PrivateRoute from './containers/auth/PrivateRoute';
 // import { fetchBetDetailsAction } from './redux/actions';
 // import { loadStateFromLocalStorage } from '.';
 import ScrollToTop from './components/ScrollToTop';
+import AllMobileHome from './components/Home/AllMobileHome';
 // import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
           <Route path="/" element={<Main />}>
             <Route index element={<Home />} />
             <Route path="/cricket" element={<Cricket />} />
+            <Route path="/all" element={<AllMobileHome />} />
             <Route path="/in-play" element={<Home />} />
             <Route path="/football" element={<Football />} />
             <Route path="/casino" element={<MoreOption />} />

@@ -6,13 +6,16 @@ import {
   InplayTennis,
   SmallDesc,
 } from '@/components';
+import HeadingSportsMobile from '@/components/Home/HeadingSportsMobile';
 import PopularFixtureTennis from '@/components/Home/PopularFixtureTennis';
 import useTennisOuter from '@/hooks/useTennisOuter';
 import { popularList } from '@/utils/contants';
 import { filterAndSortMatches } from '@/utils/helper';
+import { useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
 
 const Tennis = () => {
+  const isMobile = useMediaQuery('(max-width:768px)');
   const { inplayFalse, inplayTrue } = useTennisOuter();
   const [openTab, setOpenTab] = useState('Today');
   const todayTennis = filterAndSortMatches(inplayFalse, 'Today');
@@ -32,11 +35,13 @@ const Tennis = () => {
         <HeroSectionWebSlider />
       </div>
       <BottomHeader />
+      {isMobile && <HeadingSportsMobile />}
+
       <div
         className="flex justify-between w-full h-auto bg-cover bg-no-repeat bg-right-top bg-fixed md:px-2 gap-3 xl:gap-5 flex-col xl:flex-row"
         style={{ backgroundImage: 'url("./images/newBanners/allBg.webp")' }}
       >
-        <div className="flex-1 bg-black md:bg-transparent">
+        <div className="flex-1 bg-transparent">
           <InplayTennis fixtureData={inplayTrue} />
           <div className="">
             <div className="relative">

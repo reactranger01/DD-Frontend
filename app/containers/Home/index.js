@@ -13,22 +13,14 @@ import {
 } from '@/components';
 import { useLocation } from 'react-router-dom';
 import useInplayOuter from '@/hooks/useInplayOuter';
+import AllMobileHome from '@/components/Home/AllMobileHome';
+import { useMediaQuery } from '@mui/material';
 
 const Home = () => {
   const location = useLocation();
-  // const [search, setSearch] = useState('');
+  const isMobile = useMediaQuery('(max-width:768px)');
+
   const {
-    // isLoading,
-    // setOpenModal,
-    // openModal,
-    // betData,
-    // isLogin,
-    // isMobile,
-    // bets,
-    // activeBetSlip,
-    // navigate,
-    // addToBetPlace,
-    // loaderOneTime,
     inplayTrueCricket,
     inplayTrueSoccer,
     inplayTrueTennis,
@@ -36,6 +28,7 @@ const Home = () => {
     inplayFalseSoccer,
     inplayFalseTennis,
   } = useInplayOuter();
+
   return (
     <div className="relative">
       <SmallDesc />
@@ -52,18 +45,25 @@ const Home = () => {
         className="flex justify-between w-full h-auto bg-cover bg-no-repeat bg-right-top bg-fixed md:px-2 gap-3 xl:gap-5 flex-col xl:flex-row"
         style={{ backgroundImage: 'url("/images/newBanners/allBg.webp")' }}
       >
-        <div className="flex-1 bg-black md:bg-transparent">
-          <InplayAll
-            inplayTrueCricket={inplayTrueCricket}
-            inplayTrueSoccer={inplayTrueSoccer}
-            inplayTrueTennis={inplayTrueTennis}
-          />
-          <PopularAll
-            inplayFalseCricket={inplayFalseCricket}
-            inplayFalseSoccer={inplayFalseSoccer}
-            inplayFalseTennis={inplayFalseTennis}
-          />
-        </div>
+        {isMobile ? (
+          <div className="flex-1 bg-transparent">
+            <AllMobileHome />
+          </div>
+        ) : (
+          <div className="flex-1 bg-transparent">
+            <InplayAll
+              inplayTrueCricket={inplayTrueCricket}
+              inplayTrueSoccer={inplayTrueSoccer}
+              inplayTrueTennis={inplayTrueTennis}
+            />
+            <PopularAll
+              inplayFalseCricket={inplayFalseCricket}
+              inplayFalseSoccer={inplayFalseSoccer}
+              inplayFalseTennis={inplayFalseTennis}
+            />
+          </div>
+        )}
+
         <div className="xl:max-w-[390px] w-full hidden md:block">
           <BetSlip
           // name={'search'}
@@ -72,7 +72,9 @@ const Home = () => {
           />
         </div>
       </div>
-      <HomeBottom />
+      <div className="hidden md:flex w-full">
+        <HomeBottom />
+      </div>
     </div>
   );
 };

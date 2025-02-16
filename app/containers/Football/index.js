@@ -7,13 +7,16 @@ import {
   InplayFootball,
   SmallDesc,
 } from '@/components';
+import HeadingSportsMobile from '@/components/Home/HeadingSportsMobile';
 import PopularFixtureFootball from '@/components/Home/PopularFixtureFootball';
 import useFootballOuter from '@/hooks/useFootballOuter';
 import { popularList } from '@/utils/contants';
 import { filterAndSortMatches } from '@/utils/helper';
+import { useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
 
 const Football = () => {
+  const isMobile = useMediaQuery('(max-width:768px)');
   const [openTab, setOpenTab] = useState('Today');
   const { inplayFalse, inplayTrue } = useFootballOuter();
   const todayFootball = filterAndSortMatches(inplayFalse, 'Today');
@@ -33,11 +36,13 @@ const Football = () => {
         <HeroSectionWebSlider />
       </div>
       <BottomHeader />
+      {isMobile && <HeadingSportsMobile />}
+
       <div
         className="flex justify-between w-full h-auto bg-cover bg-no-repeat bg-right-top bg-fixed md:px-2 gap-3 xl:gap-5 flex-col xl:flex-row"
         style={{ backgroundImage: 'url("/images/newBanners/allBg.webp")' }}
       >
-        <div className="flex-1 bg-black md:bg-transparent">
+        <div className="flex-1 bg-transparent">
           <InplayFootball fixtureData={inplayTrue} />
           <div className="">
             <div className="relative">

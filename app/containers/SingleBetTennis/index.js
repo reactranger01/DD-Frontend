@@ -43,7 +43,7 @@ const SingleBetTennis = () => {
                   >
                     {reactIcons.close}
                   </button>
-                  <div className="md:w-16 px-4  w-full bg-black md:bg-transparent md:h-10 h-9 md:rounded-md  top-[10px] left-0 flex items-center justify-between md:justify-center">
+                  <div className="md:w-16 px-4  w-full bg-transparent md:h-10 h-9 md:rounded-md  top-[10px] left-0 flex items-center justify-between md:justify-center">
                     <button
                       onClick={() => navigate(-1)}
                       className="text-white font-arial font-semibold"

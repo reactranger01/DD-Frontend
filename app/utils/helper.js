@@ -535,6 +535,7 @@ export const getFixtureData = async (
   setInplayFalse,
   setLoading,
   setLoaderOneTime,
+  setAllData,
 ) => {
   setLoading(true);
   try {
@@ -544,6 +545,7 @@ export const getFixtureData = async (
     if (response?.status === 200 || response?.status === 201) {
       const data = response?.data.filter((item) => item.isDelete === false);
       if (data) {
+        setAllData && setAllData(data);
         const todayDate = new Date().toISOString().split('T')[0];
         const inplayTrueData = [];
         const inplayFalseData = [];
@@ -656,7 +658,6 @@ export const filterAndSortMatches = (matches, tab) => {
   tomorrow.setDate(today.getDate() + 1);
   const upcoming = new Date(today);
   upcoming.setDate(today.getDate() + 2);
-
   return matches
     .filter((match) => {
       const matchDate = new Date(match.matchDateTime);

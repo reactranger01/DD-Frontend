@@ -52,7 +52,7 @@ const Footer = () => {
 
   return (
     <>
-      <div>
+      <div className="text-12">
         <Accordion className="custom-accordian footer-accordion origin-center">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -66,7 +66,7 @@ const Footer = () => {
           </AccordionSummary>
 
           <AccordionDetails className="max-h-[300px] overflow-y-auto ml-4">
-            <h2 className="text-20 font-bold mb-6 ">
+            <h2 className="text-18 font-bold mb-6 ">
               Yolo247 - Best Real Money Online Gambling Platform in India
             </h2>
             <p className="">
@@ -82,7 +82,7 @@ const Footer = () => {
               to get amazing experiences and rewards.
             </p>
 
-            <h2 className="text-20 font-bold mt-4 mb-4">
+            <h2 className="text-18 font-bold mt-4 mb-4">
               Yolo247 - Your Ultimate Online Betting Partner
             </h2>
             <p className="">
@@ -121,7 +121,7 @@ const Footer = () => {
               Download Now
             </button>
 
-            <h2 className="text-20 font-bold mt-4">
+            <h2 className="text-18 font-bold mt-4">
               Why is Yolo247 Your Best Choice?
             </h2>
 

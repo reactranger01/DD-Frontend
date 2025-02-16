@@ -66,6 +66,7 @@ const PopularFixture = ({ data }) => {
   };
   const totalMatched = 0;
   const totalMatchedCss = 0;
+  console.log(data, 'data');
   return (
     <>
       {data?.length === 0 ? (

@@ -432,8 +432,38 @@ export const BottomHeaderOption = [
   //   name: 'Special Market',
   // },
 ];
-
-// right sidebar
+export const sportsMobile = [
+  {
+    id: 1,
+    icon: '/images/home/in-play.png',
+    name: 'ALL',
+    path: '/all',
+  },
+  {
+    id: 2,
+    icon: '/images/home/cricket.png',
+    name: ' CRICKET',
+    path: '/cricket',
+  },
+  {
+    id: 3,
+    icon: '/images/home/football.png',
+    name: 'FOOTBALL',
+    path: '/football',
+  },
+  {
+    id: 4,
+    icon: '/images/home/tennis.png',
+    name: 'Tennis',
+    path: '/tennis',
+  },
+  // {
+  //   id: 5,
+  //   icon: '/images/home/tennis.png',
+  //   name: 'SPL MARKET',
+  //   path: '/tennis',
+  // },
+];
 export const quickLinks = [
   {
     id: 1,

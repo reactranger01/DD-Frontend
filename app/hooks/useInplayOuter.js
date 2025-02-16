@@ -19,7 +19,9 @@ const useInplayOuter = () => {
   const [inplayFalseCricket, setInplayFalseCricket] = useState([]);
   const [inplayFalseSoccer, setInplayFalseSoccer] = useState([]);
   const [inplayFalseTennis, setInplayFalseTennis] = useState([]);
-
+  const [allDataCricket, setAllDataCricket] = useState([]);
+  const [allDataFootball, setAllDataFootball] = useState([]);
+  const [allDataTennis, setAllDataTennis] = useState([]);
   const navigate = useNavigate();
   const [bets, setBets] = useState([]);
   const dispatch = useDispatch();
@@ -87,6 +89,7 @@ const useInplayOuter = () => {
       setInplayFalseCricket,
       setisLoading,
       setLoaderOneTime,
+      setAllDataCricket,
     );
   };
   const getSoccerData = () => {
@@ -96,6 +99,7 @@ const useInplayOuter = () => {
       setInplayFalseSoccer,
       setisLoading,
       setLoaderOneTime,
+      setAllDataFootball,
     );
   };
   const getTennisData = () => {
@@ -105,6 +109,7 @@ const useInplayOuter = () => {
       setInplayFalseTennis,
       setisLoading,
       setLoaderOneTime,
+      setAllDataTennis,
     );
   };
   useEffect(() => {
@@ -140,6 +145,9 @@ const useInplayOuter = () => {
     inplayFalseCricket,
     inplayFalseSoccer,
     inplayFalseTennis,
+    allDataCricket,
+    allDataFootball,
+    allDataTennis,
   };
 };
 

@@ -5,15 +5,17 @@ import {
   InplayCricket,
   SmallDesc,
 } from '@/components';
+import HeadingSportsMobile from '@/components/Home/HeadingSportsMobile';
 import PopularFixture from '@/components/Home/PopularFixture';
 import useCricketOuter from '@/hooks/useCricketOuter';
 import { popularList } from '@/utils/contants';
 import { filterAndSortMatches } from '@/utils/helper';
+import { useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
 
 const Cricket = () => {
   const { inplayFalse, inplayTrue } = useCricketOuter();
-
+  const isMobile = useMediaQuery('(max-width:768px)');
   const [openTab, setOpenTab] = useState('Today');
   const todayCricket = filterAndSortMatches(inplayFalse, 'Today');
   const tomorrowCricket = filterAndSortMatches(inplayFalse, 'Tomorrow');
@@ -24,6 +26,7 @@ const Cricket = () => {
       : openTab == 'Tomorrow'
       ? tomorrowCricket
       : upcomingCricket;
+
   return (
     <>
       <SmallDesc />
@@ -32,11 +35,12 @@ const Cricket = () => {
         <HeroSectionWebSlider />
       </div>
       <BottomHeader />
+      {isMobile && <HeadingSportsMobile />}
       <div
         className="flex justify-between w-full h-auto bg-cover bg-no-repeat bg-right-top bg-fixed md:px-2 gap-3 xl:gap-5 flex-col xl:flex-row"
         style={{ backgroundImage: 'url("/images/newBanners/allBg.webp")' }}
       >
-        <div className="flex-1 bg-black md:bg-transparent">
+        <div className="flex-1 bg-transparent">
           <InplayCricket fixtureData={inplayTrue} />
           <div className="">
             <div className="relative">
@@ -46,7 +50,7 @@ const Cricket = () => {
                 </div>
                 <div className="curve-part bg-secondary-100 w-[50px] h-full skew-x-[33deg] rounded-10 -ml-[27px] border-none"></div>
               </div>
-              <div className="md:hidden popular-div font-mont mr-2 text-12 my-2 text-white">
+              <div className="md:hidden font-semibold pl-3 popular-div font-mont mr-2 text-[11px] mt-3 text-white bg-black w-fit">
                 POPULAR
               </div>
               <div className="z-10 h-full overflow-auto custom-scroll">

@@ -63,7 +63,6 @@ const PopularFixtureFootball = ({ data }) => {
       });
     }
   };
-
   useEffect(() => {
     if (bets.length > 0) dispatch(fetchBetDetailsAction(bets));
   }, [bets, dispatch]);

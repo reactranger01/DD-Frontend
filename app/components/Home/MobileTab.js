@@ -17,7 +17,7 @@ const MobileTab = () => {
             <Link
               to={item.link}
               className={`flex items-center flex-col gap-1 py-1 rounded-md ${
-                currentPath === item.link ? 'bg-gradient-1' : ''
+                currentPath === item.link ? 'bg-gradient-2' : ''
               }`}
             >
               <img src={item.icon} alt={item.name} />

@@ -17,7 +17,7 @@ const MobileMatchHeading = ({ data, sport }) => {
     >
       <div className="">
         <img
-          src="/images/home/cricket.png"
+          src={`/images/home/${sport == 'soccer' ? 'football' : sport}.png`}
           alt="ball"
           className="w-6 object-cover"
         />

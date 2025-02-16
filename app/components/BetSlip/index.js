@@ -28,7 +28,6 @@ const BetSlip = () => {
   const [formError, setFormError] = useState({
     stake: '',
   });
-  console.log(bets, 'bets');
   useEffect(() => {
     setBetData(bets?.[0]);
     setEnent_ID(bets?.[0]?.eventId);
@@ -223,7 +222,6 @@ const BetSlip = () => {
     }
   }, [betData, bets]);
 
-  console.log(bets, 'bets');
   return (
     <>
       <div className="w-full pt-5">

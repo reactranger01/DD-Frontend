@@ -33,7 +33,7 @@ const SingleBetFootball = () => {
             <div className="scroll-smooth">
               <div className="flex items-center justify-center">
                 <div className="gradient-bg flex flex-col md:flex-row items-center justify-between  w-full border-b-2 border-[#6462D5]">
-                  <div className="md:w-16 px-4  w-full bg-black md:bg-transparent md:h-10 h-9 md:rounded-md  top-[10px] left-0 flex items-center justify-between md:justify-center">
+                  <div className="md:w-16 px-4  w-full bg-transparent md:h-10 h-9 md:rounded-md  top-[10px] left-0 flex items-center justify-between md:justify-center">
                     <button
                       onClick={() => navigate(-1)}
                       className="text-white font-arial font-semibold"

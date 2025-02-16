@@ -65,8 +65,8 @@ const HomeBottom = () => {
     },
   ];
   return (
-    <>
-      <div>
+    <div className="w-full">
+      <div className="">
         <div className="hb-heading text-[30px] font-inter text-white px-10">
           <h1 className="my-auto font-semibold">A LITTLE EXTRA NEVER HURTS</h1>
         </div>
@@ -134,7 +134,7 @@ const HomeBottom = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
